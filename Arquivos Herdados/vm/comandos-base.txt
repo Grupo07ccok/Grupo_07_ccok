@@ -1,0 +1,26 @@
+Remover Usuários antes da apresentação:
+sudo deluser user_name
+
+Criar um usuário:
+sudo adduser user_name
+
+Trocando de usuário via terminal
+su user_name
+
+criar diretório
+mkdir diretorio_name
+
+Criar um arquivo e manipular arquivos
+touch arquivo_name.txt  -- TXT é a extenção escolhida pode ser outras
+echo "Seu texto vai aqui" > arquivo_name.txt  -- serve para escrever ou sobrescrever algo de um arquivo
+cat arquivo_name.txt -- exibe o conteúdo do arquivo no terminal
+
+
+manipulação de arquivos
+mv -- renomeia
+mv arquivo diretório/ -- movimenta
+
+rm -- apaga arquivos
+rmdir -- apaga diretórios
+
+cp -- copia

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Marley de S. Santos" />
+    <meta name="description" content="Calculadora de Simulação de Taxa de Produtividade" />
+    <meta name="keywords" content="Calculadora, Simulador" />
+    <title>Cálculadora | Simulação de Perda Financeira</title>
+    <style>
+        * {
+            font-family:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Oxygen,
+                Ubuntu,
+                Cantarell,
+                "Open Sans",
+                "Helvetica Neue",
+                sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Calculadora de Perda Financeira</h1>
+        <p>
+            Esta calculadora simula as perdas segundo uma taxa de
+            produtividade, <br> pesquisada pela Administração Nacional da
+            Aeronáutica e Espaço (NASA) e Organização das Nações Unidas
+            (ONU).
+        </p>
+    </div>
+    <div>
+        <p>
+            Sabe-se que segundo pesquisas, a cada 1ºC acima de 20ºC,<br>
+            a produtividade de trabalhadores cai entre 2% a 3%.
+        </p>
+        <h2>
+            Simule uma perda em relação a taxa de produtividade por
+            trabalhador em mineração subterrânea baseado na temperatura
+        </h2>
+        <div style="border: 1px solid black; padding: 10px">
+            <div>
+                <span>Especifique a temperatura do ambiente em ºC (Entre 21ºC
+                    e 37ºC):</span>
+                <input type="number" id="input_temperatura" min="21" max="37" />
+            </div>
+            <br />
+            <div>
+                <span>Especifique a quantidade de trabalhadores:</span>
+                <input type="number" id="input_quantidade_trabalhadores" min="1" />
+            </div>
+            <br />
+            <div>
+                <span>Selecione o cargo:</span>
+
+                <select id="select_cargo">
+                    <option value="tecnico_mineracao">
+                        Técnico de Mineração
+                    </option>
+                    <option value="minerador">Minerador</option>
+                    <option value="auxiliar_mineracao">
+                        Auxiliar de Mineração
+                    </option>
+                    <option value="supervisor_mineracao">
+                        Supervisor de Mineração
+                    </option>
+                    <option value="operador_maquina">
+                        Operador de Máquina de Mineração
+                    </option>
+                    <option selected disabled value="Escolha">Escolha a função</option>
+                </select>
+
+                <span> -></span>
+                <span id="div_salario"></span>
+
+                <br />
+                <div id="div_alerta"></div>
+            </div>
+            <br />
+            <div>
+                <!-- <button onclick="atualizarSalario()">
+                    Atualizar salário
+                </button> -->
+                <button onclick="simularPerda()">Simular perdas</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados de fev de 2024, segundo o site https://revlo.com.br/qual-o-salario-de-quem-trabalha-com-mineracao/ (Acesso em 04-set-2025)
+        var salarioTecnicoMineracao = 4452.8; // https://www.salario.com.br/profissao/tecnico-de-mineracao-cbo-316305/
+        var salarioMinerador = 2347.58; // https://www.salario.com.br/profissao/minerador-cbo-711130/
+        var salarioAuxiliarMineracao = 2797.0; // https://revlo.com.br/qual-o-salario-de-quem-trabalha-com-mineracao/
+        var salarioSupervisorProducaoMineracao = 6347.0; // https://revlo.com.br/qual-o-salario-de-quem-trabalha-com-mineracao/
+        var salarioOperadorMaquina = 2000.0; // https://www.glassdoor.com.br/Sal%C3%A1rios/operador-de-maquinas-de-mineracao-sal%C3%A1rio-SRCH_KO0%2C33.htm
+
+        var alerta = div_alerta; // Div de alertas
+
+        var salario;
+
+        // Função para atualiozar e mostrar valor médio de salário de cargo
+        function atualizarSalario() {
+
+            var displaySalario = div_salario; // Div que exibe o salário de cada cargo
+            var selectOptions = select_cargo; // Select de cargos
+
+            if (selectOptions.value == "Escolhe") {
+
+                alert("Escolha um Cargo!")
+            }
+
+            // Validaçõo para Técnico de Mineração
+            if (selectOptions.value == "tecnico_mineracao") {
+
+                displaySalario.innerHTML = `Salário médio de R$ ${salarioTecnicoMineracao}`;
+                salario = salarioTecnicoMineracao;
+            }
+
+            // Validação para Minerador
+            if (selectOptions.value == "minerador") {
+
+                displaySalario.innerHTML = `Salário médio de R$ ${salarioMinerador}`;
+                salario = salarioMinerador;
+            }
+
+            // Validação para Auxiliar de Mineração
+            if (selectOptions.value == "auxiliar_mineracao") {
+
+                displaySalario.innerHTML = `Salário médio de R$ ${salarioAuxiliarMineracao}`;
+                salario = salarioAuxiliarMineracao;
+            }
+
+            // Validação para Supervisor de Mineração
+            if (selectOptions.value == "supervisor_mineracao") {
+
+                displaySalario.innerHTML = `Salário médio de R$ ${salarioSupervisorProducaoMineracao}`;
+                salario = salarioSupervisorProducaoMineracao;
+            }
+
+            // Validação para Operador de Máquinad de Mineração
+            if (selectOptions.value == "operador_maquina") {
+
+                displaySalario.innerHTML = `Salário médio de R$ ${salarioOperadorMaquina}`;
+                salario = salarioOperadorMaquina;
+            }
+        }
+
+        // Função de simular perdas
+        function simularPerda() {
+
+            var temperatura = Number(input_temperatura.value); // Input de temperatura
+
+            var quantidadeTrabalhadores = Number(
+                input_quantidade_trabalhadores.value,
+            ); // Input de quantidade de trabalhadores
+
+            if (temperatura <= 20) {
+                
+                alert("Temperatura abaixo do necessário para simulação");
+                
+            } else if (quantidadeTrabalhadores <= 0) {
+
+                alert("Quantidade de funcionários insuficente");
+
+            } else if (select_cargo.value == "Escolha a função") {
+
+                alert("Escolha um cargo para simular ");
+
+            } else if (select_cargo.value == "Escolha"){
+                
+                alert("Escolha um cargo para simular ");
+
+            }else {
+                // console.log(select_cargo.value) // teste para verificar se o valor da option
+                atualizarSalario();
+
+                var selectOptions = select_cargo; // Select de cargo dos trabalhadores
+
+                var temperaturaExcedente = temperatura - 20; // Temperatura excedente acima de 20ºC
+                var percentualPerda = temperaturaExcedente * (2.5 / 100); // Média de percentual de baixa de produtividade (2,5%)
+                var produtividadeRestante = (1 - percentualPerda) * 100; // De 100%, reduz-se o percentual de perda
+
+                var valorPerda = salario * percentualPerda; // Valor de perda
+
+                var msg = `
+                        <br>
+                        A perda de produtividade aproximada, neste cenário está em torno de R$ ${valorPerda.toFixed(2)} (${((valorPerda / salario) * 100).toFixed(2)} %) do valor pago do salário..
+                        <br><br>
+                        Isso equivale a cerca de R$ ${(valorPerda * 12).toFixed(2)}/ano.
+                        <br><br>
+                        Para ${quantidadeTrabalhadores} trabalhadores, aumenta para R$ ${(quantidadeTrabalhadores * valorPerda).toFixed(2)}/mês, equivalente a R$ ${(quantidadeTrabalhadores * valorPerda * 12).toFixed(2)}/ano
+                        <br><br>
+                        EStimamos que a produtivave estará em cerca de ${produtividadeRestante.toFixed(2)}%<br>
+                        Percebeu o quanto pode estar perdendo?
+                        <br>
+                        `;
+
+                alerta.innerHTML = msg;
+
+                // Aviso para tomar cuidado com a temperatura no ambiente de trabalho
+                if (temperatura > 25) {
+                    alert(
+                        "Cuidado! \nA partir de 25°C o ambiente fica altamente desgastante para os trabalhadores ",
+                    );
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

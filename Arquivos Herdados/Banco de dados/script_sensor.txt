@@ -1,0 +1,11 @@
+Sensor:
+
+LM35
+Arduino Uno R3
+1
+'Rocha Silva'
+
+LM35
+Arduino Uno R3
+1
+''
