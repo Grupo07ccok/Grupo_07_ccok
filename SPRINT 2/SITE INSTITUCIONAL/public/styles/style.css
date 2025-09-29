@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    font-family: "Poppins", Arial, sans-serif;
+
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.div_imagem {
+    width: 50%;
+    height: 100%;
+}
+
+.div_imagem .container {
+    height: 100vh;
+    width: 100%;
+}
+
+.div_imagem .container .img_cadastro {
+    height: 100vh;
+    width: 100%;
+}
+
+.div_formulario {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #faf9f0;
+}
+
+.div_formulario .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.div_formulario .container h1 {
+    font-size: 4em;
+}
+
+.div_formulario .container .formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario b {
+    font-size: 1.5rem;
+}
+
+.formulario .input {
+    width: 35vw;
+    height: 5vh;
+    background-color: #faf9f0;
+    border: 2px solid black;
+    font-size: 1.3rem;
+
+}
+
+.formulario .input::placeholder {
+    font-size: 1.3rem;
+    padding: auto;
+}
+
+.div_formulario .container .btn_cadastrar {
+    width: 30vw;
+    height: 5vh;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.div_formulario .container hr {
+    width: 20vw;
+    background-color: #bdbdbd;
+}
+
+.div_formulario .container .btn_continuar {
+    width: 15vw;
+    height: 5vh;
+    background-color: #faf9f0;
+    border: none;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.315);
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.div_formulario .container .b_link {
+    color: #F5751A;
+}
