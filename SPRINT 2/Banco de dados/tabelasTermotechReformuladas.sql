@@ -30,10 +30,11 @@ CREATE TABLE usuario (
         cidade VARCHAR(70),
         estado CHAR(2),
         pais VARCHAR(50),
-        fkEmpresa INT,
+        qtdSensor INT,
         tempMax DECIMAL(5,2) NOT NULL, -- Temperatura do local
 		tempMin DECIMAL(5,2) NOT NULL,
 		tempMedia DECIMAL(5,2) NOT NULL,
+        fkEmpresa INT,
         CONSTRAINT fkEmpresaMina
 			FOREIGN KEY (fkEmpresa)
 				REFERENCES empresa(idEmpresa)
@@ -56,12 +57,14 @@ CREATE TABLE coletaDados (
 			FOREIGN KEY (fkSensor)
 				REFERENCES sensor(idSensor),
     temperatura DECIMAL(2,0),
-	horaColeta DATETIME DEFAULT current_timestamp, -- Data e Hora da temperatura
+	horaColeta DATETIME DEFAULT current_timestamp, -- Data e Hora da temperatura (PEGAR DA API COM JAVASCRIPT)
 	localColeta VARCHAR(100),
-	qtdSensor INT,
     alerta TINYINT,
 	funcionamento TINYINT, -- Irá constar se o sensor está funcionando ou não, necessitando de reparos/atualizações ou não, 0 é quebrado/reparo/atualização e 1 é funcionando
-		CONSTRAINT chkSituacao CHECK(funcionamento IN(0, 1))
+		CONSTRAINT chkSituacao CHECK(funcionamento IN(0, 1)),
+	sensorAnalogico FLOAT
 );
 
 SHOW TABLES;
+
+select * from coletaDados;
