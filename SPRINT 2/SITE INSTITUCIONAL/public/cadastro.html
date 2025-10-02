@@ -1,50 +1,67 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro: Usuário</title>
-    <link rel="stylesheet" href="../public/styles/style.css">
-</head>
-
+    <title>Login: Usuário</title>
+    <link rel="stylesheet" href="../public/styles/styles_login_cadastro.css">
+    </head>
 
 <body>
-    <div class="div_imagem">
-        <div class="container">
-            <img src="../public/assets/img_page_cadastro.png" class="img_cadastro" alt="">
-        </div>
-    </div>
-    <div class="div_formulario">
-        <div class="container">
-            <h1>CADASTRE-SE</h1>
-            <form action="" class="formulario">
-                <b>Nome</b>
-                <input type="text" name="" placeholder="Insira seu  nome: " class="input" id="input_nome">
-                <b>Email</b>
-                <input type="text" name="" placeholder="Insira seu email: " class="input" id="input_email">
-                <b>Senha</b>
-                <input type="text" name="" placeholder="******** " class="input" id="input_senha">
-                <b>Confirme a senha</b>
-                <input type="text" name="" placeholder="******** " class="input" id="input_confirma_senha">
-            </form> 
-            <br><br>
-            <button class="btn_cadastrar">Cadastrar</button>
-            <br>
-            <hr>
-            <br>
-            <button class="btn_continuar">
-                <img src="assets/icon-google.png" alt="google" srcset="">
-                <b>Continuar com Google</b>
-            </button>
-            <br>
-            <button class="btn_continuar">
-                <img src="assets/icon-apple.png" alt="apple" srcset="">
-                <b>Continuar com Apple ID</b>
-            </button>
-            <br>
-            <b>Já possui uma conta? <a href="login.html" class="b_link">Faça login</a></b>
-        </div>
+    <div class="pagina-login">
+        <!-- LATERAL IMAGEM (50%) -->
+        <section class="lateral-imagem">
+            <div class="lateral-imagem-interna">
+                <img src="../public/assets/img_page_cadastro.png" class="imagem-cadastro" alt="">
+            </div>
+        </section>
+
+        <!-- LATERAL FORM (50%) -->
+        <section class="lateral-formulario">
+            <div class="lateral-formulario-interna">
+                <h1 class="titulo-login">CADASTRO</h1>
+
+                <form class="formulario-login" action="#" method="post" novalidate>
+                    <label class="rotulo-login" for="nome-login">Nome</label>
+                    <input class="campo-login" id="nome-cadastro" type="nome" placeholder="Insira seu nome:" required>
+
+                    <label class="rotulo-login" for="email-cadastro">E-mail</label>
+                    <input class="campo-login" id="email-cadastro" type="email" placeholder="email@email.com" required>
+
+                    <label class="rotulo-login" for="senha-cadastro">Senha</label>
+                    <input class="campo-login" id="senha-cadastro" type="password" placeholder="********" required>
+
+                    <label class="rotulo-login" for="senha-cadastro">Confirme sua senha</label>
+                    <input class="campo-login" id="senha-cadastro" type="password" placeholder="********" required>
+
+                    <button type="submit" class="botao-formulario">Continuar</button>
+                </form>
+
+                <hr class="separador-login">
+
+                <div class="redes-login">
+                    <button class="botao-social google-login">
+                        <img src="assets/icon-google.png" alt="Google">
+                        Continuar com o Google
+                    </button>
+
+                    <button class="botao-social apple-login">
+                        <img src="assets/icon-apple.png" alt="Apple">
+                        Continuar com o Apple ID
+                    </button>
+                </div>
+
+                <p class="links-login">
+                    Já possui uma conta? <a class="link-login" href="login.html">Faça login</a>
+                </p>
+                <p class="links-login">
+                    <a class="link-login" href="#">Esqueci minha senha</a>
+                </p>
+            </div>
+        </section>
+
     </div>
 </body>
 

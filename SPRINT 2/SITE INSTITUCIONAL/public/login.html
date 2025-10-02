@@ -4,20 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login: Usuário</title>
-    <link rel="stylesheet" href="../public/styles/styles_login.css">
+    <link rel="stylesheet" href="../public/styles/styles_login_cadastro.css">
 </head>
 <body>
   <div class="pagina-login">
-    <!-- LATERAL IMAGEM (50%) -->
-    <section class="lateral-esquerda">
-      <div class="lateral-esquerda-interna">
-        <img src="../public/assets/img_page_cadastro.png" class="imagem-cadastro" alt="">
-      </div>
-    </section>
-
+    
     <!-- LATERAL FORM (50%) -->
-    <section class="lateral-direita">
-      <div class="lateral-direita-interna">
+    <section class="lateral-formulario">
+      <div class="lateral-formulario-interna">
         <h1 class="titulo-login">LOGIN</h1>
 
         <form class="formulario-login" action="#" method="post" novalidate>
@@ -27,7 +21,7 @@
           <label class="rotulo-login" for="senha-login">Senha</label>
           <input class="campo-login" id="senha-login" type="password" placeholder="********" required>
 
-          <button type="submit" class="botao-login">Login</button>
+          <button type="submit" class="botao-formulario">Entrar</button>
         </form>
 
         <hr class="separador-login">
@@ -45,11 +39,17 @@
         </div>
 
         <p class="links-login">
-          Não possui uma conta? <a class="link-login" href="#">Cadastre-se</a>
+          Não possui uma conta? <a class="link-login" href="cadastro.html">Cadastre-se</a>
         </p>
         <p class="links-login">
           <a class="link-login" href="#">Esqueci minha senha</a>
         </p>
+      </div>
+    </section>
+    <!-- LATERAL IMAGEM (50%) -->
+    <section class="lateral-imagem">
+      <div class="lateral-imagem-interna">
+        <img src="../public/assets/img_page_login.png" class="imagem-cadastro" alt="">
       </div>
     </section>
 
