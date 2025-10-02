@@ -1,23 +1,27 @@
 CREATE DATABASE termotech;
 
 USE termotech;
+show tables;
 
 CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
     nomeFantasia VARCHAR(60), -- Nome Fantasia da Empresa
 	razaoSocial VARCHAR(50), -- Razão Social da Empresa
-	email VARCHAR(80) UNIQUE NOT NULL, -- E-mail da Empresa
+	emailResponsavel VARCHAR(80) UNIQUE NOT NULL, -- E-mail da Empresa
 	nomeResponsavel VARCHAR(100), -- Nome do funcionário responsável da Empresa
-	senhaHash VARCHAR(255) NOT NULL, -- Hash da senha de acesso da Empresa
 	cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
 	logradouro VARCHAR(200), -- Endereço da Empresa 
 	qtdEmpregados INT, -- Quantidade de funcionários da Empresa
 	estadoEmpresa CHAR(2), -- Unidade Federativa da Empresa
 	municipio VARCHAR(50), -- Município da Empresa
-	telefone VARCHAR(25) -- Telefone de contato da Empresa
+	telefoneResponsavel VARCHAR(25) -- Telefone de contato da Empresa
 );
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT, -- ID do Usuário (Autoincrementado)
+    nome VARCHAR(200),
+    senhaHash VARCHAR(255) NOT NULL, -- Hash da senha de acesso da Empresa
+	email VARCHAR(255) NOT NULL,
+    telefone CHAR(11) NOT NULL,
     fkEmpresa INT, -- Será utilizado para pegar dados de email e senhaHash da tabela empresa para verificar o login
     CONSTRAINT fkEmpresaUsuario
 		FOREIGN KEY (fkEmpresa)
@@ -68,3 +72,4 @@ CREATE TABLE coletaDados (
 SHOW TABLES;
 
 select * from coletaDados;
+truncate table coletaDados;
