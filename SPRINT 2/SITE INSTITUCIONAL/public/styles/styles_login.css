@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'); 
+
+.pagina-login * {
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif; 
+}
+
+/* Container dividido (lado imagem | lado form) */
+.pagina-login {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/*  LADO IMAGEM 50%  */
+.lateral-esquerda {
+  width: 50%;
+  overflow: hidden;
+}
+
+.lateral-esquerda-interna {
+  height: 100vh;
+  width: 100%;
+  /* background-image: url('../assets/imgs/sua-imagem-esquerda.jpg');  -- vou achar dps*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*  LADO FORM */
+.lateral-direita {
+  width: 50%;
+  background-color: #faf9f0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 30px;
+}
+
+.lateral-direita-interna {
+  width: 100%;
+  max-width: 420px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+.titulo-login {
+  font-size: 2.8rem; 
+  margin: 0 0 22px 0;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+/* Form */
+.formulario-login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rotulo-login {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-left: 2px;
+}
+
+/* Inputs */
+.campo-login {
+  width: 100%;
+  height: 48px; /* parecido com 5vh -- viewport */
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 2px solid #000; 
+  background-color: #faf9f0;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Placeholder */
+.campo-login::placeholder {
+  font-size: 1rem;
+}
+
+/* Botão principal */
+.botao-login {
+  width: 100%;
+  height: 48px;
+  margin-top: 6px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* Separador */
+.separador-login {
+  width: 60%;
+  height: 1px;
+  background-color: #bdbdbd;
+  border: none;
+  margin: 18px 0;
+}
+
+/* Botões sociais (Google / Apple) */
+.redes-login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.botao-social {
+  width: 70%;
+  max-width: 320px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  border: 1px solid #e6e6e6;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Cor do link */
+.link-login {
+  color: #F5751A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Pequenos textos/links */
+.links-login {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+/* ----- RESPONSIVO  naooo sei se precisaa----- 
+@media (max-width: 900px) {
+  .pagina-login {
+    flex-direction: column;
+  }
+  .lateral-esquerda {
+    width: 100%;
+    height: 40vh; /* imagem em cima no mobile 
+  }
+  .lateral-esquerda-interna {
+    height: 40vh;
+  }
+  .lateral-direita {
+    width: 100%;
+    padding: 30px 20px;
+  }
+  .lateral-direita-interna {
+    max-width: 520px;
+  }
+}*/
