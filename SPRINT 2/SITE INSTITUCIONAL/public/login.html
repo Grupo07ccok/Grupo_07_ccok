@@ -21,6 +21,8 @@
           <label class="rotulo-login" for="senha_login">Senha</label>
           <input class="campo-login" id="senha_login" type="password" placeholder="********" required oninput="verificarSenha()">
 
+          <div id="div_mensagemSenha"></div> 
+
           <button type="submit" class="botao-padrao" onclick="verificar()">Entrar</button>
         </form>
 
@@ -64,27 +66,29 @@
   function verificar(){
     var email = (email_login.value);
 
-    if(email.includes('@') && email.length != 0 && email.Endswith('.com')){
+    if(email.includes('@') && email.length != 0 && email.includes(mail) && email.endsWith('.com')){
       armazenarEmail += `${email}`;
     } else{
-      Alert(`Por favor, digite um email válido`);
+      alert(`Por favor, digite um email válido`);
     }
 
   }
 
   function verificarSenha(){
     var senha = (senha_login.value);
-    var senhaLower = senha.toLowerCase;
+    var senhaLower = senha.toLowerCase();
     if(senha.length < 8){
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 8 caracteres.`
-    } else if(senha.toLowerCase == senha){
+    } else if(senha.toLowerCase() == senha){
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra maiúscula.`
-    } else if(senha.toUpperCase == senha){
+    } else if(senha.toUpperCase() == senha){
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra minúscula.`
-    } else if(!senha.includes('0','1','2','3','4','5','6','7','8','9')){
+    } else if(!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')){
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 número.`
-    } else if(!senhaLower.includes('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','x','z')){
+    } else if(!senhaLower.includes('a') && !senhaLower.includes('b') && !senhaLower.includes('b') && !senhaLower.includes('c') && !senhaLower.includes('d') && !senhaLower.includes('e') && !senhaLower.includes('f') && !senhaLower.includes('g') && !senhaLower.includes('h') && !senhaLower.includes('i') && !senhaLower.includes('j') && !senhaLower.includes('k') && !senhaLower.includes('l') && !senhaLower.includes('m') && !senhaLower.includes('n') && !senhaLower.includes('o') && !senhaLower.includes('p') && !senhaLower.includes('q') && !senhaLower.includes('r') && !senhaLower.includes('s') && !senhaLower.includes('t') && !senhaLower.includes('u') && !senhaLower.includes('v') && !senhaLower.includes('w') && !senhaLower.includes('x') && !senhaLower.includes('y') && !senhaLower.includes('z')){
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra.`
+    } else{
+      div_mensagemSenha.innerHTML = `Senha está com um nível forte.`
     }
   }
 </script>
