@@ -15,13 +15,13 @@
         <h1 class="titulo-login">LOGIN</h1>
 
         <form class="formulario-login" action="#" method="post" novalidate>
-          <label class="rotulo-login" for="email-login">E-mail</label>
-          <input class="campo-login" id="email-login" type="email" placeholder="email@email.com" required>
+          <label class="rotulo-login" for="email_login">E-mail</label>
+          <input class="campo-login" id="email_login" type="email" placeholder="email@email.com" required>
 
-          <label class="rotulo-login" for="senha-login">Senha</label>
-          <input class="campo-login" id="senha-login" type="password" placeholder="********" required>
+          <label class="rotulo-login" for="senha_login">Senha</label>
+          <input class="campo-login" id="senha_login" type="password" placeholder="********" required oninput="verificarSenha()">
 
-          <button type="submit" class="botao-padrao">Entrar</button>
+          <button type="submit" class="botao-padrao" onclick="verificar()">Entrar</button>
         </form>
 
         <hr class="separador-login">
@@ -56,3 +56,36 @@
   </div>
 </body>
 </html>
+
+<script>
+
+  var armazenarEmail = '';
+
+  function verificar(){
+    var email = (email_login.value);
+
+    if(email.includes('@') && email.length != 0 && email.Endswith('.com')){
+      armazenarEmail += `${email}`;
+    } else{
+      Alert(`Por favor, digite um email válido`);
+    }
+
+  }
+
+  function verificarSenha(){
+    var senha = (senha_login.value);
+    var senhaLower = senha.toLowerCase;
+    if(senha.length < 8){
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 8 caracteres.`
+    } else if(senha.toLowerCase == senha){
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra maiúscula.`
+    } else if(senha.toUpperCase == senha){
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra minúscula.`
+    } else if(!senha.includes('0','1','2','3','4','5','6','7','8','9')){
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 número.`
+    } else if(!senhaLower.includes('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','x','z')){
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra.`
+    }
+  }
+</script>
+
