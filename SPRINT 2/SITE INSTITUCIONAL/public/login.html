@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login: Usuário</title>
     <link rel="stylesheet" href="../public/styles/style.css">
+    <link rel="stylesheet" href="../public/styles/global.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="pagina-login">
+  <div id="div_login" class="pagina-login" style="display: flex;">
     
     <!-- LATERAL FORM (50%) -->
     <section class="lateral-formulario">
       <div class="lateral-formulario-interna">
         <h1 class="titulo-login">LOGIN</h1>
 
-        <form class="formulario-login" action="#" method="post" novalidate>
+        <div class="formulario-login" action="#" method="post" novalidate>
           <label class="rotulo-login" for="email_login">E-mail</label>
           <input class="campo-login" id="email_login" type="email" placeholder="email@email.com" required>
 
@@ -23,8 +25,8 @@
 
           <div id="div_mensagemSenha"></div> 
 
-          <button type="submit" class="botao-padrao" onclick="verificar()">Entrar</button>
-        </form>
+          <button class="botao-padrao" onclick="verificar()">Entrar</button>
+        </div>
 
         <hr class="separador-login">
 
@@ -56,26 +58,127 @@
     </section>
 
   </div>
+
+
+   <!-- NAVBAR -->
+  <div id="div_dashboard" style="display: none;">
+  <header class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+      <span>TermoTech</span>
+    </div>
+
+    <nav class="menu">
+      <a href="#">Início</a>
+      <a href="#">Sobre Nós</a>
+      <a href="#">Nossa Missão</a>
+      <a href="#">Projetos</a>
+      <a href="#" class="active">Contato</a> <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+    </nav>
+
+    <div class="select_linguagem">
+      <select class="lang">
+        <option>PT-BR</option>
+        <option>EN-US</option>
+      </select>
+      <button class="login">Login</button>
+      <button class="signup">Cadastre-se</button>
+    </div>
+  </header>
+
+  <section>
+
+    <!-- aqui pode ser o conteudo principal da pagina inicial-->
+     <div>
+  <canvas id="grafico_linha" style="position: relative; height: 40vh; width: 40vw;"></canvas>
+  </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <section class="newsletter">
+      <h2>Fique por dentro de novidades da Terra Sensor</h2>
+      <p>Inscreva-se na nossa newsletter</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Seu melhor endereço de e-mail">
+        <button>Inscrever-se</button>
+      </div>
+      <label class="checkbox">
+        <input type="checkbox"> Aceito receber informações de notícias, eventos, etc.
+      </label>
+    </section>
+
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>Termo Tech</h3>
+        <p>O seu sonho é o nosso projeto, cada detalhe é importante e cada cuidado pode mudar histórias.</p>
+        <p>Está preparado para melhorar seu negócio?</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <p>📧 contato@terrasensor.com</p>
+        <p>📞 0800 123 456</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Soluções</h4>
+        <ul>
+          <li>Medição de temperatura</li>
+          <li>Detecção de gás</li>
+          <li>Sensores de umidade</li>
+          <li>Sonar</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Siga-nos nas redes sociais</h4>
+        <div class="sociais">
+          <span>📷</span> <!--coisa feia so p dps achar os icons bonitinhos-->
+          <span>📘</span>
+          <span>▶️</span>
+          <span>🐦</span>
+          <span>💻</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="copy">
+      © 2025 - Copyright - Terra Sensor - Todos os Direitos Reservados.
+    </div>
+  </footer>
+  </div>
+
 </body>
 </html>
 
 <script>
 
+  var senha = '';
   var armazenarEmail = '';
+  var mockadoEmail = 'joao@gmail.com';
+  var mockadoSenha = 'joao123';
 
   function verificar(){
     var email = (email_login.value);
+    senha = (senha_login.value);
 
-    if(email.includes('@') && email.length != 0 && email.includes(mail) && email.endsWith('.com')){
-      armazenarEmail += `${email}`;
-    } else{
-      alert(`Por favor, digite um email válido`);
+    // if(email.includes('@') && email.length != 0 && email.includes(mail) && email.endsWith('.com')){
+    //   armazenarEmail += `${email}`;
+    // } else{
+    //   alert(`Por favor, digite um email válido`);
+    // }
+
+    if(email == mockadoEmail && senha == mockadoSenha){
+      div_dashboard.style.display = 'block';
+      div_login.style.display = 'none';
     }
-
   }
 
   function verificarSenha(){
-    var senha = (senha_login.value);
+    senha = (senha_login.value);
     var senhaLower = senha.toLowerCase();
     if(senha.length < 8){
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 8 caracteres.`
@@ -91,5 +194,37 @@
       div_mensagemSenha.innerHTML = `Senha está com um nível forte.`
     }
   }
+
+   const ctx = document.getElementById('grafico_linha');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+      datasets: [
+        {
+        label: 'Temperatura atual do sensor',
+        data: [30, 27, 21, 25, 37, 22, 18, 28, 32, 26],
+        borderWidth: 2
+        },
+        {
+        type: 'line',
+        label: 'Temperatura máxima ideal',
+        data: [27, 27, 27, 27, 27, 27, 27, 27, 27, 27],
+        borderWidth: 2
+        }
+    
+    ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 </script>
+
+
 
