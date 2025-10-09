@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif; /*font google fonts Kanit*/
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #000;
+}
+
+.logo img {
+  height: 28px;
+}
+
+.menu a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+
+.menu a.active {
+  color: #f97316;
+}
+
+.select_linguagem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lang {
+  border: none;
+  background: transparent;
+  font-weight: 500;
+}
+
+.login {
+  background: #fff;
+  border: 1px solid #000;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/*botao logar*/
+.signup {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/* FOOTER */
+.footer {
+  background: #0c0c0c;
+  color: #fff;
+  padding: 50px 40px 20px;
+}
+
+.newsletter {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/*titulo e textos*/
+.newsletter h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.newsletter p {
+  color: #aaa;
+  margin-bottom: 16px;
+}
+
+.newsletter_form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/*form do campo la*/
+.newsletter_form input {
+  padding: 10px;
+  width: 300px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.newsletter_form button {
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: block;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+
+/*conteudo do rodapé mesmo*/
+.footer_content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  border-top: 1px solid #444;
+  padding-top: 30px;
+}
+
+.footer_col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer_col h4 {
+  color: #f97316;
+  margin-bottom: 10px;
+}
+
+.footer_col ul {
+  list-style: none;
+}
+
+.footer_col li {
+  margin-bottom: 6px;
+}
+
+.sociais span {
+  font-size: 1.4rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.copy {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+
+/*Esse pode ser o arquivo para adicionar tudo que vai se repetir nas paginas (tipo a navbar e footer)*/
