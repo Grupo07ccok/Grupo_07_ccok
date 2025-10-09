@@ -1,161 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login: Usuário</title>
-    <link rel="stylesheet" href="../public/styles/style.css">
-    <link rel="stylesheet" href="../public/styles/global.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login: Usuário</title>
+  <link rel="stylesheet" href="../public/styles/style.css">
+  <link rel="stylesheet" href="../public/styles/global.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-  <div id="div_login" class="pagina-login" style="display: flex;">
-    
+  <div id="div_login" class="pagina_login" style="display: flex;">
+
     <!-- LATERAL FORM (50%) -->
-    <section class="lateral-formulario">
-      <div class="lateral-formulario-interna">
-        <h1 class="titulo-login">LOGIN</h1>
+    <section class="lateral_formulario">
+      <div class="lateral_formulario_interna">
+        <h1 class="titulo_login">LOGIN</h1>
 
-        <div class="formulario-login" action="#" method="post" novalidate>
-          <label class="rotulo-login" for="email_login">E-mail</label>
-          <input class="campo-login" id="email_login" type="email" placeholder="email@email.com" required>
+        <div class="formulario_login" action="#" method="post" novalidate>
+          <label class="rotulo_login" for="email_login">E-mail</label>
+          <input class="campo_login" id="email_login" type="email" placeholder="email@email.com" required>
 
-          <label class="rotulo-login" for="senha_login">Senha</label>
-          <input class="campo-login" id="senha_login" type="password" placeholder="********" required oninput="verificarSenha()">
+          <label class="rotulo_login" for="senha_login">Senha</label>
+          <input class="campo_login" id="senha_login" type="password" placeholder="********" required
+            oninput="verificarSenha()">
 
-          <div id="div_mensagemSenha"></div> 
+          <div id="div_mensagemSenha"></div>
 
-          <button class="botao-padrao" onclick="verificar()">Entrar</button>
+          <button class="botao_padrao" onclick="verificar()">Entrar</button>
         </div>
 
-        <hr class="separador-login">
+        <hr class="separador_login">
 
-        <div class="redes-login">
-          <button class="botao-social google-login">
-             <img src="assets/icon-google.png" alt="Google"> 
+        <div class="redes_login">
+          <button class="botao_social google_login">
+            <img src="assets/icon-google.png" alt="Google">
             Continuar com o Google
           </button>
 
-          <button class="botao-social apple-login">
+          <button class="botao_social apple_login">
             <img src="assets/icon-apple.png" alt="Apple">
             Continuar com o Apple ID
           </button>
         </div>
 
-        <p class="links-login">
-          Não possui uma conta? <a class="link-login" href="cadastro.html">Cadastre-se</a>
+        <p class="links_login">
+          Não possui uma conta? <a class="link_login" href="cadastro.html">Cadastre-se</a>
         </p>
-        <p class="links-login">
-          <a class="link-login" href="#">Esqueci minha senha</a>
+        <p class="links_login">
+          <a class="link_login" href="#">Esqueci minha senha</a>
         </p>
       </div>
     </section>
     <!-- LATERAL IMAGEM (50%) -->
-    <section class="lateral-imagem">
-      <div class="lateral-imagem-interna">
-        <img src="../public/assets/img_page_login.png" class="imagem-cadastro" alt="">
+    <section class="lateral_imagem">
+      <div class="lateral_imagem_interna">
+        <img src="../public/assets/img_page_login.png" class="imagem_cadastro" alt="">
       </div>
     </section>
 
-  </div>
-
-
-   <!-- NAVBAR -->
-  <div id="div_dashboard" style="display: none;">
-  <header class="navbar">
-    <div class="logo">
-      <img src="logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
-      <span>TermoTech</span>
-    </div>
-
-    <nav class="menu">
-      <a href="#">Início</a>
-      <a href="#">Sobre Nós</a>
-      <a href="#">Nossa Missão</a>
-      <a href="#">Projetos</a>
-      <a href="#" class="active">Contato</a> <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
-    </nav>
-
-    <div class="select_linguagem">
-      <select class="lang">
-        <option>PT-BR</option>
-        <option>EN-US</option>
-      </select>
-      <button class="login">Login</button>
-      <button class="signup">Cadastre-se</button>
-    </div>
-  </header>
-
-  <section>
-    <h2>Dashboard</h2>
-    <!-- aqui pode ser o conteudo principal da pagina inicial-->
-     <div style="position: relative; height: 40vh; width: 60vw;">
-  <canvas id="grafico_barra"></canvas>
-  </div>
-
-  <div style="position: relative; height: 40vh; width: 60vw;">
-  <canvas id="grafico_linha"></canvas>
-  </div>
-
-  </section>
-
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <section class="newsletter">
-      <h2>Fique por dentro de novidades da Terra Sensor</h2>
-      <p>Inscreva-se na nossa newsletter</p>
-      <div class="newsletter_form">
-        <input type="email" placeholder="Seu melhor endereço de e-mail">
-        <button>Inscrever-se</button>
-      </div>
-      <label class="checkbox">
-        <input type="checkbox"> Aceito receber informações de notícias, eventos, etc.
-      </label>
-    </section>
-
-    <div class="footer_content">
-      <div class="footer_col">
-        <h3>Termo Tech</h3>
-        <p>O seu sonho é o nosso projeto, cada detalhe é importante e cada cuidado pode mudar histórias.</p>
-        <p>Está preparado para melhorar seu negócio?</p>
-      </div>
-
-      <div class="footer_col">
-        <h4>Contato</h4>
-        <p>📧 contato@terrasensor.com</p>
-        <p>📞 0800 123 456</p>
-      </div>
-
-      <div class="footer_col">
-        <h4>Soluções</h4>
-        <ul>
-          <li>Medição de temperatura</li>
-          <li>Detecção de gás</li>
-          <li>Sensores de umidade</li>
-          <li>Sonar</li>
-        </ul>
-      </div>
-
-      <div class="footer_col">
-        <h4>Siga-nos nas redes sociais</h4>
-        <div class="sociais">
-          <span>📷</span> <!--coisa feia so p dps achar os icons bonitinhos-->
-          <span>📘</span>
-          <span>▶️</span>
-          <span>🐦</span>
-          <span>💻</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="copy">
-      © 2025 - Copyright - Terra Sensor - Todos os Direitos Reservados.
-    </div>
-  </footer>
   </div>
 
 </body>
+
 </html>
 
 <script>
@@ -165,7 +73,7 @@
   var mockadoEmail = 'joao@gmail.com';
   var mockadoSenha = 'joao123';
 
-  function verificar(){
+  function verificar() {
     var email = (email_login.value);
     senha = (senha_login.value);
 
@@ -175,33 +83,33 @@
     //   alert(`Por favor, digite um email válido`);
     // }
 
-    if(email == mockadoEmail && senha == mockadoSenha){
+    if (email == mockadoEmail && senha == mockadoSenha) {
       div_dashboard.style.display = 'block';
       div_login.style.display = 'none';
-    } else{
+    } else {
       alert('Erro ao digitar o email ou senha, tente novamente.')
     }
   }
 
-  function verificarSenha(){
+  function verificarSenha() {
     senha = (senha_login.value);
     var senhaLower = senha.toLowerCase();
-    if(senha.length < 8){
+    if (senha.length < 8) {
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 8 caracteres.`
-    } else if(senha.toLowerCase() == senha){
+    } else if (senha.toLowerCase() == senha) {
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra maiúscula.`
-    } else if(senha.toUpperCase() == senha){
+    } else if (senha.toUpperCase() == senha) {
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra minúscula.`
-    } else if(!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')){
+    } else if (!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')) {
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 número.`
-    } else if(!senhaLower.includes('a') && !senhaLower.includes('b') && !senhaLower.includes('b') && !senhaLower.includes('c') && !senhaLower.includes('d') && !senhaLower.includes('e') && !senhaLower.includes('f') && !senhaLower.includes('g') && !senhaLower.includes('h') && !senhaLower.includes('i') && !senhaLower.includes('j') && !senhaLower.includes('k') && !senhaLower.includes('l') && !senhaLower.includes('m') && !senhaLower.includes('n') && !senhaLower.includes('o') && !senhaLower.includes('p') && !senhaLower.includes('q') && !senhaLower.includes('r') && !senhaLower.includes('s') && !senhaLower.includes('t') && !senhaLower.includes('u') && !senhaLower.includes('v') && !senhaLower.includes('w') && !senhaLower.includes('x') && !senhaLower.includes('y') && !senhaLower.includes('z')){
+    } else if (!senhaLower.includes('a') && !senhaLower.includes('b') && !senhaLower.includes('b') && !senhaLower.includes('c') && !senhaLower.includes('d') && !senhaLower.includes('e') && !senhaLower.includes('f') && !senhaLower.includes('g') && !senhaLower.includes('h') && !senhaLower.includes('i') && !senhaLower.includes('j') && !senhaLower.includes('k') && !senhaLower.includes('l') && !senhaLower.includes('m') && !senhaLower.includes('n') && !senhaLower.includes('o') && !senhaLower.includes('p') && !senhaLower.includes('q') && !senhaLower.includes('r') && !senhaLower.includes('s') && !senhaLower.includes('t') && !senhaLower.includes('u') && !senhaLower.includes('v') && !senhaLower.includes('w') && !senhaLower.includes('x') && !senhaLower.includes('y') && !senhaLower.includes('z')) {
       div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra.`
-    } else{
+    } else {
       div_mensagemSenha.innerHTML = `Senha está com um nível forte.`
     }
   }
 
-   const barra = document.getElementById('grafico_barra');
+  const barra = document.getElementById('grafico_barra');
 
   new Chart(barra, {
     type: 'bar',
@@ -209,18 +117,18 @@
       labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
       datasets: [
         {
-        label: 'Temperatura atual do sensor',
-        data: [30, 27, 21, 25, 37, 22, 18, 28, 32, 26],
-        borderWidth: 2
+          label: 'Temperatura atual do sensor',
+          data: [30, 27, 21, 25, 37, 22, 18, 28, 32, 26],
+          borderWidth: 2
         },
         {
-        type: 'line',
-        label: 'Temperatura máxima ideal',
-        data: [27, 27, 27, 27, 27, 27, 27, 27, 27, 27],
-        borderWidth: 2
+          type: 'line',
+          label: 'Temperatura máxima ideal',
+          data: [27, 27, 27, 27, 27, 27, 27, 27, 27, 27],
+          borderWidth: 2
         }
-    
-    ]
+
+      ]
     },
     options: {
       scales: {
@@ -236,20 +144,20 @@
   new Chart(linha, {
     type: 'line',
     data: {
-      labels: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00','11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+      labels: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
       datasets: [
         {
-        label: 'Produção',
-        data: [100, 100, 100, 100, 100, 100, 92.5, 87.5, 85, 80, 80, 72.5, 70, 65, 57.5, 65, 70, 82.5, 82.5, 90, 90, 92.5, 100, 100],
-        borderWidth: 2
+          label: 'Produção',
+          data: [100, 100, 100, 100, 100, 100, 92.5, 87.5, 85, 80, 80, 72.5, 70, 65, 57.5, 65, 70, 82.5, 82.5, 90, 90, 92.5, 100, 100],
+          borderWidth: 2
         },
         {
-        label: 'Temperatura',
-        data: [18, 17, 17, 19, 19, 20, 23, 25, 26, 28, 28, 31, 32, 34, 37, 34, 32, 27, 27, 24, 24, 23, 20, 19],
-        borderWidth: 2
+          label: 'Temperatura',
+          data: [18, 17, 17, 19, 19, 20, 23, 25, 26, 28, 28, 31, 32, 34, 37, 34, 32, 27, 27, 24, 24, 23, 20, 19],
+          borderWidth: 2
         }
-    
-    ]
+
+      ]
     },
     options: {
       scales: {
@@ -260,6 +168,3 @@
     }
   });
 </script>
-
-
-
