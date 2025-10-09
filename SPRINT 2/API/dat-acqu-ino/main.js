@@ -12,7 +12,7 @@ const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
-    valoresSensorAnalogico,
+    valoresTemperatura,
     valoresSensorDigital,
 ) => {
     
@@ -20,10 +20,10 @@ const serial = async (
     let poolBancoDados = mysql.createPool(
         {
             host: 'localhost',
-            user: 'root', // NAO USAR O ROOT, CRIAR UM USUARIO
-            password: '',
+            user: 'aluno', // NAO USAR O ROOT, CRIAR UM USUARIO
+            password: 'Sptech#2024',
             database: 'termotech',
-            port: 3306
+            port: 3307
         }
     ).promise();
     
@@ -52,29 +52,46 @@ const serial = async (
         console.log(data);
         const valores = data.split(';');
         const sensorDigital = parseInt(valores[1]);
-        const sensorAnalogico = parseFloat(valores[0]);
+        const temperatura = parseFloat(valores[0]);
         // const agora = new Date();
         // const horaFormatada = agora.toISOString().slice(0,19).replace('T', ' ');
         // ADICIONAR A DATA E HORARIO PELO JAVASCRIPT!!!
 
         // armazena os valores dos sensores nos arrays correspondentes
 
-        valoresSensorAnalogico.push(sensorAnalogico);
+        valoresTemperatura.push(temperatura);
         valoresSensorDigital.push(sensorDigital);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // este insert irá inserir os dados na tabela "medida"
+            // se temperatura > 27 = Emitir alert:
+            if(temperatura > 27) {
+                // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO coletaDados (sensorAnalogico) VALUES (?)',
-                // 'INSERT INTO coletaDados (sensorAnalogico, horaColeta) VALUES (? , ?)',
-                [sensorAnalogico]
-                // [sensorAnalogico, horaFormatada]
+                'INSERT INTO coletaDados (fkSensor, temperatura, alerta) VALUES (1, ?, 1)',
+                // 'INSERT INTO coletaDados (temperatura, horaColeta) VALUES (? , ?)',
+                [temperatura]
+                // [temperatura, horaFormatada]
 
             );
-            console.log("valores inseridos no banco: ", sensorAnalogico);
-            // console.log("valores inseridos no banco: ", sensorAnalogico + horaFormatada);
+            console.log("valores inseridos no banco: ", temperatura);
+            // console.log("valores inseridos no banco: ", temperatura + horaFormatada);
+
+            } else {
+                // este insert irá inserir os dados na tabela "medida"
+                await poolBancoDados.execute(
+                    'INSERT INTO coletaDados (fkSensor, temperatura, alerta) VALUES (1, ?, 0)',
+                    // 'INSERT INTO coletaDados (temperatura, horaColeta) VALUES (? , ?)',
+                    [temperatura]
+                    // [temperatura, horaFormatada]
+    
+                );
+                console.log("valores inseridos no banco: ", temperatura);
+                // console.log("valores inseridos no banco: ", temperatura + horaFormatada);
+
+            }
+
 
         }
 
@@ -88,7 +105,7 @@ const serial = async (
 
 // função para criar e configurar o servidor web
 const servidor = (
-    valoresSensorAnalogico,
+    valoresTemperatura,
     valoresSensorDigital
 ) => {
     const app = express();
@@ -107,7 +124,7 @@ const servidor = (
 
     // define os endpoints da API para cada tipo de sensor
     app.get('/sensores/analogico', (_, response) => {
-        return response.json(valoresSensorAnalogico);
+        return response.json(valoresTemperatura);
     });
     app.get('/sensores/digital', (_, response) => {
         return response.json(valoresSensorDigital);
@@ -117,18 +134,18 @@ const servidor = (
 // função principal assíncrona para iniciar a comunicação serial e o servidor web
 (async () => {
     // arrays para armazenar os valores dos sensores
-    const valoresSensorAnalogico = [];
+    const valoresTemperatura = [];
     const valoresSensorDigital = [];
 
     // inicia a comunicação serial
     await serial(
-        valoresSensorAnalogico,
+        valoresTemperatura,
         valoresSensorDigital
     );
 
     // inicia o servidor web
     servidor(
-        valoresSensorAnalogico,
+        valoresTemperatura,
         valoresSensorDigital
     );
 })();

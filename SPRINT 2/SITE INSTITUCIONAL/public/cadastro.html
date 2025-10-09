@@ -10,54 +10,55 @@
     </head>
 
 <body>
-    <div class="pagina-login">
+    <div class="pagina_login">
         <!-- LATERAL IMAGEM (50%) -->
-        <section class="lateral-imagem">
-            <div class="lateral-imagem-interna">
-                <img src="../public/assets/img_page_cadastro.png" class="imagem-cadastro" alt="">
+        <section class="lateral_imagem">
+            <div class="lateral_imagem_interna">
+                <img src="../public/assets/img_page_cadastro.png" class="imagem_cadastro" alt="">
             </div>
         </section>
 
         <!-- LATERAL FORM (50%) -->
-        <section class="lateral-formulario">
-            <div class="lateral-formulario-interna">
-                <h1 class="titulo-login">CADASTRO</h1>
+        <section class="lateral_formulario">
+            <div class="lateral_formulario_interna">
+                <h1 class="titulo_login">CADASTRO</h1>
 
-                <form class="formulario-login" action="#" method="post" novalidate>
-                    <label class="rotulo-login" for="nome-login">Nome</label>
-                    <input class="campo-login" id="nome-cadastro" type="nome" placeholder="Insira seu nome:" required>
+                <div class="formulario_login" >
+                    <label class="rotulo_login" for="nome_login">Nome</label>
+                    <input class="campo_login" id="nome_cadastro" type="nome" placeholder="Insira seu nome:" required>
 
-                    <label class="rotulo-login" for="email-cadastro">E-mail</label>
-                    <input class="campo-login" id="email-cadastro" type="email" placeholder="email@email.com" required>
+                    <label class="rotulo_login" for="email_cadastro">E-mail</label>
+                    <input class="campo_login" id="email_cadastro" type="email" placeholder="email@email.com" required>
 
-                    <label class="rotulo-login" for="senha-cadastro">Senha</label>
-                    <input class="campo-login" id="senha-cadastro" type="password" placeholder="********" required>
+                    <label class="rotulo_login" for="senha_cadastro">Senha</label>
+                    <input class="campo_login" id="senha_cadastro" type="password" placeholder="********" required oninput="verificar()"> <div id="msg_forca"></div>
 
-                    <label class="rotulo-login" for="senha-cadastro">Confirme sua senha</label>
-                    <input class="campo-login" id="senha-cadastro" type="password" placeholder="********" required>
+                    <label class="rotulo_login" for="confirma_cadastro">Confirme sua senha</label>
+                    <input class="campo_login" id="confirma_cadastro" type="password" placeholder="********" required>
 
-                    <button type="submit" class="botao-padrao">Continuar</button>
-                </form>
+                    <!-- <button type="submit" class="botao_formulario"  -->
+                    <button class="botao_formulario" onclick="cadastrar()">Continuar</button>
+                </div>
 
-                <hr class="separador-login">
+                <hr class="separador_login">
 
-                <div class="redes-login">
-                    <button class="botao-social google-login">
+                <div class="redes_login">
+                    <button class="botao_social google_login">
                         <img src="assets/icon-google.png" alt="Google">
                         Continuar com o Google
                     </button>
 
-                    <button class="botao-social apple-login">
+                    <button class="botao_social apple_login">
                         <img src="assets/icon-apple.png" alt="Apple">
                         Continuar com o Apple ID
                     </button>
                 </div>
 
-                <p class="links-login">
-                    Já possui uma conta? <a class="link-login" href="login.html">Faça login</a>
+                <p class="links_login">
+                    Já possui uma conta? <a class="link_login" href="login.html">Faça login</a>
                 </p>
-                <p class="links-login">
-                    <a class="link-login" href="#">Esqueci minha senha</a>
+                <p class="links_login">
+                    <a class="link_login" href="#">Esqueci minha senha</a>
                 </p>
             </div>
         </section>
@@ -66,3 +67,75 @@
 </body>
 
 </html>
+
+<script>
+    // Guarda em variável global:
+    var guarda_nome = "";
+    var guarda_email = "";
+    var guarda_senha = "";
+    var guarda_confirma = "";
+    var senha = "";
+    var forca_senha = "";
+
+    function verificar() {
+        senha = senha_cadastro.value;
+        var tamanho_senha = senha.length;
+        var senha_sem = senha.replaceAll(/[^a-zA-Z0-9]/g,"");
+        var tamanho_senha_sem = senha_sem.length;
+        var senha_minuscula = senha.toLowerCase();
+        var senha_maiuscula = senha.toUpperCase();
+        var crit1 = 0;
+        var crit2 = 0;
+        var crit3 = 0;
+        var criteriosAtendidos = 0
+
+        if(tamanho_senha >= 8) { // tem pelo menos 8 caracteres
+            ++crit1;
+        }
+
+        if(senha_minuscula != senha && senha_maiuscula != senha) { // tem letras maiúsculas e minúculas
+            ++crit2;
+        }
+
+        if(tamanho_senha != tamanho_senha_sem) { // tem caracteres especiais
+            ++crit3;
+        }
+
+        criteriosAtendidos = crit1 + crit2 + crit3;
+
+        if(criteriosAtendidos == 0) {
+            forca_senha = `Insegura`
+        } else if(criteriosAtendidos == 1) {
+            forca_senha = `Fraca`
+        } else if(criteriosAtendidos == 2) {
+            forca_senha = `Média`
+        } else {
+            forca_senha = `Forte`   
+        }
+
+        msg_forca.innerHTML = `${forca_senha}`
+    }
+
+    function cadastrar() {
+        // Inputs:
+        var nome = nome_cadastro.value;
+        var email = email_cadastro.value;
+        var confirma = confirma_cadastro.value;
+
+        if(nome != "") {
+            guarda_nome = nome;
+        }
+
+        if (email.includes('@') && (email.endsWith('.com') || email.endsWith('.com.br'))) {
+            guarda_email = email;
+        }
+
+        if(forca_senha == 'forte') {
+            guarda_senha = senha;
+        }
+
+        if(senha == confirma) {
+            guarda_confirma = confirma;
+        }
+    }
+</script>
