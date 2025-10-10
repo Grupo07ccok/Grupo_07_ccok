@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "poppins", sans-serif; /*font google fonts Kanit*/
+  font-family: "poppins", sans-serif; /*font google fonts Kanit (?)*/
   margin: 0;
   padding: 0;
 }
@@ -13,6 +13,7 @@
   padding: 12px 40px;
   background: #fff;
   border-bottom: 1px solid #ddd;
+  
 }
 
 .logo {
