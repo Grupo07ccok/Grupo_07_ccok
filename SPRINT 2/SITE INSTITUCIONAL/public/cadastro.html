@@ -80,8 +80,8 @@
     function verificar() {
         senha = senha_cadastro.value;
         var tamanho_senha = senha.length;
-        var senha_sem = senha.replaceAll(/[^a-zA-Z0-9]/g,"");
-        var tamanho_senha_sem = senha_sem.length;
+        var senha_sem_especial = senha.replaceAll(/[^a-zA-Z0-9]/g,""); //troca todos os caracteres que não são números ou letras
+        var tamanho_senha_sem_especial = senha_sem_especial.length;
         var senha_minuscula = senha.toLowerCase();
         var senha_maiuscula = senha.toUpperCase();
         var crit1 = 0;
@@ -97,8 +97,13 @@
             ++crit2;
         }
 
-        if(tamanho_senha != tamanho_senha_sem) { // tem caracteres especiais
+        if(tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
             ++crit3;
+        }
+
+        if (!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')) {
+        } else {
+            alert(`tem número`)
         }
 
         criteriosAtendidos = crit1 + crit2 + crit3;

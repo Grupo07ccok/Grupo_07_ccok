@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador financeiro</title>
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+
+<body>
+    <div class="simulador_financeiro">
+        <div class="container">
+            <h1>Simulador <span>Financeiro</span></h1>
+
+            <div class="div_select">
+                <b>Selecione o tipo de cálculo</b>
+                <select id="select_metodo" class="select_calculo" onchange="escolha()">
+                    <option value="1" selected>Receita anual</option>
+                    <option value="2">Produção anual</option>
+                </select><br><br>
+            </div>
+
+            <div class="div_receita_producao" id="div_receita">
+                <div class="div_campos">
+                    <b>Receita anual por ano <span>*</span></b> <br>
+                    <input class="input_simulador" id="input_receitaAnual" placeholder="Em reais (R$):"
+                        type="number"><br><br>
+                </div>
+                <div class="div_campos">
+                    <b>Temperatura média na mina <span>*</span></b><br>
+                    <input class="input_simulador" id="input_temperatura" placeholder="Em graus (Cº):"
+                        type="number"><br><br>
+                </div>
+            </div>
+
+            <div class="div_receita_producao" id="div_producao" style="display: none;">
+                <div class="div_line">
+                    <div>
+                        <b>Produção de cobre por ano <span>*</span></b><br>
+                        <input class="input_simulador" id="input_producao" placeholder="Em toneladas:"
+                            type="number"><br><br>
+                    </div>
+                    <div>
+                        <b>Custo de extração <span>*</span></b> <br>
+                        <input class="input_simulador" id="input_custo" placeholder="Em reais (R$):"
+                            type="number"><br><br>
+                    </div>
+                </div>
+                <b>Temperatura média na mina <span>*</span></b><br>
+                <input class="input_simulador" id="input_temperatura2" placeholder="Em graus (Cº):"
+                    type="number"><br><br>
+            </div>
+
+            <button onclick="calcular()" class="botao-simulador">Calcular valores</button><br><br>
+
+            <div id="div_mensagem"></div>
+        </div>
+    </div>
+    <div id="popup">
+        <div id="popup_conteudo">
+            <span id="fechar_popup" onclick="fecharPopup()">&times;</span>
+            <h2>Resultado da Simulação</h2>
+            <p id="texto_popup"></p>
+            <button class="botao-popup" onclick="fecharPopup()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        function escolha() {
+            if (select_metodo.value == '1') {
+                div_receita.style.display = 'flex';
+                div_producao.style.display = 'none';
+            } else {
+                div_producao.style.display = 'flex';
+                div_receita.style.display = 'none';
+            }
+        }
+
+        function calcular() {
+            var metodo = select_metodo.value;
+            var temperatura = Number(input_temperatura.value || input_temperatura2.value);
+            var texto = '';
+
+            if (metodo == '1') {
+                var receita = Number(input_receitaAnual.value);
+                if (receita && temperatura) {
+                    var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
+                    var ganhoExtra = receitaLiquidaValor - receita;
+                    texto = `
+                        Com o monitoramento, sua receita líquida será de 
+                        ${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+                        Você ganhará a mais 
+                        ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
+                    `;
+                    abrirPopup(texto);
+                } else {
+                    alert('Preencha todos os campos.');
+                }
+            } else if (metodo == '2') {
+                var producao = Number(input_producao.value);
+                var custo = Number(input_custo.value);
+                if (producao && custo && temperatura) {
+                    var receitaBruta = producao * 53500;
+                    var receitaLiquida = receitaBruta - (custo * producao);
+                    var receitaSemSensor = receitaLiquida * (1 - ((temperatura - 20) * 0.025));
+                    var perda = receitaLiquida - receitaSemSensor;
+                    texto = `
+                        Com o sensor, sua receita líquida será de 
+                        ${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+                        Sem o sensor, seria de 
+                        ${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+                        Você deixaria de ganhar 
+                        ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
+                    `;
+                    abrirPopup(texto);
+                } else {
+                    alert('Preencha todos os campos.');
+                }
+            }
+        }
+
+        function abrirPopup(texto) {
+            texto_popup.innerHTML = texto;
+            popup.style.display = 'flex';
+        }
+
+        function fecharPopup() {
+            popup.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
