@@ -1,14 +1,12 @@
 CREATE DATABASE termotech;
-
+drop database termotech;
 USE termotech;
 show tables;
 
 CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
 	razaoSocial VARCHAR(50), -- Razão Social da Empresa
-	emailResponsavel VARCHAR(80) UNIQUE NOT NULL, -- E-mail da Empresa
-	nomeResponsavel VARCHAR(100), -- Nome do funcionário responsável da Empresa
-	telefoneResponsavel CHAR(11), -- Telefone de contato da Empresa
+	telefone CHAR(11), -- Telefone de contato da Empresa
 	cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
 	cep CHAR(9) -- CEP da Empresa 
 );
@@ -69,7 +67,9 @@ SHOW TABLES;
 
 select * from coletaDados;
 select * from sensor;
-select * from coletaDados;
+select * from mina;
+select * from empresa;
+select * from usuario;
 
 truncate table coletaDados;
 
