@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora TermoTech</title>
+</head>
+<body>
+    <h1>
+        SIMULADOR FINANCEIRO TERMO TECH
+    </h1>
+    Insira o valor da receita do ano passado:
+    <br>
+    R$ <input type="text" id="ipt_receitaAnterior" placeholder="e.g. 100000000.50">
+    <br><br>
+    Insira a temperatura média das suas minas:
+    <br>
+    <input type="text" id="ipt_temperatura" placeholder="e.g. 25.5"> ºC
+    <br><br>
+    <button onclick="calcular()">Calcular</button>
+    <br><br>
+    <div id="div_msg"></div>
+</body>
+</html>
+
+<script>
+    var quedaGrau = 0.025 // a cada 1ºC acima de 20ºC, a produção cai em 2.5%
+
+    function calcular(){
+        var receitaAnterior = Number(ipt_receitaAnterior.value);
+        var temperatura = Number(ipt_temperatura.value);
+        var diferencaTemperatura = (temperatura - 20);
+        var quedaProducao = diferencaTemperatura * quedaGrau;
+        var producaoFinal = receitaAnterior * (1 - quedaProducao);
+
+        if(temperatura <= 20) {
+            alert(`A temperatura deve ser acima de 20ºC para precisar ser monitorada`)
+        } else {
+            div_msg.innerHTML = `
+                Com o aumento de ${diferencaTemperatura}ºC, a produção cai em ${quedaProducao*100}%<br>
+                A receita estimada é de ${producaoFinal.toLocaleString('pt-BR',{style:"currency",currency:'BRL'})}
+            `
+        }
+
+
+    }
+
+
+</script>
