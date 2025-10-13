@@ -310,10 +310,48 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
+/*---section nossa_Missao - Andrei---------------------------------------*/
+
+.nossa_Missao{
+  background-color: #faf9f0;
+}
+
+.nossa_Missao .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 10vh;
+}
+
+.nossa_Missao .container .container_Imagem {
+  order: 2;
+  
+}
+
+.container_Imagem img{
+  height: 650px;
+  width: 800px;
+  box-shadow: -15px 15px 0 #F5751A;
+}
+
+.texto_nossa_Missao p{
+order: 1;
+}
+
+.texto_nossa_Missao h2 {
+  font-size: 38px;
+  margin: 23px 35px 20px 0;
+}
+
+.texto_nossa_Missao p {
+  font-size: 20px;
+}
+
 
 /*---section video_pitch - Miyuki---------------------------------------*/
 .video_pitch {
-  background-color: #eee;
+  background-color: #faf9f0;
   width: 100%;
   height: 100vh;
   margin: 0;
@@ -321,8 +359,8 @@ body {
 
 .video_pitch .container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: row;
   padding: 10vh;
 }
@@ -347,7 +385,7 @@ body {
 
 .texto_video h2 {
   font-size: 38px;
-  margin: 23px 35px 20px 0;
+  margin: 0 35px 20px 0;
 }
 
 .texto_video p {
@@ -357,7 +395,7 @@ body {
 
 /*---section diagrama_solucao - leticia---------------------------------------*/
 .diagrama_solucao {
-      background-color: #eee;
+      background-color: #faf9f0;
       width: 100%;
       height: 80vh;
       margin: 0;
