@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Termo Tech | LandingPage</title>
   <link rel="stylesheet" href="../public/styles/global.css" />
-  <link rel="stylesheet" href="../public/styles/style.css" />
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 
 <body>
@@ -23,7 +23,8 @@
       <a href="#">Sobre Nós</a>
       <a href="#nossa_Missao">Nossa Missão</a>
       <a href="#video_pitch">Diagrama de solução</a>
-      <a href="#diagrama_solucao">Diagrama de Solução</a> <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+      <a href="#diagrama_solucao">Diagrama de Solução</a>
+      <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
     </nav>
 
     <div class="select_linguagem">
@@ -48,7 +49,7 @@
 
   <section id="nossa_Missao">
     <!-- aqui fica o codigo do responsavel pela seçao  do nossaMissao - Andrei  -->
-     <div class="container">
+    <div class="container">
       <div class="container_Imagem">
         <img src="../public/assets/img/Nossa_Missão.png" alt="">
       </div>
@@ -77,7 +78,7 @@
     <div class="container">
       <div class="container_video">
         <!-- qual vídeo é pra colocar? -->
-        <video src=""></video> 
+        <video src=""></video>
       </div>
       <div class="texto_video">
         <div class="titulo_secao">
@@ -94,7 +95,58 @@
       </div>
     </div>
   </section>
+  <section id="simulador_financeiro">
+    <div class="container">
+      <h1>Simulador <span>Financeiro</span></h1>
 
+      <div class="div_select">
+        <b>Selecione o tipo de cálculo</b>
+        <select id="select_metodo" class="select_calculo" onchange="escolha()">
+          <option value="1" selected>Receita anual</option>
+          <option value="2">Produção anual</option>
+        </select><br><br>
+      </div>
+
+      <div class="div_receita_producao" id="div_receita">
+        <div class="div_campos">
+          <b>Receita anual por ano <span>*</span></b> <br>
+          <input class="input_simulador" id="input_receitaAnual" placeholder="Em reais (R$):" type="number"><br><br>
+        </div>
+        <div class="div_campos">
+          <b>Temperatura média na mina <span>*</span></b><br>
+          <input class="input_simulador" id="input_temperatura" placeholder="Em graus (Cº):" type="number"><br><br>
+        </div>
+      </div>
+
+      <div class="div_receita_producao" id="div_producao" style="display: none;">
+        <div class="div_line">
+          <div>
+            <b>Produção de cobre por ano <span>*</span></b><br>
+            <input class="input_simulador" id="input_producao" placeholder="Em toneladas:" type="number"><br><br>
+          </div>
+          <div>
+            <b>Custo de extração <span>*</span></b> <br>
+            <input class="input_simulador" id="input_custo" placeholder="Em reais (R$):" type="number"><br><br>
+          </div>
+        </div>
+        <b>Temperatura média na mina <span>*</span></b><br>
+        <input class="input_simulador" id="input_temperatura2" placeholder="Em graus (Cº):" type="number"><br><br>
+      </div>
+
+      <button onclick="calcular()" class="botao_simulador">Calcular valores</button><br><br>
+
+      <div id="div_mensagem"></div>
+    </div>
+    </div>
+    <div id="popup">
+      <div id="popup_conteudo">
+        <span id="fechar_popup" onclick="fecharPopup()">&times;</span>
+        <h2>Resultado da Simulação</h2>
+        <p id="texto_popup"></p>
+        <button class="botao_popup" onclick="fecharPopup()">Fechar</button>
+      </div>
+    </div>
+  </section>
 
   <section id="diagrama_solucao">
     <!-- aqui fica o codigo do responsavel pela seçao  do diagrama_solucao - Leticia -->
@@ -104,7 +156,7 @@
       </div>
       <div class="container_diagrama">
         <div class="caixa_diagrama">
-          <p>algo aqui dentro</p> 
+          <p>algo aqui dentro</p>
         </div>
       </div>
     </div>
@@ -127,18 +179,20 @@
     <div class="footer_content">
       <div class="footer_col">
         <div class="logo" style="margin-bottom: 10px; color: white;">
-          <img style="height: 35px; width: 35px;" src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+          <img style="height: 35px; width: 35px;" src="assets/img/logo.png" alt="Logo Termo Tech">
+          <!--trocar pela logo de vdd-->
           <h3>Termo Tech</h3>
         </div>
 
-        
+
         <p>O seu sonho é o nosso projeto, cada detalhe é importante e cada cuidado pode mudar histórias.</p>
         <p>Está preparado para melhorar seu negócio?</p>
       </div>
 
       <div class="footer_col">
         <h4>Contato</h4>
-        <p><img style="width: 23px; height: 23px;" src="../public/assets/icons/icon_email.png" alt="icon_email"> contato@terrasensor.com</p> <!--ficou torto aaaa-->
+        <p><img style="width: 23px; height: 23px;" src="../public/assets/icons/icon_email.png" alt="icon_email">
+          contato@terrasensor.com</p> <!--ficou torto aaaa-->
         <p><img src="../public/assets/icons/icon_phone.png" alt="icon_fone"> 0800 123 456</p>
       </div>
 
@@ -157,14 +211,14 @@
         <div class="sociais">
           <span>
             <img src="../public/assets/icons/icon_instagram.png" alt="icon_insta">
-          </span> 
-        
+          </span>
+
           <span>
             <img src="../public/assets/icons/icon_facebook.png" alt="icon_face">
           </span>
 
           <span>
-           <img  src="../public/assets/icons/icon_youtube.png" alt="icon_youtube">
+            <img src="../public/assets/icons/icon_youtube.png" alt="icon_youtube">
           </span>
 
           <span>
@@ -186,3 +240,67 @@
 </body>
 
 </html>
+
+<script>
+        function escolha() {
+            if (select_metodo.value == '1') {
+                div_receita.style.display = 'flex';
+                div_producao.style.display = 'none';
+            } else {
+                div_producao.style.display = 'flex';
+                div_receita.style.display = 'none';
+            }
+        }
+
+        function calcular() {
+            var metodo = select_metodo.value;
+            var temperatura = Number(input_temperatura.value || input_temperatura2.value);
+            var texto = '';
+
+            if (metodo == '1') {
+                var receita = Number(input_receitaAnual.value);
+                if (receita && temperatura) {
+                    var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
+                    var ganhoExtra = receitaLiquidaValor - receita;
+                    texto = `
+                        Com o monitoramento, sua receita líquida será de 
+                        ${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+                        Você ganhará a mais 
+                        ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
+                    `;
+                    abrirPopup(texto);
+                } else {
+                    alert('Preencha todos os campos.');
+                }
+            } else if (metodo == '2') {
+                var producao = Number(input_producao.value);
+                var custo = Number(input_custo.value);
+                if (producao && custo && temperatura) {
+                    var receitaBruta = producao * 53500;
+                    var receitaLiquida = receitaBruta - (custo * producao);
+                    var receitaSemSensor = receitaLiquida * (1 - ((temperatura - 20) * 0.025));
+                    var perda = receitaLiquida - receitaSemSensor;
+                    texto = `
+                        Com o sensor, sua receita líquida será de 
+                        ${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+                        Sem o sensor, seria de 
+                        ${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+                        Você deixaria de ganhar 
+                        ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
+                    `;
+                    abrirPopup(texto);
+                } else {
+                    alert('Preencha todos os campos.');
+                }
+            }
+        }
+
+        function abrirPopup(texto) {
+            texto_popup.innerHTML = texto;
+            popup.style.display = 'flex';
+        }
+
+        function fecharPopup() {
+            popup.style.display = 'none';
+        }
+    </script>

@@ -179,16 +179,16 @@ body {
 
 /*SIMULADOR FINANCEIRO*/
 
-.simulador_financeiro {
+#simulador_financeiro {
   width: 100%;
   height: 100%;
-  background-image: url('../assets/img_simulador.png');
+  background-image: url('../assets/img/img_simulador.png');
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.simulador_financeiro .container {
+#simulador_financeiro .container {
   font-size: larger;
   width: 40vw;
   height: 65vh;

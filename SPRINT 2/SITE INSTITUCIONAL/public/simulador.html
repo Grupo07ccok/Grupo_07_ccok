@@ -67,69 +67,7 @@
         </div>
     </div>
 
-    <script>
-        function escolha() {
-            if (select_metodo.value == '1') {
-                div_receita.style.display = 'flex';
-                div_producao.style.display = 'none';
-            } else {
-                div_producao.style.display = 'flex';
-                div_receita.style.display = 'none';
-            }
-        }
-
-        function calcular() {
-            var metodo = select_metodo.value;
-            var temperatura = Number(input_temperatura.value || input_temperatura2.value);
-            var texto = '';
-
-            if (metodo == '1') {
-                var receita = Number(input_receitaAnual.value);
-                if (receita && temperatura) {
-                    var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
-                    var ganhoExtra = receitaLiquidaValor - receita;
-                    texto = `
-                        Com o monitoramento, sua receita líquida será de 
-                        ${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
-                        Você ganhará a mais 
-                        ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
-                    `;
-                    abrirPopup(texto);
-                } else {
-                    alert('Preencha todos os campos.');
-                }
-            } else if (metodo == '2') {
-                var producao = Number(input_producao.value);
-                var custo = Number(input_custo.value);
-                if (producao && custo && temperatura) {
-                    var receitaBruta = producao * 53500;
-                    var receitaLiquida = receitaBruta - (custo * producao);
-                    var receitaSemSensor = receitaLiquida * (1 - ((temperatura - 20) * 0.025));
-                    var perda = receitaLiquida - receitaSemSensor;
-                    texto = `
-                        Com o sensor, sua receita líquida será de 
-                        ${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
-                        Sem o sensor, seria de 
-                        ${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
-                        Você deixaria de ganhar 
-                        ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
-                    `;
-                    abrirPopup(texto);
-                } else {
-                    alert('Preencha todos os campos.');
-                }
-            }
-        }
-
-        function abrirPopup(texto) {
-            texto_popup.innerHTML = texto;
-            popup.style.display = 'flex';
-        }
-
-        function fecharPopup() {
-            popup.style.display = 'none';
-        }
-    </script>
+    
 </body>
 
 </html>
