@@ -312,11 +312,11 @@ body {
 }
 /*---section nossa_Missao - Andrei---------------------------------------*/
 
-.nossa_Missao{
+#nossa_Missao{
   background-color: #faf9f0;
 }
 
-.nossa_Missao .container {
+#nossa_Missao .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -324,7 +324,7 @@ body {
   padding: 10vh;
 }
 
-.nossa_Missao .container .container_Imagem {
+#nossa_Missao .container .container_Imagem {
   order: 2;
   
 }
@@ -350,14 +350,14 @@ order: 1;
 
 
 /*---section video_pitch - Miyuki---------------------------------------*/
-.video_pitch {
+#video_pitch {
   background-color: #faf9f0;
   width: 100%;
   height: 100vh;
   margin: 0;
 }
 
-.video_pitch .container {
+#video_pitch .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -394,7 +394,7 @@ order: 1;
 
 
 /*---section diagrama_solucao - leticia---------------------------------------*/
-.diagrama_solucao {
+#diagrama_solucao {
       background-color: #faf9f0;
       width: 100%;
       height: 80vh;
