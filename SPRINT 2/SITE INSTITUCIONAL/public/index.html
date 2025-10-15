@@ -5,8 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Termo Tech | LandingPage</title>
-  <link rel="stylesheet" href="../public/styles/global.css" />
+  <link rel="stylesheet" href="styles/global.css" />
   <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/carroussel.css">
 </head>
 
 <body>
@@ -20,8 +21,8 @@
 
     <nav class="menu">
       <a href="#" class="active">Início</a>
-      <a href="#">Sobre Nós</a>
-      <a href="#nossa_Missao">Nossa Missão</a>
+      <a href="#nossa_missao">Nossa Missão</a>
+      <a href="#sobre_nos">Sobre Nós</a>
       <a href="#simulador_financeiro">Simulador</a>
       <a href="#diagrama_solucao">Diagrama de Solução</a>
       <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
@@ -47,13 +48,13 @@
     <!-- aqui fica o codigo do responsavel pela seçao  do carrossel - Eduardo  -->
   </section>
 
-  <section id="nossa_Missao">
+  <section id="nossa_missao">
     <!-- aqui fica o codigo do responsavel pela seçao  do nossaMissao - Andrei  -->
     <div class="container">
       <div class="container_Imagem">
         <img src="../public/assets/img/Nossa_Missão.png" alt="">
       </div>
-      <div class="texto_nossa_Missao">
+      <div class="texto_nossa_missao">
         <div class="titulo_secao">
           <h2>Nossa <span style="color: #f97316">Missão</span></h2>
         </div>
@@ -69,8 +70,68 @@
         </div>
       </div>
     </div>
+  </section>
 
+  <section id="sobre_nos" class="sobre_nos">
+    <h1>Sobre <span>Nós</span></h1>
+    <div class="slide" id="slide1">
+      <div class="carroussel">
+        <div class="conteudo">
+          <div class="triangulo_texto">
+            <img class="imgs_triangulo" src="assets/img/trianguloRoxo.png" alt="">
+            <div class="paragrafo">
+              <b>Quem Somos</b>
+              <p>A <span>Termo Tech</span> nasceu de um projeto acadêmico com um propósito claro: unir
+                <span>tecnologia</span> e sustentabilidade no setor de <span>mineração</span>.
+              </p>
+            </div>
+          </div>
+          <img class="imgs_triangulo" src="assets/img/trianguloLaranja.png" alt="">
 
+        </div>
+      </div>
+    </div>
+    <div class="slide" id="slide2" style="display: none;">
+      <div class="carroussel">
+        <div class="conteudo">
+          <div class="triangulo_texto">
+            <img class="imgs_triangulo" src="assets/img/trianguloLaranja.png" alt="">
+            <div class="paragrafo">
+              <b>O Que Fazemos</b>
+              <p>
+                Com sensores inteligentes e análise de dados em nuvem,
+                nossa plataforma coleta informações cruciais permitindo
+                que gestores tomem decisões rápidas e precisas.
+              </p>
+            </div>
+          </div>
+          <img class="imgs_triangulo" src="assets/img/trianguloVerde.png" alt="">
+
+        </div>
+      </div>
+    </div>
+    <div class="slide" id="slide3" style="display: none;">
+      <div class="carroussel">
+        <div class="conteudo">
+          <div class="triangulo_texto">
+            <img class="imgs_triangulo" src="assets/img/trianguloVerde.png" alt="">
+            <div class="paragrafo">
+              <b>Nosso Propósito</b>
+              <p>Transformar dados em estratégias, tornando o processo de extração mais seguro, econômico
+                e sustentável.
+              </p>
+            </div>
+          </div>
+          <img class="imgs_triangulo" src="assets/img/trianguloRoxo.png" alt="">
+
+        </div>
+      </div>
+    </div>
+    <div class="radio_buttons">
+      <button type="radio" id="btn1" onclick="trocarSlide(0)" class="btn_radio active"></button>
+      <button type="radio" id="btn2" onclick="trocarSlide(1)" class="btn_radio"></button>
+      <button type="radio" id="btn3" onclick="trocarSlide(2)" class="btn_radio"></button>
+    </div>
   </section>
 
   <section id="video_pitch">
@@ -242,45 +303,82 @@
 </html>
 
 <script>
-        function escolha() {
-            if (select_metodo.value == '1') {
-                div_receita.style.display = 'flex';
-                div_producao.style.display = 'none';
-            } else {
-                div_producao.style.display = 'flex';
-                div_receita.style.display = 'none';
-            }
-        }
+  // CAROUSSEL
+  var cont = 0
+  var slides = [
+    document.getElementById('slide1'), // INDICE 0 
+    document.getElementById('slide2'),  // INDICE 1
+    document.getElementById('slide3') // INDICE 2
+  ];
 
-        function calcular() {
-            var metodo = select_metodo.value;
-            var temperatura = Number(input_temperatura.value || input_temperatura2.value);
-            var texto = '';
+  var radios = [
+    document.getElementById('btn1'), // INDICE 0
+    document.getElementById('btn2'),  // INDICE 1
+    document.getElementById('btn3') // INDICE 2
+  ];
+  function trocarSlide(numSlide) {
+    /* Esse for esconde todos os slides, percorre a lista de slides, desativa todos com display = none*/
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+      radios[i].classList.remove('active'); // remove a classe active de todos os botões
+    }
+    // Atualizando contador para o numSlide(Parâmetro passado quando clica no botão)
+    cont = numSlide
+    // Mostrar o slide desejado
+    slides[numSlide].style.display = 'flex';
+    radios[numSlide].classList.add('active'); // marca o botão clicado
+  }
+  setInterval(function () {
+    nextImage();
+  }, 3000);
 
-            if (metodo == '1') {
-                var receita = Number(input_receitaAnual.value);
-                if (receita && temperatura) {
-                    var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
-                    var ganhoExtra = receitaLiquidaValor - receita;
-                    texto = `
+  function nextImage() {
+    ++cont
+    if (cont >= 3) {
+      cont = 0
+    }
+    trocarSlide(cont)
+  }
+  // SIMULADOR FINANCEIRO
+  function escolha() {
+    if (select_metodo.value == '1') {
+      div_receita.style.display = 'flex';
+      div_producao.style.display = 'none';
+    } else {
+      div_producao.style.display = 'flex';
+      div_receita.style.display = 'none';
+    }
+  }
+
+  function calcular() {
+    var metodo = select_metodo.value;
+    var temperatura = Number(input_temperatura.value || input_temperatura2.value);
+    var texto = '';
+
+    if (metodo == '1') {
+      var receita = Number(input_receitaAnual.value);
+      if (receita && temperatura) {
+        var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
+        var ganhoExtra = receitaLiquidaValor - receita;
+        texto = `
                         Com o monitoramento, sua receita líquida será de 
                         ${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
                         Você ganhará a mais 
                         ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
                     `;
-                    abrirPopup(texto);
-                } else {
-                    alert('Preencha todos os campos.');
-                }
-            } else if (metodo == '2') {
-                var producao = Number(input_producao.value);
-                var custo = Number(input_custo.value);
-                if (producao && custo && temperatura) {
-                    var receitaBruta = producao * 53500;
-                    var receitaLiquida = receitaBruta - (custo * producao);
-                    var receitaSemSensor = receitaLiquida * (1 - ((temperatura - 20) * 0.025));
-                    var perda = receitaLiquida - receitaSemSensor;
-                    texto = `
+        abrirPopup(texto);
+      } else {
+        alert('Preencha todos os campos.');
+      }
+    } else if (metodo == '2') {
+      var producao = Number(input_producao.value);
+      var custo = Number(input_custo.value);
+      if (producao && custo && temperatura) {
+        var receitaBruta = producao * 53500;
+        var receitaLiquida = receitaBruta - (custo * producao);
+        var receitaSemSensor = receitaLiquida * (1 - ((temperatura - 20) * 0.025));
+        var perda = receitaLiquida - receitaSemSensor;
+        texto = `
                         Com o sensor, sua receita líquida será de 
                         ${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
                         Sem o sensor, seria de 
@@ -288,19 +386,19 @@
                         Você deixaria de ganhar 
                         ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
                     `;
-                    abrirPopup(texto);
-                } else {
-                    alert('Preencha todos os campos.');
-                }
-            }
-        }
+        abrirPopup(texto);
+      } else {
+        alert('Preencha todos os campos.');
+      }
+    }
+  }
 
-        function abrirPopup(texto) {
-            texto_popup.innerHTML = texto;
-            popup.style.display = 'flex';
-        }
+  function abrirPopup(texto) {
+    texto_popup.innerHTML = texto;
+    popup.style.display = 'flex';
+  }
 
-        function fecharPopup() {
-            popup.style.display = 'none';
-        }
-    </script>
+  function fecharPopup() {
+    popup.style.display = 'none';
+  }
+</script>
