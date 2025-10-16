@@ -43,11 +43,6 @@
     <!-- aqui fica o codigo do responsavel pela seçao do banner - Nathan -->
   </section>
 
-  <section class="carrossel">
-
-    <!-- aqui fica o codigo do responsavel pela seçao  do carrossel - Eduardo  -->
-  </section>
-
   <section id="nossa_missao">
     <!-- aqui fica o codigo do responsavel pela seçao  do nossaMissao - Andrei  -->
     <div class="container">
@@ -326,8 +321,10 @@
     cont = numSlide
     // Mostrar o slide desejado
     slides[numSlide].style.display = 'flex';
-    radios[numSlide].classList.add('active'); // marca o botão clicado
+    // Marca o botão clicado
+    radios[numSlide].classList.add('active');
   }
+
   setInterval(function () {
     nextImage();
   }, 3000);
@@ -361,11 +358,11 @@
         var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
         var ganhoExtra = receitaLiquidaValor - receita;
         texto = `
-                        Com o monitoramento, sua receita líquida será de 
-                        ${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
-                        Você ganhará a mais 
-                        ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
-                    `;
+            Com o monitoramento, sua receita líquida será de 
+            ${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+            Você ganhará a mais 
+            ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
+          `;
         abrirPopup(texto);
       } else {
         alert('Preencha todos os campos.');
@@ -379,13 +376,13 @@
         var receitaSemSensor = receitaLiquida * (1 - ((temperatura - 20) * 0.025));
         var perda = receitaLiquida - receitaSemSensor;
         texto = `
-                        Com o sensor, sua receita líquida será de 
-                        ${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
-                        Sem o sensor, seria de 
-                        ${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
-                        Você deixaria de ganhar 
-                        ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
-                    `;
+          Com o sensor, sua receita líquida será de 
+          ${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+          Sem o sensor, seria de 
+          ${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.<br><br>
+          Você deixaria de ganhar 
+          ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
+        `;
         abrirPopup(texto);
       } else {
         alert('Preencha todos os campos.');

@@ -48,7 +48,7 @@ body {
 
 .lateral_formulario_interna {
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,6 +94,19 @@ body {
   font-size: 1rem;
 }
 
+
+.line_campos {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container_inputs {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Botão principal */
 .botao_padrao {
   width: 100%;
@@ -108,6 +121,10 @@ body {
   border-radius: 6px;
 }
 
+.botao_padrao a{
+  text-decoration: none;
+  color: #fff;
+}
 /* Separador */
 .separador_login {
   width: 60%;
@@ -155,6 +172,9 @@ body {
   font-size: 0.9rem;
   color: #222;
 }
+
+
+
 
 /* ----- RESPONSIVO  naooo sei se precisaa----- 
 @media (max-width: 900px) {
