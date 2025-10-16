@@ -98,7 +98,7 @@
 
                 <div class="caixa_grafico">
                     <p class="titulo_grafico">Produção X Temperatura</p>
-                    <canvas id="Producao_temperatura_Chart"> <!--EXEMPLOO --> </canvas>
+                   <canvas id="grafico_producao"></canvas>
                 </div>
             </div>
 
@@ -175,54 +175,49 @@ new Chart(barraCtx, {
 
 
 // --- linha Temp X Produção ---
-const linhaCtx = document.getElementById('Producao_temperatura_Chart');
+                  const ctx3 = document.getElementById('grafico_producao');
 
-new Chart(linhaCtx, {
-  type: 'line',
-  data: {
-    labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
-    datasets: [
-      {
-        label: 'Temperatura (°C)',
-        data: [30, 29, 32, 25, 27, 23],
-        borderColor: 'rgba(255, 99, 132, 1)', // vermelho
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 2.5,
-        tension: 0.3,
-        fill: false
-      },
-      {
-        label: 'Produção',
-        data: [80, 82, 35, 85, 40, 83],
-        borderColor: 'rgba(54, 162, 235, 1)', // azul
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 2.5,
-        tension: 0.3,
-        fill: false
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'bottom' },
-      title: { display: false }
-    },
-    scales: {
-      x: {
-        ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' }
-      },
-      y: {
-        beginAtZero: false,
-        ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' }
-      }
-    }
-  }
-});
+                  new Chart(ctx3, {
+                    data: {
+                      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
+                      datasets: [{
+                        type: 'line',
+                        label: 'Produção estimada',
+                        data: [86.25, 78, 84, 82.25],
+                        yAxisID: 'y1',
+                        backgroundColor: '#F5751A',
+                        borderColor: '#F5751A',
+                        borderWidth: 1
+                      }, {
+                        type: 'bar',
+                        label: 'Temperatura atual',
+                        data: [25.5, 28.8, 26.4, 27.1],
+                        yAxisID: 'y',
+                        backgroundColor: '#333e77',
+                        borderWidth: 1
+                      }]
+                    },
+
+                    options: {
+
+                      scales: {
+
+                        y: { // Primary Y-axis
+                          beginAtZero: true,
+                          type: 'linear',
+                          position: 'left',
+                          id: 'y-temperatura',
+                        },
+                        y1: { // Secondary Y-axis
+                          beginAtZero: true,
+                          type: 'linear',
+                          position: 'right',
+                          id: 'y-producao',
+                        }
+                      }
+                    },
+                  });
+            
 
 
 // --- linha Mínima, Máxima e Média ---
