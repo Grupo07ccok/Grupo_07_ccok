@@ -95,7 +95,7 @@
 #select_mina, #select_sensor{
     border-radius: 30px;
     background-color: #fff;
-    color: #000;
+    color: #333e77;
     border: 1px solid black;
     box-shadow: 3px 3px 2px gray;
     height: 35px;
@@ -125,15 +125,18 @@
     box-shadow: 3px 3px 2px gray;
     background-color: #fff;
     padding: 20px;
-    width: 280px;
+    width: 380px;
     height: 110px;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .dados{
     font-size: 32px;
     margin-top: 20px;
-    color: #505050;
+    color: #f97316;
     font-weight: bold;
 }
 
@@ -148,7 +151,7 @@
 
 .titulo_grafico{
     font-weight: bold;
-    color: #505050;
+    color: #333e77;
     font-size: 16px;
 }
 .primeira_linha, .segunda_linha{
@@ -166,11 +169,20 @@
     box-shadow: 3px 3px 2px gray;
     background-color: #fff;
     padding: 20px;
-    width: 590px; /*ver se o canvas vai respeitar isso aqui -- nao respeita :)*/
-    height: 320px;
+    width: 850px; /*ver se o canvas vai respeitar isso aqui -- nao respeita :)*/
+    height: 350px;
 }
 
 canvas{
     width: 100%; /*100% em relação ao container q ele vai (caixa_grafico)*/
+}
+
+.texto_azul{
+  color: #333e77;
+  font-size: larger;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 

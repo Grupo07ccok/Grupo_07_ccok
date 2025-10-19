@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body style="background-color: #faf9f0;">
+<body style="background-color: #fffdef;">
 
     <header class="navbar_dashboard">
         <div class="logo">
@@ -66,22 +66,22 @@
         <div class="secao_kpi">
             <div class="container_kpi">
                 <div class="caixa_kpi">
-                    <p>Temperatura Atual</p>
+                    <p class="texto_azul">Temperatura Atual</p>
                     <span class="dados">27º</span>
                 </div>
 
                 <div class="caixa_kpi">
-                    <p>Qte. de Alertas</p>
+                    <p class="texto_azul">Qte. de Alertas</p>
                     <span class="dados">3</span>
                 </div>
 
                 <div class="caixa_kpi">
-                    <p>Sensor em Alerta</p>
-                    <span class="dados">A3</span>
+                    <p class="texto_azul">Sensor em Alerta</p>
+                    <span class="dados">Sensor 3</span>
                 </div>
 
                 <div class="caixa_kpi">
-                    <p>Produtividade Atual</p>
+                    <p class="texto_azul">Produtividade Atual</p>
                     <span class="dados">87%</span>
                 </div>
             </div>
@@ -131,24 +131,20 @@ const barraCtx = document.getElementById('temp_atual_chart');
 new Chart(barraCtx, {
   type: 'bar',
   data: {
-    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
     datasets: [
       {
+        type: 'line',
+        label: 'Temperatura Alerta (°C)',
+        data: [27, 27, 27, 27, 27],
+        backgroundColor: '#F5751A', // laranja
+        borderColor: '#F5751A',
+        borderWidth: 2
+      },
+      {
         label: 'Temperatura Média (°C)',
-        data: [22, 24, 27, 23, 20, 18],
-        backgroundColor: 'rgba(0, 123, 255, 0.7)', // azul
-        borderRadius: 4
-      },
-      {
-        label: 'Umidade Média (%)',
-        data: [90, 89, 83, 87, 88, 82],
-        backgroundColor: 'rgba(255, 159, 64, 0.7)', // laranja
-        borderRadius: 4
-      },
-      {
-        label: 'Pressão Média (hPa)',
-        data: [1010, 1012, 1008, 1013, 1011, 1009],
-        backgroundColor: 'rgba(108, 117, 125, 0.7)', // cinza
+        data: [20, 30, 35, 26, 23],
+        backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
         borderRadius: 4
       }
     ]
@@ -167,7 +163,8 @@ new Chart(barraCtx, {
       y: {
         beginAtZero: true,
         ticks: { color: '#444', font: { size: 13 } },
-        grid: { color: 'rgba(0,0,0,0.05)' }
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        max: 40,
       }
     }
   }
@@ -179,22 +176,23 @@ new Chart(barraCtx, {
 
                   new Chart(ctx3, {
                     data: {
-                      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
+                      labels: ['0:00', '1:00', '2:00', '3:00','4:00', '5:00', '6:00', '7:00','8:00', '9:00', '10:00', '11:00','12:00', '13:00', '14:00', '15:00','16:00', '17:00', '18:00', '19:00','20:00', '21:00', '22:00', '23:00'],
                       datasets: [{
                         type: 'line',
                         label: 'Produção estimada',
-                        data: [86.25, 78, 84, 82.25],
+                        data: [100, 100, 100, 100, 98, 93, 88, 88, 83, 80, 78, 78, 73, 70, 70, 63, 65, 68, 73, 80, 88, 93, 93, 95],
                         yAxisID: 'y1',
                         backgroundColor: '#F5751A',
                         borderColor: '#F5751A',
-                        borderWidth: 1
+                        borderWidth: 2
                       }, {
-                        type: 'bar',
+                        type: 'line',
                         label: 'Temperatura atual',
-                        data: [25.5, 28.8, 26.4, 27.1],
+                        data: [18, 19, 19, 20, 21, 23, 25, 25, 27, 28, 29, 29, 31, 32, 32, 35, 34, 33, 31, 28, 25, 23, 23, 22],
                         yAxisID: 'y',
                         backgroundColor: '#333e77',
-                        borderWidth: 1
+                        borderColor: '#333e77',
+                        borderWidth: 2
                       }]
                     },
 
@@ -207,6 +205,7 @@ new Chart(barraCtx, {
                           type: 'linear',
                           position: 'left',
                           id: 'y-temperatura',
+                          max: 100,
                         },
                         y1: { // Secondary Y-axis
                           beginAtZero: true,
@@ -230,30 +229,30 @@ new Chart(linha_MMM_Ctx, {
     datasets: [
       {
         label: 'Mínima',
-        data: [30, 29, 28, 25, 22, 23, 20],
-        borderColor: 'rgba(255, 99, 132, 1)', // vermelho
-        backgroundColor: 'rgba(255, 99, 132, 0.15)',
-        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+        data: [18, 20, 18, 23, 22, 23, 20],
+        borderColor: '#333e77', // azul
+        backgroundColor: '#333e77',
+        pointBackgroundColor: '#333e77',
         borderWidth: 2,
         tension: 0.3,
         fill: false
       },
       {
         label: 'Máxima',
-        data: [80, 82, 80, 85, 80, 83, 70],
-        borderColor: 'rgba(54, 162, 235, 1)', // azul
-        backgroundColor: 'rgba(54, 162, 235, 0.15)',
-        pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+        data: [37, 35, 36, 35, 35, 37, 36],
+        borderColor: '#F5751A', // laranja
+        backgroundColor: '#F5751A',
+        pointBackgroundColor: '#F5751A',
         borderWidth: 2,
         tension: 0.3,
         fill: false
       },
       {
         label: 'Média',
-        data: [55, 56, 54, 53, 52, 54, 45],
-        borderColor: 'rgba(75, 192, 75, 1)', // verde
-        backgroundColor: 'rgba(75, 192, 75, 0.15)',
-        pointBackgroundColor: 'rgba(75, 192, 75, 1)',
+        data: [30, 30, 30, 33, 32, 34, 31],
+        borderColor: 'rgba(108, 117, 125, 0.7)', // cinza
+        backgroundColor: 'rgba(108, 117, 125, 0.7)',
+        pointBackgroundColor: 'rgba(108, 117, 125, 0.7)',
         borderWidth: 2,
         tension: 0.3,
         fill: false
@@ -280,7 +279,8 @@ new Chart(linha_MMM_Ctx, {
       y: {
         beginAtZero: false,
         ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' }
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        max: 40,
       }
     }
   }
@@ -293,24 +293,12 @@ const barra_qtdAlerta_Ctx = document.getElementById('qtdAlerta_Ctx');
 new Chart(barra_qtdAlerta_Ctx, {
   type: 'bar',
   data: {
-    labels: ['MinaX', 'MinaY', 'MinaZ'],
+    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
     datasets: [
       {
-        label: 'Sensor A',
-        data: [10, 12, 9],
-        backgroundColor: 'rgba(0, 123, 255, 0.7)', // azul
-        borderRadius: 4
-      },
-      {
-        label: 'Sensor B',
-        data: [8, 10, 6],
-        backgroundColor: 'rgba(255, 159, 64, 0.7)', // laranja
-        borderRadius: 4
-      },
-      {
-        label: 'Sensor C',
-        data: [5, 4, 7],
-        backgroundColor: 'rgba(108, 117, 125, 0.7)', // cinza
+        label: 'Qtd. Alertas',
+        data: [15, 30, 60, 27, 10],
+        backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
         borderRadius: 4
       }
     ]
@@ -341,7 +329,8 @@ new Chart(barra_qtdAlerta_Ctx, {
       y: {
         beginAtZero: true,
         ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' }
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        max: 70,
       }
     }
   }
