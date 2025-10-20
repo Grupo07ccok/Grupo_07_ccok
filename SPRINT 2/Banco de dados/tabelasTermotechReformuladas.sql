@@ -5,10 +5,13 @@ show tables;
 
 CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
-	razaoSocial VARCHAR(50), -- Razão Social da Empresa
-	telefone CHAR(11), -- Telefone de contato da Empresa
-	cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
-	cep CHAR(9) -- CEP da Empresa 
+    nomeFantasia VARCHAR(100), -- Nome fantasia da Empresa
+	razaoSocial VARCHAR(100), -- Razão Social da Empresa
+    cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
+    cep CHAR(9), -- CEP da Empresa 
+    numero VARCHAR(6), -- Número do endereço da Empresa
+    complemento VARCHAR(100), -- Complemento
+    email VARCHAR(100) -- Email do responsável para envio do token
 );
 
 INSERT INTO empresa VALUES
@@ -17,14 +20,15 @@ INSERT INTO empresa VALUES
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT, -- ID do Usuário (Autoincrementado)
     nome VARCHAR(200),
-    senha VARCHAR(255) NOT NULL, -- Senha de acesso da Empresa
-	email VARCHAR(255) NOT NULL,
     telefone CHAR(11) NOT NULL,
+    email VARCHAR(255) NOT NULL, -- Email para login do usuário
+    senha VARCHAR(255) NOT NULL, -- Senha de acesso do usuário
     fkEmpresa INT, -- Será utilizado para pegar dados de email e senhaHash da tabela empresa para verificar o login
     CONSTRAINT fkEmpresaUsuario
 		FOREIGN KEY (fkEmpresa)
 			REFERENCES empresa(idEmpresa)
 	);
+    
     CREATE TABLE mina(
 		idMina INT PRIMARY KEY AUTO_INCREMENT,
         latitude DECIMAL(10,6),
@@ -41,7 +45,7 @@ INSERT INTO mina VALUES
 CREATE TABLE sensor (
 	idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
     fkMina INT,
-    statusS VARCHAR(50),
+    statusS VARCHAR(50), -- Status se está funcionando
 	CONSTRAINT fkMinaSensor
 			FOREIGN KEY (fkMina)
 				REFERENCES mina(idMina)                
