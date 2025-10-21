@@ -1,0 +1,569 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.pagina_login * {
+  box-sizing: border-box;
+}
+
+/* Container dividido (lado imagem | lado form) */
+.pagina_login {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/*  LADO IMAGEM 50%  */
+.lateral_imagem {
+  width: 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.lateral_imagem_interna {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*  LADO FORM */
+.lateral_formulario {
+  width: 50%;
+  background-color: #faf9f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 30px;
+}
+
+.lateral_formulario_interna {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+.titulo_login {
+  font-size: 2.8rem;
+  margin: 0 0 22px 0;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+/* Form */
+.formulario_login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rotulo_login {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-left: 2px;
+}
+
+/* Inputs */
+.campo_login {
+  width: 100%;
+  height: 48px;
+  /* parecido com 5vh -- viewport */
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 2px solid #000;
+  background-color: #faf9f0;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Placeholder */
+.campo_login::placeholder {
+  font-size: 1rem;
+}
+
+
+.line_campos {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container_inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botão principal */
+.botao_padrao {
+  width: 100%;
+  height: 48px;
+  margin-top: 6px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.botao_padrao a{
+  text-decoration: none;
+  color: #fff;
+}
+/* Separador */
+.separador_login {
+  width: 60%;
+  height: 1px;
+  background-color: #bdbdbd;
+  border: none;
+  margin: 18px 0;
+}
+
+/* Botões sociais (Google / Apple) */
+.redes_login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.botao_social {
+  width: 70%;
+  max-width: 320px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e6e6e6;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Cor do link */
+.link_login {
+  color: #F5751A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Pequenos textos/links */
+.links_login {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+
+
+
+/* ----- RESPONSIVO  naooo sei se precisaa----- 
+@media (max-width: 900px) {
+  .pagina_login {
+    flex-direction: column;
+  }
+  .lateral_esquerda {
+    width: 100%;
+    height: 40vh; /* imagem em cima no mobile 
+  }
+  .lateral_esquerda-interna {
+    height: 40vh;
+  }
+  .lateral_direita {
+    width: 100%;
+    padding: 30px 20px;
+  }
+  .lateral_direita-interna {
+    max-width: 520px;
+  }
+}*/
+
+/*SIMULADOR FINANCEIRO*/
+
+#simulador_financeiro {
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/img/img_simulador.png');
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#simulador_financeiro .container {
+  font-size: larger;
+  width: 40vw;
+  height: 65vh;
+  background-color: white;
+  box-shadow: -15px 15px 0 #F5751A;
+  padding: 5vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-direction: column;
+  margin-right: 20vh;
+
+}
+
+#simulador_financeiro .container span {
+  color: #F5751A;
+}
+
+#simulador_financeiro .container .div_select {
+  width: 100%;
+  height: 15%;
+}
+
+.div_select .select_calculo {
+  width: 100%;
+  height: 5vh;
+  border: #000 solid 2px;
+}
+
+#simulador_financeiro .container .div_receita_producao {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: start;
+  gap: 0;
+}
+
+.div_receita_producao .div_campos {
+  width: 100%;
+}
+
+.div_receita_producao .div_line {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.div_line div {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+#simulador_financeiro .container .input_simulador {
+  width: 100%;
+  height: 5vh;
+  border: #000 solid 2px;
+}
+
+.botao_simulador {
+  width: 100%;
+  height: 7.5vh;
+  padding: 2vh;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#popup_conteudo {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+#fechar_popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 25px;
+  cursor: pointer;
+  color: #333;
+}
+
+#popup h2 {
+  color: #F5751A;
+}
+
+.botao_popup {
+  margin-top: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/*---section nossa_Missao - Andrei---------------------------------------*/
+
+#nossa_missao {
+  width: 100vw;
+  height: 100vh;
+  background-color: #FAF9F0;
+}
+
+#nossa_missao .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 10vh;
+}
+
+#nossa_missao .container .container_Imagem {
+  order: 2;
+
+}
+
+.container_Imagem img {
+  height: 550px;
+  width: 650px;
+  box-shadow: -15px 15px 0 #F5751A;
+}
+
+.texto_nossa_missao p {
+  order: 1;
+}
+
+.texto_nossa_missao h2 {
+  font-size: 38px;
+  margin: 23px 35px 20px 0;
+}
+
+.texto_nossa_missao p {
+  font-size: 20px;
+}
+
+
+/*---section video_pitch - Miyuki---------------------------------------*/
+#video_pitch {
+  background-color: #faf9f0;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+#video_pitch .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 10vh;
+}
+
+.container_video {
+  width: 120vh;
+  height: 27vw;
+  background-color: rgb(0, 0, 0);
+  box-shadow: -15px 15px 0 #F5751A;
+  padding: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 3vh;
+}
+
+.texto_video {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.texto_video h2 {
+  font-size: 38px;
+  margin: 0 35px 20px 0;
+}
+
+.texto_video p {
+  font-size: 20px;
+}
+
+
+/*---section diagrama_solucao - leticia---------------------------------------*/
+#diagrama_solucao {
+  background-color: #faf9f0;
+  width: 100%;
+  height: 80vh;
+  margin: 0;
+}
+
+#diagrama_solucao .container {
+  display: flex;
+  flex-direction: column;
+  /* empilha os elementos */
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 50px;
+
+}
+
+.titulo_secao {
+  margin-bottom: 20px;
+}
+
+.container_diagrama {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.caixa_diagrama {
+  border: 2px solid black;
+  border-radius: 8px;
+  width: 95%;
+  height: 370px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+}
+
+/*CSS CARROUSSEL*/
+.sobre_nos {
+  width: 100vw;
+  background-color: #FAF9F0;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sobre_nos h1 {
+  color: black;
+  padding: 5vh;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.sobre_nos span {
+  color: #F5751A;
+}
+
+.sobre_nos .slide {
+  width: 100%;
+}
+
+.carroussel {
+  height: 60vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conteudo {
+  width: 90%;
+  height: 100%;
+  transform: skewY(3deg);
+  /* inclinação */
+  background-color: #202942;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.triangulo_texto {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 70%;
+}
+
+.paragrafo {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  font-size: 1.5rem;
+  transform: skewY(-3deg);
+}
+
+.paragrafo b {
+  font-size: 3rem;
+}
+
+.paragrafo span {
+  font-weight: bold;
+  color: white;
+}
+
+.imgs_triangulo {
+  height: 35vh;
+  width: 20vw;
+}
+
+.triangulo_radio {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio_buttons {
+  width: 100%;
+  padding: 2vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.radio_buttons .btn_radio {
+  width: 5vw;
+  height: 2vh;
+  border-radius: 1vh;
+  border: none;
+  background-color: #aaaaaa;
+}
+
+.radio_buttons .btn_radio:hover {
+  transition: 1s;
+  background-color: #ffb078;
+
+}
+
+.radio_buttons .active {
+  background-color: #F5751A;
+}
