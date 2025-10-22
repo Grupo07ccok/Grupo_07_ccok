@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="slider">
+      <div class="slides">
+        <!--Radio Buttons-->
+        <input type="radio" name="radio-btn" id="radio1" />
+        <input type="radio" name="radio-btn" id="radio2" />
+        <input type="radio" name="radio-btn" id="radio3" />
+        <!--FIM Radio Buttons-->
+
+        <!--Slide images-->
+        <div class="slide first">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHrNty36MwUYrGxyPal-SGbb25VNIMbNzJrA&s" alt="Imagem 1" />
+        </div>
+        <div class="slide">
+          <img src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/du/DUM2HZX3U6HY1664303607905.png" alt="Imagem 2" />
+        </div>
+        <div class="slide">
+          <img src="https://xboxwire.thesourcemediaassets.com/sites/8/2022/06/OW2_F2P_TrailerThumbnails_JP_ArtOnly_1920x1080-copy-78f7f2575ba743649894.jpg" alt="Imagem 3" />
+        </div>
+        <!--FIM Slide images-->
+
+        <!--Navgation Auto-->
+        <div class="navigation-auto">
+          <div class="auto-btn1"></div>
+          <div class="auto-btn2"></div>
+          <div class="auto-btn3"></div>
+        </div>
+      </div>
+
+      <div class="manual-navigation">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+   var cont = 1;
+  document.getElementById("radio1").checked = true;
+
+  setInterval(function () {
+    nextImage();
+  }, 4000);
+
+  function nextImage() {
+    cont++;
+    if (cont > 3) {
+      cont = 1;
+    }
+
+    document.getElementById("radio" + cont).checked = true;
+  }
+</script>
