@@ -121,10 +121,11 @@ body {
   border-radius: 6px;
 }
 
-.botao_padrao a{
+.botao_padrao a {
   text-decoration: none;
   color: #fff;
 }
+
 /* Separador */
 .separador_login {
   width: 60%;
@@ -203,6 +204,7 @@ body {
   width: 100%;
   height: 100%;
   background-image: url('../assets/img/img_simulador.png');
+  background-size: cover;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -258,7 +260,9 @@ body {
   justify-content: space-between;
   flex-direction: row;
 }
-
+.div_campos b {
+  font-size: 20px;
+}
 .div_line div {
   width: 45%;
   display: flex;
@@ -349,20 +353,16 @@ body {
   padding: 10vh;
 }
 
-#nossa_missao .container .container_Imagem {
-  order: 2;
-
-}
-
-.container_Imagem img {
-  height: 550px;
-  width: 650px;
+.container_imagem{
+  height: 70vh;
+  width: 50vw;
+  background: url("../assets/img/Nossa_Missão.png");
+  background-size: cover;
   box-shadow: -15px 15px 0 #F5751A;
 }
-
-.texto_nossa_missao p {
-  order: 1;
+.container_Imagem .img_nossa_missao {
 }
+
 
 .texto_nossa_missao h2 {
   font-size: 38px;
@@ -384,6 +384,8 @@ body {
 
 #video_pitch .container {
   display: flex;
+  width: 100%;
+  height: 100%;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
@@ -401,7 +403,10 @@ body {
   align-items: flex-start;
   margin-right: 3vh;
 }
-
+.video{
+  width: 100%;
+  height: 100%;
+}
 .texto_video {
   width: 30%;
   display: flex;
@@ -470,7 +475,7 @@ body {
 .sobre_nos h1 {
   color: black;
   padding: 5vh;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 700;
 }
 
@@ -558,12 +563,53 @@ body {
   background-color: #aaaaaa;
 }
 
+
 .radio_buttons .btn_radio:hover {
   transition: 1s;
   background-color: #ffb078;
+}
+/*BANNER*/
+#banner {
+  width: 100vw;
+  height: 100%;
+  background-color: #FAF9F0;
+}
+
+#banner .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+.conteudo_banner {
+  width: 40%;
+  padding: 10vh;
+}
+
+.titulo_home {
+  font-size: 7.5vh;
+}
+
+.imagem_banner {
+  background: url("../assets/img/img_home.png");
+  background-size: cover;
+  width: 60%;
+  height: 100%;
 
 }
 
-.radio_buttons .active {
-  background-color: #F5751A;
+.botao_home {
+  width: 100%;
+  height: 48px;
+  margin-top: 6px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: -5px 5px 0 #F5751A;
 }

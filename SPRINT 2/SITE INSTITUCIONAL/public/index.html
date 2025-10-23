@@ -21,51 +21,36 @@
 
     <nav class="menu">
       <a href="#" class="active">Início</a>
-      <a href="#nossa_missao">Nossa Missão</a>
       <a href="#sobre_nos">Sobre Nós</a>
+      <a href="#nossa_missao">Nossa Missão</a>
       <a href="#simulador_financeiro">Simulador</a>
       <a href="#diagrama_solucao">Diagrama de Solução</a>
       <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
     </nav>
 
     <div class="select_linguagem">
-      <select class="lang">
-        <option>PT-BR</option>
-        <option>EN-US</option>
-      </select>
       <button class="login"><a href="login.html">Login</a></button>
       <button class="signup"><a href="cadastro.html">Cadastre-se</a></button>
     </div>
   </header>
 
-  <section class="banner">
-
-    <!-- aqui fica o codigo do responsavel pela seçao do banner - Nathan -->
-  </section>
-
-  <section id="nossa_missao">
-    <!-- aqui fica o codigo do responsavel pela seçao  do nossaMissao - Andrei  -->
+  <section id="banner">
     <div class="container">
-      <div class="container_Imagem">
-        <img src="../public/assets/img/Nossa_Missão.png" alt="">
+      <div class="conteudo_banner">
+        <p class="titulo_home">SOMOS <b>ESPECIALISTAS</b> EM SENSORES PARA <b>MINERAÇÃO</b></p>
+
+        <p>
+          Há mais de 12 semanas no mercado, somos referência em tecnologias de
+          sensores IoT para mineração.
+        </p>
+        <button class="botao_home">Saiba mais →</button>
       </div>
-      <div class="texto_nossa_missao">
-        <div class="titulo_secao">
-          <h2>Nossa <span style="color: #f97316">Missão</span></h2>
-        </div>
-        <div>
-          <p>
-            Sabemos que a mineração é uma área em<br>
-            constante crescimento e evolução, e<br>
-            entendemos que temos as melhores soluções<br>
-            para os seus problemas.<br><br><br>
-            Entre em contato conosco e venha ver ver<br>
-            como podemos te ajudar.
-          </p>
-        </div>
+
+      <div class="imagem_banner">
       </div>
     </div>
   </section>
+
 
   <section id="sobre_nos" class="sobre_nos">
     <h1>Sobre <span>Nós</span></h1>
@@ -123,34 +108,59 @@
       </div>
     </div>
     <div class="radio_buttons">
-      <button type="radio" id="btn1" onclick="trocarSlide(0)" class="btn_radio active"></button>
-      <button type="radio" id="btn2" onclick="trocarSlide(1)" class="btn_radio"></button>
-      <button type="radio" id="btn3" onclick="trocarSlide(2)" class="btn_radio"></button>
+      <button type="radio" id="btn1" onclick="trocarSlide1()" style="background-color: #f97316;"
+        class="btn_radio"></button>
+      <button type="radio" id="btn2" onclick="trocarSlide2()" class="btn_radio"></button>
+      <button type="radio" id="btn3" onclick="trocarSlide3()" class="btn_radio"></button>
     </div>
   </section>
 
+  <section id="nossa_missao">
+    <!-- aqui fica o codigo do responsavel pela seçao  do nossaMissao - Andrei  -->
+    <div class="container">
+      <div class="texto_nossa_missao">
+        <div class="titulo_secao">
+          <h2>Nossa <span style="color: #f97316">Missão</span></h2>
+        </div>
+        <div>
+          <p>
+            Sabemos que a mineração é uma área em<br>
+            constante crescimento e evolução, e<br>
+            entendemos que temos as melhores soluções<br>
+            para os seus problemas.<br><br><br>
+            Entre em contato conosco e venha ver ver<br>
+            como podemos te ajudar.
+          </p>
+        </div>
+      </div>
+      <div class="container_imagem"></div>
+    </div>
+  </section>
   <section id="video_pitch">
     <!-- aqui fica o codigo do responsavel pela seçao  do pitch com video - Miyuki-->
     <div class="container">
       <div class="container_video">
-        <!-- qual vídeo é pra colocar? -->
-        <video src=""></video>
+        <iframe class="video" src="https://www.youtube.com/embed/H1m1eP9tuwo?si=9OmXHlw0nS6Wd9XF"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="texto_video">
         <div class="titulo_secao">
-          <h2>Vídeo <span style="color: #f97316">Pitch</span></h2>
+          <h2>O <span style="color: #f97316">Cobre</span></h2>
         </div>
         <div>
           <p>
-            Quer saber mais sobre a Terra Tech? <br>
-            Nosso vídeo pitch pode te ajudar com <br>
-            isso, nele é apresentado de forma ludia <br>
-            os valores e objetivos da nossa equipe.
+            Quer saber mais sobre o cobre? <br>
+            O vídeo fala sobre o que é o cobre, <br>
+            como ele é extraído, o processo de tratamento <br>
+            e a fabricação de produtos.
           </p>
         </div>
       </div>
     </div>
   </section>
+
   <section id="simulador_financeiro">
     <div class="container">
       <h1>Simulador <span>Financeiro</span></h1>
@@ -300,42 +310,66 @@
 <script>
   // CAROUSSEL
   var cont = 0
-  var slides = [
-    document.getElementById('slide1'), // INDICE 0 
-    document.getElementById('slide2'),  // INDICE 1
-    document.getElementById('slide3') // INDICE 2
-  ];
+  function trocarSlide1() {
+    cont = 0
+    slide1.style.display = 'flex';
+    slide2.style.display = 'none';
+    slide3.style.display = 'none';
 
-  var radios = [
-    document.getElementById('btn1'), // INDICE 0
-    document.getElementById('btn2'),  // INDICE 1
-    document.getElementById('btn3') // INDICE 2
-  ];
-  function trocarSlide(numSlide) {
-    /* Esse for esconde todos os slides, percorre a lista de slides, desativa todos com display = none*/
-    for (var i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
-      radios[i].classList.remove('active'); // remove a classe active de todos os botões
-    }
-    // Atualizando contador para o numSlide(Parâmetro passado quando clica no botão)
-    cont = numSlide
-    // Mostrar o slide desejado
-    slides[numSlide].style.display = 'flex';
-    // Marca o botão clicado
-    radios[numSlide].classList.add('active');
+
+    btn1.style.backgroundColor = '#F5751A';
+    btn2.style.backgroundColor = '#aaaaaa';
+    btn3.style.backgroundColor = '#aaaaaa';
   }
 
+  function trocarSlide2() {
+    cont = 1
+
+    slide1.style.display = 'none';
+    slide2.style.display = 'flex';
+    slide3.style.display = 'none';
+
+    btn1.style.backgroundColor = '#aaaaaa';
+    btn2.style.backgroundColor = '#F5751A';
+    btn3.style.backgroundColor = '#aaaaaa';
+
+  }
+  function trocarSlide3() {
+    cont = 2
+    slide1.style.display = 'none';
+    slide2.style.display = 'none';
+    slide3.style.display = 'flex';
+
+
+    btn1.style.backgroundColor = '#aaaaaa';
+    btn2.style.backgroundColor = '#aaaaaa';
+    btn3.style.backgroundColor = '#F5751A';
+  }
+
+  /*
+    
   setInterval(function () {
-    nextImage();
+    proximaImagem();
   }, 3000);
 
-  function nextImage() {
+  function proximaImagem() {
     ++cont
     if (cont >= 3) {
       cont = 0
     }
-    trocarSlide(cont)
+    if (cont == 0) {
+      trocarSlide1()
+      
+    } else if(cont == 1) {
+      trocarSlide2()
+      
+    } else if(cont == 2) {
+      trocarSlide3()
+    }
   }
+  */
+
+
   // SIMULADOR FINANCEIRO
   function escolha() {
     if (select_metodo.value == '1') {

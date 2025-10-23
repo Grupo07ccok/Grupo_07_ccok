@@ -69,16 +69,17 @@
 
   var senha = '';
   var armazenarEmail = '';
-  var mockadoEmail = 'joao@gmail.com';
-  var mockadoSenha = 'joao123';
+  var mockadoEmail = 'julia@gmail.com';
+  var mockadoSenha = 'julia123';
 
   function verificar() {
     var email = (email_login.value);
     senha = (senha_login.value);
 
     if (email == mockadoEmail && senha == mockadoSenha) {
-      div_dashboard.style.display = 'block';
-      div_login.style.display = 'none';
+      window.location.href = 'dashboard.html';
+      console.log(window.location);
+      
     } else {
       alert('Erro ao digitar o email ou senha, tente novamente.')
     }
