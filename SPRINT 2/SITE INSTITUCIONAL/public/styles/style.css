@@ -613,3 +613,25 @@ body {
   cursor: pointer;
   box-shadow: -5px 5px 0 #F5751A;
 }
+
+.checks_cadastro {
+  display: flex;
+  justify-content:space-evenly;
+  flex-wrap: wrap;
+  
+}
+
+.check{
+  display: flex;
+  flex-direction: row;
+}
+
+.check_img {
+  height: 22px;
+  width: 22px;
+}
+
+.check_img img {
+  height: 100%;
+  width: 100%;
+}
