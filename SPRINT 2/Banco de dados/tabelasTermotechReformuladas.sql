@@ -1,5 +1,5 @@
 CREATE DATABASE termotech;
-drop database termotech;
+-- drop database termotech;
 USE termotech;
 show tables;
 
@@ -36,20 +36,20 @@ INSERT INTO usuario VALUES
 	(DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 2);
     
     CREATE TABLE mina(
-		idMina INT PRIMARY KEY,
+		idMina INT PRIMARY KEY AUTO_INCREMENT,
+        fkEmpresa INT,
         latitude DECIMAL(10,6),
         longitude DECIMAL(10,6),
-        fkEmpresa INT,
         CONSTRAINT fkEmpresaMina
 			FOREIGN KEY (fkEmpresa)
 				REFERENCES empresa(idEmpresa)
 );
 
 INSERT INTO mina VALUES
-	(DEFAULT, '-19.810300' , '-42.863221', 1),
-	(DEFAULT, '-6.710625', '-52.706971', 1),
-	(DEFAULT, '-17.646297', '-43.170836', 2),
-	(DEFAULT, '-13.712354', '-50.070253', 2);
+	(DEFAULT, 1, '-19.810300' , '-42.863221'),
+	(DEFAULT, 1, '-6.710625', '-52.706971'),
+	(DEFAULT, 2, '-17.646297', '-43.170836'),
+	(DEFAULT, 2, '-13.712354', '-50.070253');
 
 CREATE TABLE sensor (
 	idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
@@ -93,7 +93,4 @@ select * from mina;
 select * from empresa;
 select * from usuario;
 
-truncate table coletaDados;
 
-INSERT INTO coletaDados (temperatura) VALUES
-(17);
