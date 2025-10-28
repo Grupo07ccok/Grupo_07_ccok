@@ -20,7 +20,7 @@
     </div>
 
     <nav class="menu">
-      <a href="#" class="active">Início</a>
+      <a href="#banner" class="">Início</a>
       <a href="#sobre_nos">Sobre Nós</a>
       <a href="#nossa_missao">Nossa Missão</a>
       <a href="#simulador_financeiro">Simulador</a>
@@ -218,12 +218,10 @@
     <!-- aqui fica o codigo do responsavel pela seçao  do diagrama_solucao - Leticia -->
     <div class="container">
       <div class="titulo_secao">
-        <h2 style="font-size: 32px;">Diagrama de <span style="color: #f97316">solução</span></h2>
+        <h2 style="font-size: 32px;">Nossa <span style="color: #f97316">solução</span></h2>
       </div>
       <div class="container_diagrama">
-        <div class="caixa_diagrama">
-          <p>algo aqui dentro</p>
-        </div>
+        <img src="assets/img/diagramaVisaoNegocio.png" alt="">
       </div>
     </div>
   </section>
@@ -346,7 +344,6 @@
     btn3.style.backgroundColor = '#F5751A';
   }
 
-  /*
     
   setInterval(function () {
     proximaImagem();
@@ -367,10 +364,13 @@
       trocarSlide3()
     }
   }
-  */
+
 
 
   // SIMULADOR FINANCEIRO
+
+  var texto = ''
+
   function escolha() {
     if (select_metodo.value == '1') {
       div_receita.style.display = 'flex';
@@ -384,7 +384,6 @@
   function calcular() {
     var metodo = select_metodo.value;
     var temperatura = Number(input_temperatura.value || input_temperatura2.value);
-    var texto = '';
 
     if (metodo == '1') {
       var receita = Number(input_receitaAnual.value);
@@ -397,7 +396,7 @@
             Você ganhará a mais 
             ${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
           `;
-        abrirPopup(texto);
+        abrirPopup();
       } else {
         alert('Preencha todos os campos.');
       }
@@ -417,14 +416,14 @@
           Você deixaria de ganhar 
           ${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por ano.
         `;
-        abrirPopup(texto);
+        abrirPopup();
       } else {
         alert('Preencha todos os campos.');
       }
     }
   }
 
-  function abrirPopup(texto) {
+  function abrirPopup() {
     texto_popup.innerHTML = texto;
     popup.style.display = 'flex';
   }

@@ -15,7 +15,7 @@ const serial = async (
     valoresTemperatura,
     valoresSensorDigital,
 ) => {
-    
+
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
@@ -26,14 +26,14 @@ const serial = async (
             port: 3307
         }
     ).promise();
-    
+
     // lista as portas seriais disponíveis e procura pelo Arduino
     const portas = await serialport.SerialPort.list();
     const portaArduino = portas.find((porta) => porta.vendorId == 2341 && porta.productId == 43);
     if (!portaArduino) {
         throw new Error('O arduino não foi encontrado em nenhuma porta serial');
     }
-    
+
     // configura a porta serial com o baud rate especificado
     const arduino = new serialport.SerialPort(
         {
@@ -41,12 +41,12 @@ const serial = async (
             baudRate: SERIAL_BAUD_RATE
         }
     );
-    
+
     // evento quando a porta serial é aberta
     arduino.on('open', () => {
         console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
     });
-    
+
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
@@ -64,33 +64,21 @@ const serial = async (
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
-
+            var alerta = 0
+            var fkSensor = 1
             // se temperatura > 27 = Emitir alert:
-            if(temperatura > 27) {
-                // este insert irá inserir os dados na tabela "medida"
+            if (temperatura > 27) {
+                alerta = 1
+            }
+            // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO coletaDados (fkSensor, temperatura, alerta) VALUES (1, ?, 1)',
+                'INSERT INTO coletaDados (temperatura, alerta, fkSensor) VALUES (?, ?, ?)',
                 // 'INSERT INTO coletaDados (temperatura, horaColeta) VALUES (? , ?)',
-                [temperatura]
+                [temperatura, alerta , fkSensor]
                 // [temperatura, horaFormatada]
 
             );
-            console.log("valores inseridos no banco: ", temperatura);
-            // console.log("valores inseridos no banco: ", temperatura + horaFormatada);
-
-            } else {
-                // este insert irá inserir os dados na tabela "medida"
-                await poolBancoDados.execute(
-                    'INSERT INTO coletaDados (fkSensor, temperatura, alerta) VALUES (1, ?, 0)',
-                    // 'INSERT INTO coletaDados (temperatura, horaColeta) VALUES (? , ?)',
-                    [temperatura]
-                    // [temperatura, horaFormatada]
-    
-                );
-                console.log("valores inseridos no banco: ", temperatura);
-                // console.log("valores inseridos no banco: ", temperatura + horaFormatada);
-
-            }
+            console.log("valores inseridos no banco: ", temperatura, alerta, fkSensor);
 
 
         }
