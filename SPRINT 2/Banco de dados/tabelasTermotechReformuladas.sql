@@ -1,6 +1,7 @@
 CREATE DATABASE termotech;
--- drop database termotech;
+
 USE termotech;
+
 show tables;
 
 CREATE TABLE empresa (
@@ -93,4 +94,13 @@ select * from mina;
 select * from empresa;
 select * from usuario;
 
-
+SELECT nomeFantasia AS 'Nome da Empresa',
+		cnpj AS CNPJ,
+        idMina AS Mina,
+        idSensor AS Sensor,
+        temperatura AS Temperatura,
+        dataHoraColeta AS 'Data e hora da coleta',
+        alerta AS Alerta
+			FROM empresa JOIN mina ON mina.fkEmpresa = idEmpresa
+				JOIN sensor ON fkMina = idMina
+				JOIN coletaDados ON fkSensor = idSensor;
