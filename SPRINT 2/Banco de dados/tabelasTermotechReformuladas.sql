@@ -104,3 +104,17 @@ SELECT nomeFantasia AS 'Nome da Empresa',
 			FROM empresa JOIN mina ON mina.fkEmpresa = idEmpresa
 				JOIN sensor ON fkMina = idMina
 				JOIN coletaDados ON fkSensor = idSensor;
+                
+SELECT 	usuario.nome AS Usuário,
+		nomeFantasia AS 'Nome da Empresa',
+		cnpj AS CNPJ,
+        idMina AS Mina,
+        idSensor AS Sensor,
+        temperatura AS Temperatura,
+        dataHoraColeta AS 'Data e hora da coleta',
+        alerta AS Alerta
+			FROM usuario JOIN empresa 
+            ON usuario.fkEmpresa = empresa.idEmpresa
+				JOIN mina ON mina.fkEmpresa = idEmpresa
+					JOIN sensor ON fkMina = idMina
+						JOIN coletaDados ON fkSensor = idSensor;
