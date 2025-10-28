@@ -1,5 +1,5 @@
 CREATE DATABASE termotech;
-drop database termotech;
+-- drop database termotech;
 USE termotech;
 show tables;
 
@@ -15,7 +15,8 @@ CREATE TABLE empresa (
 );
 
 INSERT INTO empresa VALUES
-	(DEFAULT, null, 'responsavel@email.com', 'João', null, '12345678912345', null);
+	(DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com'),
+	(DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com');
 
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT, -- ID do Usuário (Autoincrementado)
@@ -23,24 +24,32 @@ CREATE TABLE usuario (
     telefone CHAR(11) NOT NULL,
     email VARCHAR(255) NOT NULL, -- Email para login do usuário
     senha VARCHAR(255) NOT NULL, -- Senha de acesso do usuário
-    fkEmpresa INT, -- Será utilizado para pegar dados de email e senhaHash da tabela empresa para verificar o login
+    fkEmpresa INT, -- Será utilizado para pegar dados de email e senha da tabela empresa para verificar o login
     CONSTRAINT fkEmpresaUsuario
 		FOREIGN KEY (fkEmpresa)
 			REFERENCES empresa(idEmpresa)
 	);
     
+INSERT INTO usuario VALUES
+	(DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
+	(DEFAULT, 'Fernando Brandão', '11987654320', 'brandao@gmail.com', '12345678aA@', 1),
+	(DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 2);
+    
     CREATE TABLE mina(
 		idMina INT PRIMARY KEY AUTO_INCREMENT,
+        fkEmpresa INT,
         latitude DECIMAL(10,6),
         longitude DECIMAL(10,6),
-        fkEmpresa INT,
         CONSTRAINT fkEmpresaMina
 			FOREIGN KEY (fkEmpresa)
 				REFERENCES empresa(idEmpresa)
 );
 
 INSERT INTO mina VALUES
-	(1, null, null, 1);
+	(DEFAULT, 1, '-19.810300' , '-42.863221'),
+	(DEFAULT, 1, '-6.710625', '-52.706971'),
+	(DEFAULT, 2, '-17.646297', '-43.170836'),
+	(DEFAULT, 2, '-13.712354', '-50.070253');
 
 CREATE TABLE sensor (
 	idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
@@ -48,11 +57,19 @@ CREATE TABLE sensor (
     statusS VARCHAR(50), -- Status se está funcionando
 	CONSTRAINT fkMinaSensor
 			FOREIGN KEY (fkMina)
-				REFERENCES mina(idMina)                
+				REFERENCES mina(idMina),
+	CONSTRAINT chkStatus
+		CHECK (statusS IN ('funcionando', 'manutenção', 'parado')) 
 );
 
 INSERT INTO sensor VALUES 
-	(DEFAULT, 1, 'funcionando');
+	(DEFAULT, 1, 'funcionando'),
+	(DEFAULT, 1, 'funcionando'),
+	(DEFAULT, 1, 'funcionando'),
+	(DEFAULT, 1, 'funcionando'),
+	(DEFAULT, 2, 'funcionando'),
+	(DEFAULT, 3, 'funcionando'),
+	(DEFAULT, 4, 'funcionando');
     
 CREATE TABLE coletaDados (
 	idColeta INT AUTO_INCREMENT,
@@ -67,6 +84,7 @@ CREATE TABLE coletaDados (
     alerta TINYINT
 );
 
+
 SHOW TABLES;
 
 select * from coletaDados;
@@ -75,7 +93,4 @@ select * from mina;
 select * from empresa;
 select * from usuario;
 
-truncate table coletaDados;
 
-INSERT INTO coletaDados (temperatura) VALUES
-(17);

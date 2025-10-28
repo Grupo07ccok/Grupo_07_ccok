@@ -61,8 +61,12 @@
                     <input class="campo_login" id="confirma_cadastro" type="text"
                         placeholder="Insira o email do responsável:" required>
 
+                    <label class="rotulo_login" for="confirma_cadastro">Telefone Responsável</label>
+                    <input class="campo_login" id="confirma_cadastro" type="text"
+                        placeholder="Insira o telefone responsável:" required>
+
                     <!-- <button type="submit" class="botao_formulario"  -->
-                    <button class="botao_padrao" onclick="cadastrar()"><a id="ir_login" href="#">Cadastrar</a></button>
+                    <button class="botao_padrao" onclick="cadastrar()"><a href="dashboard.html">Continuar</a></button>
                 </div>
 
                 <hr class="separador_login">
@@ -84,13 +88,12 @@
 
 <script>
     // Guarda em variável global:
-    var guarda_nomeFantasia = [];
-    var guarda_razaoSocial = [];
-    var guarda_cnpj = [];
-    var guarda_cep = [];
-    var guarda_num = [];
-    var guarda_complemento = [];
-    var guarda_emalResponsavel = [];
+    var guarda_nome = "";
+    var guarda_email = "";
+    var guarda_senha = "";
+    var guarda_confirma = "";
+    var senha = "";
+    var forca_senha = "";
 
     function verificar() {
         senha = senha_cadastro.value;
@@ -157,8 +160,6 @@
         if (senha == confirma) {
             guarda_confirma = confirma;
         }
-
-        ir_login.href = "login.html"
     }
 </script>
 

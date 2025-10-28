@@ -48,7 +48,7 @@ body {
 
 .lateral_formulario_interna {
   width: 100%;
-  max-width: 500px;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,19 +94,6 @@ body {
   font-size: 1rem;
 }
 
-
-.line_campos {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.container_inputs {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Botão principal */
 .botao_padrao {
   width: 100%;
@@ -119,11 +106,6 @@ body {
   font-size: 1rem;
   cursor: pointer;
   border-radius: 6px;
-}
-
-.botao_padrao a {
-  text-decoration: none;
-  color: #fff;
 }
 
 /* Separador */
@@ -174,9 +156,6 @@ body {
   color: #222;
 }
 
-
-
-
 /* ----- RESPONSIVO  naooo sei se precisaa----- 
 @media (max-width: 900px) {
   .pagina_login {
@@ -204,7 +183,6 @@ body {
   width: 100%;
   height: 100%;
   background-image: url('../assets/img/img_simulador.png');
-  background-size: cover;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -225,11 +203,11 @@ body {
 
 }
 
-#simulador_financeiro .container span {
+.container span {
   color: #F5751A;
 }
 
-#simulador_financeiro .container .div_select {
+.container .div_select {
   width: 100%;
   height: 15%;
 }
@@ -240,7 +218,7 @@ body {
   border: #000 solid 2px;
 }
 
-#simulador_financeiro .container .div_receita_producao {
+.container .div_receita_producao {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -260,16 +238,14 @@ body {
   justify-content: space-between;
   flex-direction: row;
 }
-.div_campos b {
-  font-size: 20px;
-}
+
 .div_line div {
   width: 45%;
   display: flex;
   flex-direction: column;
 }
 
-#simulador_financeiro .container .input_simulador {
+.container .input_simulador {
   width: 100%;
   height: 5vh;
   border: #000 solid 2px;
@@ -334,18 +310,13 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
-
 /*---section nossa_Missao - Andrei---------------------------------------*/
 
-#nossa_missao {
-  width: 100vw;
-  height: 100vh;
-  background-color: #FAF9F0;
+#nossa_Missao{
+  background-color: #faf9f0;
 }
 
-#nossa_missao .container {
-  width: 100%;
-  height: 100%;
+#nossa_Missao .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -353,23 +324,27 @@ body {
   padding: 10vh;
 }
 
-.container_imagem{
-  height: 70vh;
-  width: 50vw;
-  background: url("../assets/img/Nossa_Missão.png");
-  background-size: cover;
+#nossa_Missao .container .container_Imagem {
+  order: 2;
+  
+}
+
+.container_Imagem img{
+  height: 550px;
+  width: 650px;
   box-shadow: -15px 15px 0 #F5751A;
 }
-.container_Imagem .img_nossa_missao {
+
+.texto_nossa_Missao p{
+order: 1;
 }
 
-
-.texto_nossa_missao h2 {
+.texto_nossa_Missao h2 {
   font-size: 38px;
   margin: 23px 35px 20px 0;
 }
 
-.texto_nossa_missao p {
+.texto_nossa_Missao p {
   font-size: 20px;
 }
 
@@ -384,8 +359,6 @@ body {
 
 #video_pitch .container {
   display: flex;
-  width: 100%;
-  height: 100%;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
@@ -403,10 +376,7 @@ body {
   align-items: flex-start;
   margin-right: 3vh;
 }
-.video{
-  width: 100%;
-  height: 100%;
-}
+
 .texto_video {
   width: 30%;
   display: flex;
@@ -425,207 +395,191 @@ body {
 
 /*---section diagrama_solucao - leticia---------------------------------------*/
 #diagrama_solucao {
+      background-color: #faf9f0;
+      width: 100%;
+      height: 80vh;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;  /* empilha os elementos */
+      align-items: flex-start; 
+      justify-content: flex-start;
+      padding: 50px;      
+             
+    }
+
+    .titulo_secao {
+      margin-bottom: 20px;     
+    }
+
+    .container_diagrama {
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      width: 100%;
+    }
+
+    .caixa_diagrama {
+      border: 2px solid black;
+      border-radius: 8px;
+      width: 95%;
+      height: 370px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px;
+    }
+
+
+/* DASHBOARD MIYUKI */
+.pagina_usuario * {
+  box-sizing: border-box;
+}
+
+/* Container dividido (lado imagem | lado form) */
+.pagina_usuario {
+  display: flex;
+  min-height: 80vh;
+  width: 100%;
   background-color: #faf9f0;
-  width: 100%;
-  height: auto;
 }
 
-#diagrama_solucao .container {
+.menu_lateral {
+  min-width: 250px;
+  height: 100%;
+  margin: 30px 15px 20px 30px ;
   display: flex;
-  flex-direction: column;
-  padding: 50px;
+}
+
+.menu_lateral .container{
+  padding: 20px;
+  display: flex;
+  background-color: #bdbdbda2;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.menu_lateral h2 {
+  margin: 10px 0 10px;
+  font-size: 20px;
+}
+
+.minas {
+  width: 100%;
+  padding-bottom: 25px;
+  border-bottom: 2px solid #F5751A;
+}
+
+.sensores {
+  width: 100%;
+  padding-bottom: 25px;
+  border-bottom: 2px solid #F5751A;
+}
+
+.periodo {
+  width: 100%;
+  padding-bottom: 25px;
+}
+
+.dashboard {
+  width: 75%px;
+  height: 100%;
+  margin: 30px 15px 20px 5px ;
+  display: flex;
+}
+
+.dashboard .container {
   width: 100%;
   height: 100%;
-}
-
-.titulo_secao {
-  margin-bottom: 20px;
-}
-
-.container_diagrama {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 90vh;
-  padding: 30px;
-}
-.container_diagrama img{
-  border-radius: 8px;
-  border: 2px solid black;
-  width: 85%;
-  height: 100%;
-}
-
-/*CSS CARROUSSEL*/
-.sobre_nos {
-  width: 100vw;
-  background-color: #FAF9F0;
-  height: 90vh;
+  padding: 0;
   display: flex;
   flex-direction: column;
 }
 
-.sobre_nos h1 {
-  color: black;
-  padding: 5vh;
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-.sobre_nos span {
-  color: #F5751A;
-}
-
-.sobre_nos .slide {
-  width: 100%;
-}
-
-.carroussel {
-  height: 60vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.conteudo {
-  width: 90%;
-  height: 100%;
-  transform: skewY(3deg);
-  /* inclinação */
-  background-color: #202942;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.triangulo_texto {
+.dashboard .container .barra_kpi {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 70%;
+  justify-content: space-evenly;
+  color: #333e77
 }
 
-.paragrafo {
+.barra_kpi .kpi {
+  width: 250px;
+  height: 100px;
+  margin: 0 15px 0 15px;
+  padding: 3px;
+  text-align: center;
+  background-color: rgb(40, 53, 110);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span {
+    font-weight: bolder;
+    font-size: 1.5rem;
+  }
+  p {
+    color: #bdbdbd;
+  }
+}
+
+.graficos {
+  width: 100%;
+  min-height:max-content;
+  margin: 20px 15px 0 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.graficos .container_graficos {
+  min-height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.graficos_container {
+  background-color: #ffffff;
+
+}
+
+.grafico {
   width: 50%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  color: white;
-  font-size: 1.5rem;
-  transform: skewY(-3deg);
-}
-
-.paragrafo b {
-  font-size: 3rem;
-}
-
-.paragrafo span {
-  font-weight: bold;
-  color: white;
-}
-
-.imgs_triangulo {
-  height: 35vh;
-  width: 20vw;
-}
-
-.triangulo_radio {
-
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.radio_buttons {
-  width: 100%;
-  padding: 2vh;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-.radio_buttons .btn_radio {
-  width: 5vw;
-  height: 2vh;
-  border-radius: 1vh;
-  border: none;
-  background-color: #aaaaaa;
-}
-
-
-.radio_buttons .btn_radio:hover {
-  transition: 1s;
-  background-color: #ffb078;
-}
-/*BANNER*/
-#banner {
-  width: 100vw;
-  height: 100%;
-  background-color: #FAF9F0;
-}
-
-#banner .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  height: 100vh;
-}
-
-.conteudo_banner {
-  width: 40%;
-  padding: 10vh;
-}
-
-.titulo_home {
-  font-size: 7.5vh;
-}
-
-.imagem_banner {
-  background: url("../assets/img/img_home.png");
-  background-size: cover;
-  width: 60%;
-  height: 100%;
-
-}
-
-.botao_home {
-  width: 100%;
-  height: 48px;
-  margin-top: 6px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: -5px 5px 0 #F5751A;
-}
-
-.checks_cadastro {
-  display: flex;
-  justify-content:space-evenly;
-  flex-wrap: wrap;
+  margin: 0 10px 0 10px;
   
 }
 
-.check{
-  display: flex;
-  flex-direction: row;
+.grafico .titulo_grafico {
+  height: 45px;
+  background-color: #000;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  padding: 5px 15px;
 }
 
-.check_img {
-  height: 22px;
-  width: 22px;
+.mina_sensor {
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin: 30px 10px 20px 10px;
 }
 
-.check_img img {
-  height: 100%;
-  width: 100%;
+.titulo_mina {
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  p {
+    font-size: 25px;
+    font-weight: bolder;
+  }
+}
+
+.canvas {
+  padding: 20px;
 }

@@ -16,7 +16,7 @@
     <!-- LATERAL FORM (50%) -->
     <section class="lateral_formulario">
       <div class="lateral_formulario_interna">
-        <h1 class="titulo_login">Login</h1>
+        <h1 class="titulo_login">LOGIN</h1>
 
         <div class="formulario_login" action="#" method="post" novalidate>
           <label class="rotulo_login" for="email_login">E-mail</label>
@@ -27,7 +27,7 @@
 
           <div id="div_mensagemSenha"></div>
 
-          <button class="botao_padrao" onclick="verificar()"><a id="ir_dash" href="#">Entrar</a></button>
+          <button class="botao_padrao" onclick="verificar()">Entrar</button>
         </div>
 
         <hr class="separador_login">
@@ -69,22 +69,83 @@
 
   var senha = '';
   var armazenarEmail = '';
-  var mockadoEmail = 'julia@gmail.com';
-  var mockadoSenha = 'julia123';
+  var mockadoEmail = 'joao@gmail.com';
+  var mockadoSenha = 'joao123';
 
   function verificar() {
     var email = (email_login.value);
     senha = (senha_login.value);
 
+    // if(email.includes('@') && email.length != 0 && email.includes(mail) && email.endsWith('.com')){
+    //   armazenarEmail += `${email}`;
+    // } else{
+    //   alert(`Por favor, digite um email válido`);
+    // }
+
     if (email == mockadoEmail && senha == mockadoSenha) {
-      ir_dash.href = "dashboard.html"
-      // window.location.href = 'dashboard.html';
-      // console.log(window.location);
-      
+      div_dashboard.style.display = 'block';
+      div_login.style.display = 'none';
     } else {
       alert('Erro ao digitar o email ou senha, tente novamente.')
     }
   }
 
+  const barra = document.getElementById('grafico_barra');
 
+  new Chart(barra, {
+    type: 'bar',
+    data: {
+      labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+      datasets: [
+        {
+          label: 'Temperatura atual do sensor',
+          data: [30, 27, 21, 25, 37, 22, 18, 28, 32, 26],
+          borderWidth: 2
+        },
+        {
+          type: 'line',
+          label: 'Temperatura máxima ideal',
+          data: [27, 27, 27, 27, 27, 27, 27, 27, 27, 27],
+          borderWidth: 2
+        }
+
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const linha = document.getElementById('grafico_linha');
+
+  new Chart(linha, {
+    type: 'line',
+    data: {
+      labels: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+      datasets: [
+        {
+          label: 'Produção',
+          data: [100, 100, 100, 100, 100, 100, 92.5, 87.5, 85, 80, 80, 72.5, 70, 65, 57.5, 65, 70, 82.5, 82.5, 90, 90, 92.5, 100, 100],
+          borderWidth: 2
+        },
+        {
+          label: 'Temperatura',
+          data: [18, 17, 17, 19, 19, 20, 23, 25, 26, 28, 28, 31, 32, 34, 37, 34, 32, 27, 27, 24, 24, 23, 20, 19],
+          borderWidth: 2
+        }
+
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 </script>

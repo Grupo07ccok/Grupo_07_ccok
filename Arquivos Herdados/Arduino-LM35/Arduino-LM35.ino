@@ -1,7 +1,7 @@
 const int PINO_SENSOR_TEMPERATURA = A3;
 float temperaturaCelsius;
-int temperatura_max = 30;
-int temperatura_min = 20;
+// int temperatura_max = 30;
+// int temperatura_min = 20;
 
 void setup() {
   Serial.begin(9600);
@@ -22,3 +22,11 @@ void loop() {
   // Serial.print(temperatura_max);
   // // Serial.print(",");
   // // Serial.print("Temperatura atual:");
+<<<<<<< HEAD
+=======
+  Serial.println(temperaturaCelsius);
+
+
+  delay(2000); // 1.800.000 milisegundos para coletar dados a cada 30 minutos
+}
+>>>>>>> 5b176773d76582bbf68dd5f379074aff6b4976e7

@@ -27,20 +27,49 @@
                     <label class="rotulo_login" for="nome_login">Nome</label>
                     <input class="campo_login" id="nome_cadastro" type="nome" placeholder="Insira seu nome:" required>
 
-                    <label class="rotulo_login" for="email_cadastro">Telefone</label>
-                    <input class="campo_login" id="email_cadastro" type="tel" placeholder="Insira seu telefone:" required>
+                    <label class="rotulo_login" for="telefone_cadastro">Telefone</label>
+                    <input class="campo_login" id="telefone_cadastro" type="tel" placeholder="Insira seu telefone:" required>
 
                     <label class="rotulo_login" for="email_cadastro">E-mail</label>
                     <input class="campo_login" id="email_cadastro" type="email" placeholder="email@email.com" required>
 
                     <label class="rotulo_login" for="senha_cadastro">Senha</label>
-                    <input class="campo_login" id="senha_cadastro" type="password" placeholder="********" required oninput="verificar()"> <div id="msg_forca"></div>
+                    <input class="campo_login" id="senha_cadastro" type="password" placeholder="********" required oninput="verificar()"> 
+                    <div class="checks_cadastro">
+                        <div class="check">
+                            Letra maiúscula 
+                            <div class="check_img" ><img id="check_upper" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                        </div>
+                        <div class="check">
+                            Letra minúscula
+                            <div class="check_img" ><img id="check_lower" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                        </div>
+                        <div class="check">
+                            Número 
+                            <div class="check_img" ><img id="check_num" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                        </div>
+                        <div class="check">
+                            Caractere especial
+                            <div class="check_img" ><img id="check_especial" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                        </div>
+                        <div class="check">
+                            8 ou mais caracteres
+                            <div class="check_img" ><img id="check_tamanho" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                        </div>
+
+                    </div>
 
                     <label class="rotulo_login" for="confirma_cadastro">Confirme sua senha</label>
                     <input class="campo_login" id="confirma_cadastro" type="password" placeholder="********" required>
 
+                    <label class="rotulo_login" for="token_cadastro">Confirme o token da empresa</label>
+                    <input class="campo_login" id="token_cadastro" type="text" placeholder="********" required>
+
                     <!-- <button type="submit" class="botao_formulario"  -->
-                    <button class="botao_padrao" onclick="cadastrar()"><a href="cadastro2.html">Continuar</a></button>
+                     <div class="botoes_cadastro">
+                         <button class="botao_padrao" onclick="cadastrar_token()">Cadastrar com token</a></button>
+                        <button class="botao_padrao" onclick="cadastrar()"><a id="ir_cadastro2" href="#">Continuar e Cadastrar empresa</a></button>
+                     </div>
                 </div>
 
                 <hr class="separador_login">
@@ -78,7 +107,14 @@
     var guarda_senha = "";
     var guarda_confirma = "";
     var senha = "";
-    var forca_senha = "";
+    var crit1 = 0;
+    var crit2 = 0;
+    var crit3 = 0;
+    var crit4 = 0;
+    var crit5 = 0;
+    var criteriosAtendidos = 0;
+
+    var tokenValido = '30/10/2025'; // TOKEN PARA VALIDAR A EMPRESA
 
     function verificar() {
         senha = senha_cadastro.value;
@@ -87,64 +123,112 @@
         var tamanho_senha_sem_especial = senha_sem_especial.length;
         var senha_minuscula = senha.toLowerCase();
         var senha_maiuscula = senha.toUpperCase();
-        var crit1 = 0;
-        var crit2 = 0;
-        var crit3 = 0;
-        var criteriosAtendidos = 0
+
+        if(senha_minuscula != senha) { // tem letras maiúsculas
+            crit1 = 1;
+            check_upper.src = '../public/assets/icons/icons-ok.png';
+        } else {
+            check_upper.src =  '../public/assets/icons/icons-cancelar.png';
+            crit1 = 0;
+        }
+        
+        if(senha_maiuscula != senha) { // tem letras minúculas
+            crit2 = 1;
+            check_lower.src = '../public/assets/icons/icons-ok.png';
+        } else {
+            check_lower.src = '../public/assets/icons/icons-cancelar.png';
+            crit2 = 0;
+        }
+        
+        if (senha.includes('0') || senha.includes('1') || senha.includes('2') || senha.includes('3') || senha.includes('4') || senha.includes('5') || senha.includes('6') || senha.includes('7') || senha.includes('8') || senha.includes('9')) {
+            crit3 = 1;
+            check_num.src = '../public/assets/icons/icons-ok.png';
+        } else {
+            check_num.src = '../public/assets/icons/icons-cancelar.png';
+            crit3 = 0;
+        }
+        
+        if(tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
+            crit4 = 1;
+            check_especial.src = '../public/assets/icons/icons-ok.png';
+        } else {
+            check_especial.src = '../public/assets/icons/icons-cancelar.png';
+            crit4 = 0;
+        }
 
         if(tamanho_senha >= 8) { // tem pelo menos 8 caracteres
-            ++crit1;
-        }
-
-        if(senha_minuscula != senha && senha_maiuscula != senha) { // tem letras maiúsculas e minúculas
-            ++crit2;
-        }
-
-        if(tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
-            ++crit3;
-        }
-
-        if (!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')) {
+            crit5 = 1;
+            check_tamanho.src = '../public/assets/icons/icons-ok.png';
         } else {
+<<<<<<< HEAD
+=======
+            check_tamanho.src = '../public/assets/icons/icons-cancelar.png';
+            crit5 = 0;
+>>>>>>> 5b176773d76582bbf68dd5f379074aff6b4976e7
         }
 
-        criteriosAtendidos = crit1 + crit2 + crit3;
+        criteriosAtendidos = crit1 + crit2 + crit3 + crit4 + crit5
+        
+    }
 
-        if(criteriosAtendidos == 0) {
-            forca_senha = `Insegura`
-        } else if(criteriosAtendidos == 1) {
-            forca_senha = `Fraca`
-        } else if(criteriosAtendidos == 2) {
-            forca_senha = `Média`
+    function cadastrar_token() {
+        // Inputs:
+        var nome = nome_cadastro.value;
+        var telefone = telefone_cadastro.value;
+        var email = email_cadastro.value;
+        var confirma = confirma_cadastro.value;
+        var token = token_cadastro.value;
+
+        if(nome == "" || telefone == "" || email == "" || senha == "" || confirma == "" || token == "") {
+            alert(`Todos os campos devem estar preenchidos`)
+        } else if (!email.includes('@') || (!email.endsWith('.com') && !email.endsWith('.com.br'))) {
+            alert(`insira um email válido`)
+        } else if (criteriosAtendidos < 5) {
+            alert(`Senha deve conter todos os requisitos`)
+        } else if (senha != confirma){
+            alert(`A senha e a confimação devem ser iguais`)
+        } else if (token != tokenValido) {
+            alert(`Insira um token válido`)
         } else {
-            forca_senha = `Forte`   
-        }
+            guarda_nome = nome;
+            guarda_email = email;
+            guarda_senha = senha;
+            guarda_confirma = confirma;
 
-        msg_forca.innerHTML = `${forca_senha}`
+            alert(`Cadastro realizado com sucesso!`);
+        } 
     }
 
     function cadastrar() {
         // Inputs:
         var nome = nome_cadastro.value;
+        var telefone = telefone_cadastro.value;
         var email = email_cadastro.value;
         var confirma = confirma_cadastro.value;
+        var token = token_cadastro.value;
 
-        if(nome != "") {
+        if (token != "") {
+            alert(`O campo Token deve estar vazio, ou clique no botão Cadastrar com token`)
+        } else if (nome == "" || telefone == "" || email == "" || senha == "" || confirma == "") {
+            alert(`Todos os campos (exceto o token) devem estar preenchidos`)
+        } else if (!email.includes('@') || (!email.endsWith('.com') && !email.endsWith('.com.br'))) {
+            alert(`insira um email válido`)
+        } else if (criteriosAtendidos < 5) {
+            alert(`Senha deve conter todos os requisitos`)
+        } else if (senha != confirma){
+            alert(`A senha e a confimação devem ser iguais`)
+        } else {
             guarda_nome = nome;
-        }
-
-        if (email.includes('@') && (email.endsWith('.com') || email.endsWith('.com.br'))) {
             guarda_email = email;
-        }
-
-        if(forca_senha == 'forte') {
             guarda_senha = senha;
-        }
-
-        if(senha == confirma) {
             guarda_confirma = confirma;
-        }
+
+            alert(`Cadastro realizado com sucesso!`);
+
+            ir_cadastro2.href = "cadastro2.html";
+        } 
     }
+    
 </script>
 
 
