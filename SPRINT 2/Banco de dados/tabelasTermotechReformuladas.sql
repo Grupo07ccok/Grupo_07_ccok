@@ -12,12 +12,13 @@ CREATE TABLE empresa (
     cep CHAR(9), -- CEP da Empresa 
     numero VARCHAR(6), -- Número do endereço da Empresa
     complemento VARCHAR(100), -- Complemento
-    email VARCHAR(100) -- Email do responsável para envio do token
+    emailResponsavel VARCHAR(100), -- Email do responsável para envio do token
+    token VARCHAR(45)
 );
 
 INSERT INTO empresa VALUES
-	(DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com'),
-	(DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com');
+	(DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com', '30102025'),
+	(DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com', 'sprint2');
 
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT, -- ID do Usuário (Autoincrementado)
