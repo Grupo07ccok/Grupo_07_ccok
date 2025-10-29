@@ -12,8 +12,7 @@ void loop() {
 
   Serial.println(temperaturaCelsius);
 
-  delay(1800000);
-}
+  delay(2000); // 1.800.000 milisegundos para coletar dados a cada 30 minutos
 
 
   // Serial.print("Temperatura Min:");
@@ -22,11 +21,6 @@ void loop() {
   // Serial.print(temperatura_max);
   // // Serial.print(",");
   // // Serial.print("Temperatura atual:");
-<<<<<<< HEAD
-=======
-  Serial.println(temperaturaCelsius);
 
-
-  delay(2000); // 1.800.000 milisegundos para coletar dados a cada 30 minutos
 }
->>>>>>> 5b176773d76582bbf68dd5f379074aff6b4976e7
+

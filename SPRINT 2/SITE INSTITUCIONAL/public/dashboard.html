@@ -2,339 +2,333 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | TermoTech</title>
-    <link rel="stylesheet" href="styles/dash.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | TermoTech</title>
+  <link rel="stylesheet" href="styles/dash.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body style="background-color: #fffdef;">
 
-    <header class="navbar_dashboard">
-        <div class="logo">
-            <img style="height: 30px; width: 30px;" src="assets/img/logo.png" alt="Logo">
+  <header class="navbar_dashboard">
+    <div class="logo">
+      <img style="height: 30px; width: 30px;" src="assets/img/logo.png" alt="Logo">
+    </div>
+
+    <nav class="menu_dashboard">
+      <a href="#" class="active">
+        <i class="fa-regular fa-clock"></i>
+        Dashboard
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-plus"></i>
+        Cadastrar mina
+      </a>
+    </nav>
+
+    <div class="perfil">
+      <i class="fa-regular fa-user"></i>
+    </div>
+  </header>
+
+  <!--CONTEUDO PRINCIPAL-->
+
+  <div class="container_conteudo">
+    <h1>Mina <span style="color: #f97316">01</span></h1>
+
+    <div class="selects_mina_sensor">
+      <select id="select_mina">
+        <option selected disabled value="#">Selecionar Mina</option>
+        <option value="opcao_mina1" selected>Mina 1</option>
+        <option value="opcao_mina2">Mina 2</option>
+        <option value="opcao_mina3">Mina 3</option>
+      </select>
+
+      <select id="select_sensor">
+        <option selected disabled value="#">Selecionar Sensor</option>
+        <option value="opcao_sensor1" selected>Sensor 1</option>
+        <option value="opcao_sensor2">Sensor 2</option>
+        <option value="opcao_sensor3">Sensor 3</option>
+        <option value="opcao_sensor4">Sensor 4</option>
+        <option value="opcao_sensor5">Sensor 5</option>
+
+      </select>
+    </div>
+
+    <!-- KPI -->
+    <div class="secao_kpi">
+      <div class="container_kpi">
+
+        <div class="caixa_kpi">
+          <p class="texto_azul">Qte. de Alertas do Sensor Escolhido</p>
+          <span class="dados">3</span>
         </div>
 
-        <nav class="menu_dashboard">
-            <a href="#" class="active">
-                <i class="fa-regular fa-clock"></i>
-                Dashboard
-            </a>
-            <a href="#">
-                <i class="fa-solid fa-plus"></i>
-                Cadastrar mina
-            </a>
-        </nav>
-
-        <div class="perfil">
-            <i class="fa-regular fa-user"></i>
-        </div>
-    </header>
-
-    <!--CONTEUDO PRINCIPAL-->
-
-    <div class="container_conteudo">
-        <h1>Mina <span style="color: #f97316">01</span></h1>
-
-        <div class="selects_mina_sensor">
-            <select id="select_mina">
-                <option selected disabled value="#">Selecionar Mina</option>
-                <option value="opcao_mina1">Mina A1</option>
-                <option value="opcao_mina2">Mina B1</option>
-                <option value="opcao_mina3">Mina C1</option>
-            </select>
-
-            <select id="select_sensor">
-                <option selected disabled value="#">Selecionar Sensor</option>
-                <option value="opcao_sensor1">Sensor A1</option>
-                <option value="opcao_sensor2">Sensor A2</option>
-                <option value="opcao_sensor3">Sensor A3</option>
-
-                <option value="opcao_sensor1">Sensor B1</option>
-                <option value="opcao_sensor2">Sensor B2</option>
-                <option value="opcao_sensor3">Sensor B3</option>
-
-                <option value="opcao_sensor1">Sensor C1</option>
-                <option value="opcao_sensor2">Sensor C2</option>
-                <option value="opcao_sensor3">Sensor C3</option>
-            </select>
+        <div class="caixa_kpi">
+          <p class="texto_azul">Sensor com mais Alertas</p>
+          <span class="dados">Sensor 3</span>
         </div>
 
-        <!-- KPI -->
-        <div class="secao_kpi">
-            <div class="container_kpi">
-                <div class="caixa_kpi">
-                    <p class="texto_azul">Temperatura Atual</p>
-                    <span class="dados">27º</span>
-                </div>
-
-                <div class="caixa_kpi">
-                    <p class="texto_azul">Qte. de Alertas</p>
-                    <span class="dados">3</span>
-                </div>
-
-                <div class="caixa_kpi">
-                    <p class="texto_azul">Sensor em Alerta</p>
-                    <span class="dados">Sensor 3</span>
-                </div>
-
-                <div class="caixa_kpi">
-                    <p class="texto_azul">Produtividade Atual</p>
-                    <span class="dados">87%</span>
-                </div>
-            </div>
-
+        <div class="caixa_kpi">
+          <p class="texto_azul">Temperatura Média Atual</p>
+          <span class="dados">27º</span>
         </div>
 
-        <!--GRAFICOS -->
-        <div class="graficos">
-            <div class="primeira_linha">
-                <div class="caixa_grafico">
-                    <p class="titulo_grafico">Temperatura atual</p>
-                    <canvas id="temp_atual_chart"> <!--EXEMPLOO--></canvas>
-                </div>
+        <div class="caixa_kpi">
+          <p class="texto_azul">Produtividade Média Atual</p>
+          <span class="dados">87%</span>
+        </div>
+      </div>
 
-                <div class="caixa_grafico">
-                    <p class="titulo_grafico">Produção X Temperatura</p>
-                   <canvas id="grafico_producao"></canvas>
-                </div>
-            </div>
+    </div>
 
-            <div class="segunda_linha">
-                <div class="caixa_grafico">
-                    <p class="titulo_grafico">Mínina, máxima e média </p>
-                    <canvas id="MMM_Chart"><!--EXEMPLO--></canvas>
-                </div>
+    <!--GRAFICOS -->
+    <div class="graficos">
+      <div class="primeira_linha">
+        <div class="caixa_grafico">
+          <p class="titulo_grafico">Temperatura atual de todos os sensores</p>
+          <canvas id="temp_atual_chart"> <!--EXEMPLOO--></canvas>
+        </div>
 
-                <div class="caixa_grafico">
-                    <p class="titulo_grafico">Quantidade de alertas</p>
-                    <canvas id="qtdAlerta_Ctx">
+        <div class="caixa_grafico">
+          <p class="titulo_grafico">Quantidade de alertas de todos os sensores</p>
+          <canvas id="qtdAlerta_Ctx"></canvas>
+        </div>
+      </div>
 
-
-                    </canvas>
-                </div>
-            </div>
+        <div class="segunda_linha">
+          <div class="caixa_grafico">
+            <p class="titulo_grafico">Produção X Temperatura do sensor escolhido</p>
+            <canvas id="grafico_producao"></canvas>
+          </div>
+          
+          <div class="caixa_grafico">
+            <p class="titulo_grafico">Mínina, máxima e média do sensor escolhido</p>
+            <canvas id="MMM_Chart"><!--EXEMPLO--></canvas>
+          </div>
         </div>
 
     </div>
+
+  </div>
 
 </body>
 
 </html>
 
 <script>
-    // --- barra Temperatura Atual ---
-const barraCtx = document.getElementById('temp_atual_chart');
+  // --- barra Temperatura Atual ---
+  const barraCtx = document.getElementById('temp_atual_chart');
 
-new Chart(barraCtx, {
-  type: 'bar',
-  data: {
-    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
-    datasets: [
-      {
+  new Chart(barraCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
+      datasets: [
+        {
+          type: 'line',
+          label: 'Temperatura Alerta (°C)',
+          data: [27, 27, 27, 27, 27],
+          backgroundColor: '#F5751A', // laranja
+          borderColor: '#F5751A',
+          borderWidth: 2
+        },
+        {
+          label: 'Temperatura Média (°C)',
+          data: [20, 30, 35, 26, 23],
+          backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        title: { display: false }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#444', font: { size: 13 } },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#444', font: { size: 13 } },
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          max: 40,
+        }
+      }
+    }
+  });
+
+
+  // --- linha Temp X Produção ---
+  const ctx3 = document.getElementById('grafico_producao');
+
+  new Chart(ctx3, {
+    data: {
+      labels: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+      datasets: [{
         type: 'line',
-        label: 'Temperatura Alerta (°C)',
-        data: [27, 27, 27, 27, 27],
-        backgroundColor: '#F5751A', // laranja
+        label: 'Produção estimada',
+        data: [100, 100, 100, 100, 98, 93, 88, 88, 83, 80, 78, 78, 73, 70, 70, 63, 65, 68, 73, 80, 88, 93, 93, 95],
+        yAxisID: 'y1',
+        backgroundColor: '#F5751A',
         borderColor: '#F5751A',
         borderWidth: 2
-      },
-      {
-        label: 'Temperatura Média (°C)',
-        data: [20, 30, 35, 26, 23],
-        backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
-        borderRadius: 4
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'bottom' },
-      title: { display: false }
-    },
-    scales: {
-      x: {
-        ticks: { color: '#444', font: { size: 13 } },
-        grid: { color: 'rgba(0,0,0,0.05)' }
-      },
-      y: {
-        beginAtZero: true,
-        ticks: { color: '#444', font: { size: 13 } },
-        grid: { color: 'rgba(0,0,0,0.05)' },
-        max: 40,
-      }
-    }
-  }
-});
-
-
-// --- linha Temp X Produção ---
-                  const ctx3 = document.getElementById('grafico_producao');
-
-                  new Chart(ctx3, {
-                    data: {
-                      labels: ['0:00', '1:00', '2:00', '3:00','4:00', '5:00', '6:00', '7:00','8:00', '9:00', '10:00', '11:00','12:00', '13:00', '14:00', '15:00','16:00', '17:00', '18:00', '19:00','20:00', '21:00', '22:00', '23:00'],
-                      datasets: [{
-                        type: 'line',
-                        label: 'Produção estimada',
-                        data: [100, 100, 100, 100, 98, 93, 88, 88, 83, 80, 78, 78, 73, 70, 70, 63, 65, 68, 73, 80, 88, 93, 93, 95],
-                        yAxisID: 'y1',
-                        backgroundColor: '#F5751A',
-                        borderColor: '#F5751A',
-                        borderWidth: 2
-                      }, {
-                        type: 'line',
-                        label: 'Temperatura atual',
-                        data: [18, 19, 19, 20, 21, 23, 25, 25, 27, 28, 29, 29, 31, 32, 32, 35, 34, 33, 31, 28, 25, 23, 23, 22],
-                        yAxisID: 'y',
-                        backgroundColor: '#333e77',
-                        borderColor: '#333e77',
-                        borderWidth: 2
-                      }]
-                    },
-
-                    options: {
-
-                      scales: {
-
-                        y: { // Primary Y-axis
-                          beginAtZero: true,
-                          type: 'linear',
-                          position: 'left',
-                          id: 'y-temperatura',
-                          max: 100,
-                        },
-                        y1: { // Secondary Y-axis
-                          beginAtZero: true,
-                          type: 'linear',
-                          position: 'right',
-                          id: 'y-producao',
-                        }
-                      }
-                    },
-                  });
-            
-
-
-// --- linha Mínima, Máxima e Média ---
-const linha_MMM_Ctx = document.getElementById('MMM_Chart');
-
-new Chart(linha_MMM_Ctx, {
-  type: 'line',
-  data: {
-    labels: ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'],
-    datasets: [
-      {
-        label: 'Mínima',
-        data: [18, 20, 18, 23, 22, 23, 20],
-        borderColor: '#333e77', // azul
+      }, {
+        type: 'line',
+        label: 'Temperatura atual',
+        data: [18, 19, 19, 20, 21, 23, 25, 25, 27, 28, 29, 29, 31, 32, 32, 35, 34, 33, 31, 28, 25, 23, 23, 22],
+        yAxisID: 'y',
         backgroundColor: '#333e77',
-        pointBackgroundColor: '#333e77',
-        borderWidth: 2,
-        tension: 0.3,
-        fill: false
-      },
-      {
-        label: 'Máxima',
-        data: [37, 35, 36, 35, 35, 37, 36],
-        borderColor: '#F5751A', // laranja
-        backgroundColor: '#F5751A',
-        pointBackgroundColor: '#F5751A',
-        borderWidth: 2,
-        tension: 0.3,
-        fill: false
-      },
-      {
-        label: 'Média',
-        data: [30, 30, 30, 33, 32, 34, 31],
-        borderColor: 'rgba(108, 117, 125, 0.7)', // cinza
-        backgroundColor: 'rgba(108, 117, 125, 0.7)',
-        pointBackgroundColor: 'rgba(108, 117, 125, 0.7)',
-        borderWidth: 2,
-        tension: 0.3,
-        fill: false
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          color: '#333',
-          font: { size: 13, weight: 'bold' }
-        }
-      },
-      title: { display: true, text: '' }
+        borderColor: '#333e77',
+        borderWidth: 2
+      }]
     },
-    scales: {
-      x: {
-        ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' }
+
+    options: {
+
+      scales: {
+
+        y: { // Primary Y-axis
+          beginAtZero: true,
+          type: 'linear',
+          position: 'left',
+          id: 'y-temperatura',
+          max: 100,
+        },
+        y1: { // Secondary Y-axis
+          beginAtZero: true,
+          type: 'linear',
+          position: 'right',
+          id: 'y-producao',
+        }
+      }
+    },
+  });
+
+
+
+  // --- linha Mínima, Máxima e Média ---
+  const linha_MMM_Ctx = document.getElementById('MMM_Chart');
+
+  new Chart(linha_MMM_Ctx, {
+    type: 'line',
+    data: {
+      labels: ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'],
+      datasets: [
+        {
+          label: 'Mínima',
+          data: [18, 20, 18, 23, 22, 23, 20],
+          borderColor: '#333e77', // azul
+          backgroundColor: '#333e77',
+          pointBackgroundColor: '#333e77',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: false
+        },
+        {
+          label: 'Máxima',
+          data: [37, 35, 36, 35, 35, 37, 36],
+          borderColor: '#F5751A', // laranja
+          backgroundColor: '#F5751A',
+          pointBackgroundColor: '#F5751A',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: false
+        },
+        {
+          label: 'Média',
+          data: [30, 30, 30, 33, 32, 34, 31],
+          borderColor: 'rgba(108, 117, 125, 0.7)', // cinza
+          backgroundColor: 'rgba(108, 117, 125, 0.7)',
+          pointBackgroundColor: 'rgba(108, 117, 125, 0.7)',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#333',
+            font: { size: 13, weight: 'bold' }
+          }
+        },
+        title: { display: true, text: '' }
       },
-      y: {
-        beginAtZero: false,
-        ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' },
-        max: 40,
+      scales: {
+        x: {
+          ticks: { color: '#444' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        },
+        y: {
+          beginAtZero: false,
+          ticks: { color: '#444' },
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          max: 40,
+        }
       }
     }
-  }
-});
+  });
 
 
-// --- barra Qtd Alerta ---
-const barra_qtdAlerta_Ctx = document.getElementById('qtdAlerta_Ctx');
+  // --- barra Qtd Alerta ---
+  const barra_qtdAlerta_Ctx = document.getElementById('qtdAlerta_Ctx');
 
-new Chart(barra_qtdAlerta_Ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
-    datasets: [
-      {
-        label: 'Qtd. Alertas',
-        data: [15, 30, 60, 27, 10],
-        backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
-        borderRadius: 4
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'bottom' },
-      title: { display: false },
-      tooltip: {
-        callbacks: {
-             //isso nao vai ficar - era so um teste 
-          label: function(context) {
-            const mina = context.chart.data.labels[context.dataIndex]; // MinaX, MinaY, MinaZ
-            const sensorBase = context.dataset.label.split(' ')[1]; // A, B, C
-            const sensorCompleto = `${mina.replace('Mina', 'Sensor ')}${sensorBase}`;
-            const valor = context.raw;
-            return `${sensorCompleto}: ${valor}`;
+  new Chart(barra_qtdAlerta_Ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
+      datasets: [
+        {
+          label: 'Qtd. Alertas',
+          data: [15, 30, 60, 27, 10],
+          backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        title: { display: false },
+        tooltip: {
+          callbacks: {
+            //isso nao vai ficar - era so um teste 
+            label: function (context) {
+              const mina = context.chart.data.labels[context.dataIndex]; // MinaX, MinaY, MinaZ
+              const sensorBase = context.dataset.label.split(' ')[1]; // A, B, C
+              const sensorCompleto = `${mina.replace('Mina', 'Sensor ')}${sensorBase}`;
+              const valor = context.raw;
+              return `${sensorCompleto}: ${valor}`;
+            }
           }
         }
-      }
-    },
-    scales: {
-      x: {
-        ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' }
       },
-      y: {
-        beginAtZero: true,
-        ticks: { color: '#444' },
-        grid: { color: 'rgba(0,0,0,0.05)' },
-        max: 70,
+      scales: {
+        x: {
+          ticks: { color: '#444' },
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#444' },
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          max: 70,
+        }
       }
     }
-  }
-});
+  });
 
 
 

@@ -131,11 +131,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    p {
+      font-size: 17;
+    }
 }
 
 .dados{
     font-size: 32px;
-    margin-top: 20px;
+    margin-top: 8px;
     color: #f97316;
     font-weight: bold;
 }
