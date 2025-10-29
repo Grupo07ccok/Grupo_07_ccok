@@ -119,3 +119,6 @@ SELECT 	usuario.nome AS Usuário,
 				JOIN mina ON mina.fkEmpresa = idEmpresa
 					JOIN sensor ON fkMina = idMina
 						JOIN coletaDados ON fkSensor = idSensor;
+                        
+
+				
