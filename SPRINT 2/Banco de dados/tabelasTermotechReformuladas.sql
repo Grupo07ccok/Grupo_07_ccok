@@ -30,7 +30,7 @@ CREATE TABLE usuario (
     CONSTRAINT fkEmpresaUsuario
 		FOREIGN KEY (fkEmpresa)
 			REFERENCES empresa(idEmpresa)
-	);
+	) AUTO_INCREMENT = 100;
     
 INSERT INTO usuario VALUES
 	(DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
@@ -45,7 +45,9 @@ INSERT INTO usuario VALUES
         CONSTRAINT fkEmpresaMina
 			FOREIGN KEY (fkEmpresa)
 				REFERENCES empresa(idEmpresa)
-);
+) AUTO_INCREMENT = 300;
+
+select * from mina;
 
 INSERT INTO mina VALUES
 	(DEFAULT, 1, '-19.810300' , '-42.863221'),
@@ -56,23 +58,25 @@ INSERT INTO mina VALUES
 CREATE TABLE sensor (
 	idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
     fkMina INT,
+    setor VARCHAR(45),
     statusS VARCHAR(50), -- Status se está funcionando
 	CONSTRAINT fkMinaSensor
 			FOREIGN KEY (fkMina)
 				REFERENCES mina(idMina),
 	CONSTRAINT chkStatus
 		CHECK (statusS IN ('funcionando', 'manutenção', 'parado')) 
-);
+) AUTO_INCREMENT = 500;
 
 INSERT INTO sensor VALUES 
-	(DEFAULT, 1, 'funcionando'),
-	(DEFAULT, 1, 'funcionando'),
-	(DEFAULT, 1, 'funcionando'),
-	(DEFAULT, 1, 'funcionando'),
-	(DEFAULT, 2, 'funcionando'),
-	(DEFAULT, 3, 'funcionando'),
-	(DEFAULT, 4, 'funcionando');
+	(DEFAULT, 300, '1A', 'funcionando'),
+	(DEFAULT, 300, '1A', 'funcionando'),
+	(DEFAULT, 301, '2A', 'funcionando'),
+	(DEFAULT, 301, '2A','funcionando'),
+	(DEFAULT, 301, '2B', 'funcionando'),
+	(DEFAULT, 302, '5A','funcionando'),
+	(DEFAULT, 303, '1B','funcionando');
     
+    select * from sensor;
 CREATE TABLE coletaDados (
 	idColeta INT AUTO_INCREMENT,
     fkSensor INT,
@@ -84,7 +88,7 @@ CREATE TABLE coletaDados (
     temperatura DECIMAL(3,1),
 	dataHoraColeta DATETIME DEFAULT current_timestamp, -- Data e Hora da temperatura (PEGAR DA API COM JAVASCRIPT)
     alerta TINYINT
-);
+) AUTO_INCREMENT = 700;
 
 
 SHOW TABLES;
@@ -98,6 +102,7 @@ select * from usuario;
 SELECT nomeFantasia AS 'Nome da Empresa',
 		cnpj AS CNPJ,
         idMina AS Mina,
+        setor AS 'Setor da mina',
         idSensor AS Sensor,
         temperatura AS Temperatura,
         dataHoraColeta AS 'Data e hora da coleta',
@@ -106,8 +111,7 @@ SELECT nomeFantasia AS 'Nome da Empresa',
 				JOIN sensor ON fkMina = idMina
 				JOIN coletaDados ON fkSensor = idSensor;
                 
-SELECT 	usuario.nome AS Usuário,
-		nomeFantasia AS 'Nome da Empresa',
+SELECT 	nomeFantasia AS 'Nome da Empresa',
 		cnpj AS CNPJ,
         idMina AS Mina,
         idSensor AS Sensor,
@@ -119,6 +123,3 @@ SELECT 	usuario.nome AS Usuário,
 				JOIN mina ON mina.fkEmpresa = idEmpresa
 					JOIN sensor ON fkMina = idMina
 						JOIN coletaDados ON fkSensor = idSensor;
-                        
-
-				
