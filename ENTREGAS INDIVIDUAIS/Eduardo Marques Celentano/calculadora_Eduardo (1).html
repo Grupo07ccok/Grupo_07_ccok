@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Mina</title>
+</head>
+<body style="background-color: gray;">
+<div style="background-color: gray; color: white; width: 550px; border: 2px solid black; padding: 15px; border-radius: 10px;" >
+    <h1><b><i>Calculadora de Produção da Mina</i></b></h1>
+
+    <b>Quantidade de Mineradores:</b> 
+    <input style="border-radius: 10px;" type="number" id="input_mineradores" placeholder="Exemplo: 15">
+    <br><br>
+
+    <b>Horas trabalhadas por dia:</b> 
+    <input style="border-radius: 10px;" type="number" id="input_horas" placeholder="Exemplo: 8">
+    <br><br>
+
+    <b>Renda gerada por hora (R$):</b> 
+    <input style="border-radius: 10px;" type="number" id="input_renda" placeholder="Exemplo: 50">
+    <br><br>
+
+    <button style="border-radius: 10px; background-color: greenyellow; color: black;" onclick="calcular()"><b>Calcular Renda</b></button>
+    <br><br>
+
+    <div id="div_resultado"></div>
+</div>
+</body>
+</html>
+
+<script>
+    function calcular () {
+        var mineradores = Number(document.getElementById("input_mineradores").value);
+        var horas = Number(document.getElementById("input_horas").value);
+        var rendaHora = Number(document.getElementById("input_renda").value);
+
+        if (mineradores <= 0 || horas <= 0 || rendaHora <= 0) {
+            div_resultado.innerHTML = `<span style="color: red;">Por favor, insira valores válidos maiores que zero.</span>`;
+            return;
+        }
+
+        var rendaDiaria = mineradores * horas * rendaHora;
+
+        div_resultado.innerHTML = `
+        Com <b>${mineradores}</b> mineradores trabalhando <b>${horas}</b> horas por dia, 
+        e gerando R$<b>${rendaHora.toFixed(2)}</b> por hora cada, 
+        a renda diária da mina será de: 
+        <span style="color: lightgreen; font-size: 18px;">R$${rendaDiaria.toFixed(2)}</span>`;
+    }
+</script>
+```
