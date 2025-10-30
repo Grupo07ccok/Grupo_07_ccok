@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TermoTech_calculadora</title>
+</head>
+<body>
+<h1>Veja quanto você pode deixar de perder:</h1>
+<br>
+
+Receita no período: 
+<input type="text" id="input_valor">
+<br>
+
+Temperatura média da mina:
+<input type="text" id="input_temp">
+<br>
+
+<button onclick="calcular()">Calcular</button>
+<div id="div_mensagem"></div>
+</body>
+</html>
+
+<script>
+    function calcular() {
+    var temp = Number(input_temp.value);
+    var valor = Number(input_valor.value);
+    var perdaProd = (temp - 20) * 2.5;
+    var valorPerda = (valor / 100) * perdaProd;
+
+     div_mensagem.innerHTML = `
+         Sua produção de poderá sofrer uma perda de ${perdaProd}%, Prejuízo Potencial (estimado): R$ R$ ${valorPerda}.
+      `;
+    }
+</script>

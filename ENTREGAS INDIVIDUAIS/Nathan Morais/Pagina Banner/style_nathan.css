@@ -1,0 +1,193 @@
+#inicio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #faf9f0;
+  padding: 0 80px;
+  height: 100vh;
+  width: 100%;
+  margin-top: 10vh;
+}
+
+.conteudo_inicio {
+  max-width: 45%;
+}
+
+.conteudo_inicio h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.conteudo_inicio .destaque {
+  font-weight: 800;
+}
+
+.conteudo_inicio p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.botao_saiba_mais {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid #f97316;
+}
+
+.botao_saiba_mais:hover {
+  background: #f97316;
+  color: #fff;
+  border-bottom: 3px solid #000;
+}
+
+.imagem_inicio {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mascara_imagem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden;
+}
+
+.mascara_imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rodape {
+  background-color: #faf9f0;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 80px 30px;
+  border-top: 3px solid #f97316;
+}
+
+.newsletter {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.newsletter h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.form_newsletter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.form_newsletter input {
+  width: 280px;
+  height: 40px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+.form_newsletter button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form_newsletter button:hover {
+  background-color: #f97316;
+}
+
+.checkbox {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.conteudo_rodape {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.coluna_rodape h4 {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.coluna_rodape ul {
+  list-style: none;
+  padding: 0;
+}
+
+.coluna_rodape li {
+  margin: 6px 0;
+}
+
+.redes_sociais span {
+  margin-right: 10px;
+  font-size: 1.4rem;
+}
+
+.direitos_autorais {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+/* ===== RESPONSIVIDADE ===== 
+@media (max-width: 1024px) {
+  #inicio {
+    flex-direction: column;
+    text-align: center;
+    padding: 120px 20px 40px;
+    height: auto;
+  } */
+
+  .conteudo_inicio {
+    max-width: 100%;
+  }
+
+  .imagem_inicio {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .mascara_imagem {
+    clip-path: none;
+  }
+
+  .conteudo_rodape {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+

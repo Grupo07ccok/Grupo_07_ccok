@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Termo Tech | Início</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="global.css"/>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <img src="img/logo.png" alt="Logo Termo Tech" />
+        <span>Termo Tech</span>
+      </div>
+
+      <nav class="menu">
+        <a href="#" class="ativo">Início</a>
+        <a href="#">Sobre Nós</a>
+        <a href="#">Nossa Missão</a>
+        <a href="#">Projetos</a>
+        <a href="#">Simulador Financeiro</a>
+      </nav>
+
+      <div class="botoes_acesso">
+        <button class="botao_login"><a href="#">Login</a></button>
+        <button class="botao_cadastro"><a href="#">Cadastre-se</a></button>
+      </div>
+    </header>
+
+    <section id="inicio">
+      <div class="conteudo_inicio">
+        <h1>
+          SOMOS <br />
+          <span class="destaque">ESPECIALISTAS</span> EM <br />
+          SENSORES PARA <span class="destaque">MINERAÇÃO</span>
+        </h1>
+        <p>
+          Há mais de 12 anos no mercado, somos referência em tecnologias de
+          sensores IoT para mineração.
+        </p>
+        <button class="botao_saiba_mais">Saiba mais →</button>
+      </div>
+
+      <div class="imagem_inicio">
+        <div class="mascara_imagem">
+          <img src="img/mineracao.jpg" alt="Equipe de mineração" />
+        </div>
+      </div>
+    </section>
+
+    <footer class="rodape">
+      <div class="newsletter">
+        <h2>Assine nossa Newsletter</h2>
+        <p>Receba novidades e atualizações sobre nossas tecnologias IoT.</p>
+        <form class="form_newsletter">
+          <input type="email" placeholder="Digite seu e-mail" required />
+          <button type="submit">Inscrever-se</button>
+        </form>
+        <label class="checkbox">
+          <input type="checkbox" /> Concordo em receber comunicações da Termo
+          Tech.
+        </label>
+      </div>
+
+      <div class="conteudo_rodape">
+        <div class="coluna_rodape">
+          <h4>Empresa</h4>
+          <ul>
+            <li>Sobre Nós</li>
+            <li>Nossa Missão</li>
+            <li>Carreiras</li>
+          </ul>
+        </div>
+
+        <div class="coluna_rodape">
+          <h4>Projetos</h4>
+          <ul>
+            <li>Monitoramento IoT</li>
+            <li>Mineração Inteligente</li>
+            <li>Sensores de Temperatura</li>
+          </ul>
+        </div>
+
+        <div class="coluna_rodape">
+          <h4>Contato</h4>
+          <ul>
+            <li>Email: contato@termotech.com.br</li>
+            <li>Telefone: (11) 99999-9999</li>
+            <li>São Paulo - SP</li>
+          </ul>
+        </div>
+
+        <div class="coluna_rodape redes_sociais">
+          <h4>Siga-nos</h4>
+          <span>🌐</span>
+          <span>📘</span>
+          <span>📸</span>
+          <span>💼</span>
+        </div>
+      </div>
+
+      <p class="direitos_autorais">
+        © 2025 Termo Tech. Todos os direitos reservados.
+      </p>
+    </footer>
+
+    <script>
+      document.querySelector(".form_newsletter").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Inscrição realizada com sucesso!");
+      });
+    </script>
+  </body>
+</html>
