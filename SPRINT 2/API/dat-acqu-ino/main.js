@@ -8,7 +8,7 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = false;
+const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
@@ -61,7 +61,7 @@ const serial = async (
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
             var alerta = 0
-            var fkSensor = 1
+            var fkSensor = 500
             // se temperatura > 27 = Emitir alert:
             if (temperatura > 27) {
                 alerta = 1

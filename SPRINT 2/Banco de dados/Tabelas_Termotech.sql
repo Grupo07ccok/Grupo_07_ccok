@@ -42,6 +42,7 @@ INSERT INTO usuario VALUES
         fkEmpresa INT,
         latitude DECIMAL(10,6),
         longitude DECIMAL(10,6),
+        temperaturaAlerta DECIMAL(3,1),
         CONSTRAINT fkEmpresaMina
 			FOREIGN KEY (fkEmpresa)
 				REFERENCES empresa(idEmpresa)
@@ -50,11 +51,11 @@ INSERT INTO usuario VALUES
 select * from mina;
 
 INSERT INTO mina VALUES
-	(DEFAULT, 1, '-19.810300' , '-42.863221'),
-	(DEFAULT, 1, '-6.710625', '-52.706971'),
-	(DEFAULT, 2, '-17.646297', '-43.170836'),
-	(DEFAULT, 2, '-13.712354', '-50.070253');
-
+	(DEFAULT, 1, '-19.810300' , '-42.863221', 25),
+	(DEFAULT, 1, '-6.710625', '-52.706971', 27),
+	(DEFAULT, 2, '-17.646297', '-43.170836', 26),
+	(DEFAULT, 2, '-13.712354', '-50.070253', 23);
+       
 CREATE TABLE sensor (
 	idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
     fkMina INT,
@@ -99,17 +100,6 @@ select * from mina;
 select * from empresa;
 select * from usuario;
 
-SELECT nomeFantasia AS 'Nome da Empresa',
-		cnpj AS CNPJ,
-        idMina AS Mina,
-        setor AS 'Setor da mina',
-        idSensor AS Sensor,
-        temperatura AS Temperatura,
-        dataHoraColeta AS 'Data e hora da coleta',
-        alerta AS Alerta
-			FROM empresa JOIN mina ON mina.fkEmpresa = idEmpresa
-				JOIN sensor ON fkMina = idMina
-				JOIN coletaDados ON fkSensor = idSensor;
                 
 SELECT 	nomeFantasia AS 'Nome da Empresa',
 		cnpj AS CNPJ,
@@ -123,3 +113,16 @@ SELECT 	nomeFantasia AS 'Nome da Empresa',
 				JOIN mina ON mina.fkEmpresa = idEmpresa
 					JOIN sensor ON fkMina = idMina
 						JOIN coletaDados ON fkSensor = idSensor;
+                        
+SELECT nomeFantasia AS 'Nome da Empresa',
+		cnpj AS CNPJ,
+        idMina AS Mina,
+        setor AS 'Setor da mina',
+        idSensor AS Sensor,
+        temperaturaAlerta AS 'Temperatura para alerta',
+        temperatura AS Temperatura,
+        dataHoraColeta AS 'Data e hora da coleta',
+        alerta AS Alerta
+			FROM empresa JOIN mina ON mina.fkEmpresa = idEmpresa
+				JOIN sensor ON fkMina = idMina
+				JOIN coletaDados ON fkSensor = idSensor;
