@@ -2,20 +2,31 @@
 <html>
 
 <head>
-    <title>Graphics</title>
+    <title>Termotech: Data Ac-quino</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+            <span>TermoTech</span>
+        </div>
 
-    <h1>Graphics</h1>
-    <div style="display: flex;">
-        <div style="width: 50%;">
-            <canvas id="sensorAnalogico"></canvas>
+        <nav class="menu">
+            <a href="#" class="">Dashboard Data-Ac-quino</a>
+
+            <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+        </nav>
+
+        <div class="select_linguagem">
+            <p></p>
         </div>
-        <div style="width: 50%;">
-            <canvas id="sensorDigital"></canvas>
-        </div>
+    </header>
+    <div class="div_grafico">
+        <h1>Temperatura atual</h1>
+        <canvas class="grafico" id="sensorAnalogico"></canvas>
     </div>
 
     <script>
@@ -24,8 +35,8 @@
             data: {
                 datasets: [{
                     label: 'Analogico',
-                    borderColor: '#63B1BC',
-                    backgroundColor: '#ED145B'
+                    borderColor: '#f48404',
+                    backgroundColor: '#205094'
                 }]
             },
             options: {

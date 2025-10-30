@@ -8,12 +8,11 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = true;
+const HABILITAR_OPERACAO_INSERIR = false;
 
 // função para comunicação serial
 const serial = async (
     valoresTemperatura,
-    valoresSensorDigital,
 ) => {
 
     // conexão com o banco de dados MySQL
@@ -50,9 +49,7 @@ const serial = async (
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
-        const valores = data.split(';');
-        const sensorDigital = parseInt(valores[1]);
-        const temperatura = parseFloat(valores[0]);
+        const temperatura = parseFloat(data);
         // const agora = new Date();
         // const horaFormatada = agora.toISOString().slice(0,19).replace('T', ' ');
         // ADICIONAR A DATA E HORARIO PELO JAVASCRIPT!!!
@@ -60,7 +57,6 @@ const serial = async (
         // armazena os valores dos sensores nos arrays correspondentes
 
         valoresTemperatura.push(temperatura);
-        valoresSensorDigital.push(sensorDigital);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
@@ -94,7 +90,6 @@ const serial = async (
 // função para criar e configurar o servidor web
 const servidor = (
     valoresTemperatura,
-    valoresSensorDigital
 ) => {
     const app = express();
 
@@ -114,26 +109,20 @@ const servidor = (
     app.get('/sensores/analogico', (_, response) => {
         return response.json(valoresTemperatura);
     });
-    app.get('/sensores/digital', (_, response) => {
-        return response.json(valoresSensorDigital);
-    });
 }
 
 // função principal assíncrona para iniciar a comunicação serial e o servidor web
 (async () => {
     // arrays para armazenar os valores dos sensores
     const valoresTemperatura = [];
-    const valoresSensorDigital = [];
 
     // inicia a comunicação serial
     await serial(
         valoresTemperatura,
-        valoresSensorDigital
     );
 
     // inicia o servidor web
     servidor(
         valoresTemperatura,
-        valoresSensorDigital
     );
 })();

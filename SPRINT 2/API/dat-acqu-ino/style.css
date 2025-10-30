@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+    /*font google fonts Kanit (?)*/
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    background-color: #FAF9F0;
+}
+/* NAVBAR */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    background: #FAF9F0;
+    border-bottom: 1px solid #ddd;
+    height: 10vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 999;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #000;
+}
+
+.logo img {
+    height: 28px;
+}
+
+.menu a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.div_grafico {
+    margin-top: 10vh;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.grafico{
+    height: 80vh;
+}
+
+/*Esse pode ser o arquivo para adicionar tudo que vai se repetir nas paginas (tipo a navbar e footer)*/
