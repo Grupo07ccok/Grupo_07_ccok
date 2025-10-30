@@ -8,21 +8,24 @@
   <link rel="stylesheet" href="styles/dash.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body style="background-color: #fffdef;">
 
   <header class="navbar_dashboard">
+
     <div class="logo">
-      <img style="height: 30px; width: 30px;" src="assets/img/logo.png" alt="Logo">
+      <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+      <span>TermoTech</span>
     </div>
 
     <nav class="menu_dashboard">
-      <a href="#" class="active">
+      <a href="#" class="link active">
         <i class="fa-regular fa-clock"></i>
         Dashboard
       </a>
-      <a href="#">
+      <a href="#" class="link">
         <i class="fa-solid fa-plus"></i>
         Cadastrar mina
       </a>
@@ -35,7 +38,7 @@
 
   <!--CONTEUDO PRINCIPAL-->
 
-  <div class="container_conteudo">
+  <div class="container_conteudo" style="display: none;">
     <h1>Mina <span style="color: #f97316">01</span></h1>
 
     <div class="selects_mina_sensor">
@@ -98,21 +101,40 @@
         </div>
       </div>
 
-        <div class="segunda_linha">
-          <div class="caixa_grafico">
-            <p class="titulo_grafico">Produção X Temperatura do sensor escolhido</p>
-            <canvas id="grafico_producao"></canvas>
-          </div>
-          
-          <div class="caixa_grafico">
-            <p class="titulo_grafico">Mínina, máxima e média do sensor escolhido</p>
-            <canvas id="MMM_Chart"><!--EXEMPLO--></canvas>
-          </div>
+      <div class="segunda_linha">
+        <div class="caixa_grafico">
+          <p class="titulo_grafico">Produção X Temperatura do sensor escolhido</p>
+          <canvas id="grafico_producao"></canvas>
         </div>
+
+        <div class="caixa_grafico">
+          <p class="titulo_grafico">Mínina, máxima e média do sensor escolhido</p>
+          <canvas id="MMM_Chart"><!--EXEMPLO--></canvas>
+        </div>
+      </div>
 
     </div>
 
   </div>
+  <section class="mina_cadastro">
+    <div class="mina_cadastro_interna">
+      <h1 class="titulo_mina">Cadastro da mina</h1>
+      <div class="formulario_mina">
+        <b><label class="rotulo_mina" for="longitude_mina">Longitude</label></b>
+        <input class="campo_mina" value="-50.534961" id="longitude_mina" type="longitude"
+          placeholder="Insira seu longitude:" required>
+
+        <b> <label class="rotulo_mina" for="latitude_mina">Latitude</label></b>
+        <input class="campo_mina" value="-5.789885" id="latitude_mina" type="tel" placeholder="Insira seu latitude:"
+          required>
+        <hr class="separador_mina">
+
+        <div class="botoes_mina">
+          <a id="ir_cadastro2" href="#"><button class="botao_padrao" onclick="cadastrar()">Cadastrar mina</button></a>
+        </div>
+      </div>
+
+  </section>
 
 </body>
 

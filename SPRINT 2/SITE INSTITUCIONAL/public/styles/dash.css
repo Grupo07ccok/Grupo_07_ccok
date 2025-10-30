@@ -2,21 +2,26 @@
 
 * {
   box-sizing: border-box;
-  font-family: "poppins", sans-serif; /*font google fonts Kanit (?)*/
+  font-family: "poppins", sans-serif;
+  /*font google fonts Kanit (?)*/
   margin: 0;
   padding: 0;
+  overflow-x: auto;
 }
 
 /* NAVBAR */
 .navbar_dashboard {
+  background-color: #faf9f0;
   display: flex;
   align-items: center;
-  justify-content: space-around; /*aqui que muda as coisa do menu - nao sei como deixa o icon de perfil no final*/
+  justify-content: space-around;
+  /*aqui que muda as coisa do menu - nao sei como deixa o icon de perfil no final*/
   padding: 12px 40px;
-  background: #fff;
   border-bottom: 1px solid #ddd;
   gap: 15px;
-  
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+
+
 }
 
 .logo {
@@ -30,24 +35,53 @@
 .logo img {
   height: 28px;
 }
-
+.mina_cadastro{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('../assets/img/Nossa_Missão.png');
+  background-size: cover;
+}
+.mina_cadastro_interna{
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  background-color: #faf9f0;
+  border-radius: 5vh;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  height: 90%;
+}
+.formulario_mina{
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
+}
 /* Menu */
 .menu_dashboard {
   display: flex;
   align-items: center;
   gap: 10px;
+
   margin-left: 30px;
 }
 
 /* Links do menu */
 .menu_dashboard a {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
   padding: 8px 14px;
   text-decoration: none;
   color: #000;
   font-weight: 600;
+  font-size: small;
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
@@ -79,108 +113,118 @@
 .container_conteudo {
   margin: 10px 150px 0px 150px;
   padding: 20px;
-  border: 0px solid black; /*so p ajudar com as margens*/
+  border: 0px solid black;
+  /*so p ajudar com as margens*/
   height: auto;
 }
 
 
 /* conteudo das dash aqui *******************************************/
 
-.selects_mina_sensor{
-    display: flex;
-    margin-top: 20px;
-    gap: 15px;
+.selects_mina_sensor {
+  display: flex;
+  margin-top: 20px;
+  gap: 15px;
 }
 
-#select_mina, #select_sensor{
-    border-radius: 30px;
-    background-color: #fff;
-    color: #333e77;
-    border: 1px solid black;
-    box-shadow: 3px 3px 2px gray;
-    height: 35px;
-    width: 180px;
-    
+#select_mina,
+#select_sensor {
+  border-radius: 30px;
+  background-color: #fff;
+  color: #333e77;
+  border: 1px solid black;
+  box-shadow: 3px 3px 2px gray;
+  height: 35px;
+  width: 180px;
+
 }
 
-.secao_kpi{
-    display: flex;
-    margin-top: 20px;
-    justify-content: center;
+.secao_kpi {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
 }
 
-.container_kpi{
-    display: flex;
-    flex-direction: row;
-    justify-content: center; /*duvida se vale mais a pena usar center e gap 20px pq ai nao distorce a tela ...*/
-    width: 100%; 
-    align-items: stretch;
-    gap: 20px;
-   
+.container_kpi {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /*duvida se vale mais a pena usar center e gap 20px pq ai nao distorce a tela ...*/
+  width: 100%;
+  align-items: stretch;
+  gap: 20px;
+
 }
 
-.caixa_kpi{
-    border: 1px solid black;
-    border-radius: 15px;
-    box-shadow: 3px 3px 2px gray;
-    background-color: #fff;
-    padding: 20px;
-    width: 380px;
-    height: 110px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    p {
-      font-size: 17;
-    }
+.caixa_kpi {
+  border: 1px solid black;
+  border-radius: 15px;
+  box-shadow: 3px 3px 2px gray;
+  background-color: #fff;
+  padding: 20px;
+  width: 380px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font-size: 17;
+  }
 }
 
-.dados{
-    font-size: 32px;
-    margin-top: 8px;
-    color: #f97316;
-    font-weight: bold;
+.dados {
+  font-size: 32px;
+  margin-top: 8px;
+  color: #f97316;
+  font-weight: bold;
 }
 
 /*PARTE DOS GRAFICOS ******************************************/
-.graficos{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    flex-direction: column;
-    gap: 20px;
+.graficos {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.titulo_grafico{
-    font-weight: bold;
-    color: #333e77;
-    font-size: 16px;
-}
-.primeira_linha, .segunda_linha{
-    display: flex;
-    flex-direction: row;
-    justify-content: center; /*ficou meio inutil pq o canvas quebra*/
-    width: 100%;
-    align-items: stretch;
-    gap: 20px; /*tive que usar gap de qualquer forma*/
+.titulo_grafico {
+  font-weight: bold;
+  color: #333e77;
+  font-size: 16px;
 }
 
-.caixa_grafico{
-    border: 1px solid black;
-    border-radius: 15px;
-    box-shadow: 3px 3px 2px gray;
-    background-color: #fff;
-    padding: 20px;
-    width: 850px; /*ver se o canvas vai respeitar isso aqui -- nao respeita :)*/
-    height: 350px;
+.primeira_linha,
+.segunda_linha {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /*ficou meio inutil pq o canvas quebra*/
+  width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  /*tive que usar gap de qualquer forma*/
 }
 
-canvas{
-    width: 100%; /*100% em relação ao container q ele vai (caixa_grafico)*/
+.caixa_grafico {
+  border: 1px solid black;
+  border-radius: 15px;
+  box-shadow: 3px 3px 2px gray;
+  background-color: #fff;
+  padding: 20px;
+  width: 850px;
+  /*ver se o canvas vai respeitar isso aqui -- nao respeita :)*/
+  height: 350px;
 }
 
-.texto_azul{
+canvas {
+  width: 100%;
+  /*100% em relação ao container q ele vai (caixa_grafico)*/
+}
+
+.texto_azul {
   color: #333e77;
   font-size: larger;
   font-weight: bold;
@@ -188,4 +232,3 @@ canvas{
   justify-content: center;
   align-items: center;
 }
-

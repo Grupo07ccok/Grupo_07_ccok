@@ -3,6 +3,7 @@
 * {
   margin: 0;
   font-family: "Poppins", Arial, sans-serif;
+
 }
 
 body {
@@ -261,9 +262,11 @@ body {
   justify-content: space-between;
   flex-direction: row;
 }
+
 .div_campos b {
   font-size: 20px;
 }
+
 .div_line div {
   width: 45%;
   display: flex;
@@ -312,7 +315,8 @@ body {
   position: relative;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
-.div_container_resultados{
+
+.div_container_resultados {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -320,7 +324,8 @@ body {
   width: 100%;
   height: 70%;
 }
-#popup_conteudo .div_resultado_simulador{
+
+#popup_conteudo .div_resultado_simulador {
   width: 30%;
   height: 90%;
   border-radius: 2vh;
@@ -330,11 +335,13 @@ body {
   align-items: center;
   padding: 2vh;
 }
-.div_resultado_simulador .span_resultado{
+
+.div_resultado_simulador .span_resultado {
   font-size: larger;
   font-weight: bolder;
   color: #F5751A;
 }
+
 #fechar_popup {
   position: absolute;
   top: 10px;
@@ -377,15 +384,15 @@ body {
   padding: 10vh;
 }
 
-.container_imagem{
+.container_imagem {
   height: 70vh;
   width: 50vw;
   background: url("../assets/img/Nossa_Missão.png");
   background-size: cover;
   box-shadow: -15px 15px 0 #F5751A;
 }
-.container_Imagem .img_nossa_missao {
-}
+
+.container_Imagem .img_nossa_missao {}
 
 
 .texto_nossa_missao h2 {
@@ -427,10 +434,12 @@ body {
   align-items: flex-start;
   margin-right: 3vh;
 }
-.video{
+
+.video {
   width: 100%;
   height: 100%;
 }
+
 .texto_video {
   width: 30%;
   display: flex;
@@ -474,7 +483,8 @@ body {
   height: 90vh;
   padding: 30px;
 }
-.container_diagrama img{
+
+.container_diagrama img {
   border-radius: 8px;
   border: 2px solid black;
   width: 85%;
@@ -586,6 +596,7 @@ body {
   transition: 1s;
   background-color: #ffb078;
 }
+
 /*BANNER*/
 #banner {
   width: 100vw;
@@ -634,12 +645,12 @@ body {
 
 .checks_cadastro {
   display: flex;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  
+
 }
 
-.check{
+.check {
   display: flex;
   flex-direction: row;
 }

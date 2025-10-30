@@ -20,14 +20,14 @@
 
         <div class="formulario_login" action="#" method="post" novalidate>
           <label class="rotulo_login" for="email_login">E-mail</label>
-          <input class="campo_login" id="email_login" type="email" placeholder="email@email.com" required>
+          <input class="campo_login" value="julia@gmail.com" id="email_login" type="email" placeholder="email@email.com" required>
 
           <label class="rotulo_login" for="senha_login">Senha</label>
           <input class="campo_login" id="senha_login" type="password" placeholder="********" required>
 
           <div id="div_mensagemSenha"></div>
 
-          <button class="botao_padrao" onclick="verificar()"><a id="ir_dash" href="#">Entrar</a></button>
+          <a id="ir_dash" href="#"><button class="botao_padrao" onclick="verificar()">Entrar</button></a>
         </div>
 
         <hr class="separador_login">
@@ -70,13 +70,14 @@
   var senha = '';
   var armazenarEmail = '';
   var mockadoEmail = 'julia@gmail.com';
-  var mockadoSenha = 'julia123';
+  var mockadoSenha = 'Julia.123';
 
   function verificar() {
     var email = (email_login.value);
     senha = (senha_login.value);
 
     if (email == mockadoEmail && senha == mockadoSenha) {
+      alert('Login realizado com sucesso!')
       ir_dash.href = "dashboard.html"
       // window.location.href = 'dashboard.html';
       // console.log(window.location);

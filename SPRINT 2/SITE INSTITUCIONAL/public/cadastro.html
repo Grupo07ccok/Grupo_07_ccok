@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login: Usuário</title>
+    <title>Cadastro: Usuário</title>
     <link rel="stylesheet" href="../public/styles/style.css">
-    </head>
+</head>
 
 <body>
     <div class="pagina_login">
@@ -23,38 +22,47 @@
             <div class="lateral_formulario_interna">
                 <h1 class="titulo_login">Cadastro</h1>
 
-                <div class="formulario_login" >
+                <div class="formulario_login">
                     <label class="rotulo_login" for="nome_login">Nome</label>
-                    <input class="campo_login" id="nome_cadastro" type="nome" placeholder="Insira seu nome:" required>
+                    <input class="campo_login" value="Julia Araripe" id="nome_cadastro" type="nome"
+                        placeholder="Insira seu nome:" required>
 
                     <label class="rotulo_login" for="telefone_cadastro">Telefone</label>
-                    <input class="campo_login" id="telefone_cadastro" type="tel" placeholder="Insira seu telefone:" required>
+                    <input class="campo_login" value="11902289521" id="telefone_cadastro" type="tel"
+                        placeholder="Insira seu telefone:" required>
 
                     <label class="rotulo_login" for="email_cadastro">E-mail</label>
-                    <input class="campo_login" id="email_cadastro" type="email" placeholder="email@email.com" required>
+                    <input class="campo_login" value="julia@gmail.com" id="email_cadastro" type="email"
+                        placeholder="email@email.com" required>
 
                     <label class="rotulo_login" for="senha_cadastro">Senha</label>
-                    <input class="campo_login" id="senha_cadastro" type="password" placeholder="********" required oninput="verificar()"> 
+                    <input class="campo_login" id="senha_cadastro" type="password" placeholder="********" required
+                        oninput="verificar()">
                     <div class="checks_cadastro" id="div_checks_cadastro" style="display: none;">
                         <div class="check">
-                            Letra maiúscula 
-                            <div class="check_img" ><img id="check_upper" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                            Letra maiúscula
+                            <div class="check_img"><img id="check_upper" src="../public/assets/icons/icons-cancelar.png"
+                                    alt=""></div>
                         </div>
                         <div class="check">
                             Letra minúscula
-                            <div class="check_img" ><img id="check_lower" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                            <div class="check_img"><img id="check_lower" src="../public/assets/icons/icons-cancelar.png"
+                                    alt=""></div>
                         </div>
                         <div class="check">
-                            Número 
-                            <div class="check_img" ><img id="check_num" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                            Número
+                            <div class="check_img"><img id="check_num" src="../public/assets/icons/icons-cancelar.png"
+                                    alt=""></div>
                         </div>
                         <div class="check">
                             Caractere especial
-                            <div class="check_img" ><img id="check_especial" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                            <div class="check_img"><img id="check_especial"
+                                    src="../public/assets/icons/icons-cancelar.png" alt=""></div>
                         </div>
                         <div class="check">
                             8 ou mais caracteres
-                            <div class="check_img" ><img id="check_tamanho" src="../public/assets/icons/icons-cancelar.png" alt=""></div>
+                            <div class="check_img"><img id="check_tamanho"
+                                    src="../public/assets/icons/icons-cancelar.png" alt=""></div>
                         </div>
 
                     </div>
@@ -63,13 +71,15 @@
                     <input class="campo_login" id="confirma_cadastro" type="password" placeholder="********" required>
 
                     <label class="rotulo_login" for="token_cadastro">Confirme o token da empresa</label>
-                    <input class="campo_login" id="token_cadastro" type="text" placeholder="********" required>
+                    <input class="campo_login" id="token_cadastro" type="text" placeholder="Insira o token da empresa:" required>
 
                     <!-- <button type="submit" class="botao_formulario"  -->
-                     <div class="botoes_cadastro">
-                         <button class="botao_padrao" onclick="cadastrar_token()">Cadastrar com token</a></button>
-                        <button class="botao_padrao" onclick="cadastrar()"><a id="ir_cadastro2" href="#">Continuar e Cadastrar empresa</a></button>
-                     </div>
+                    <div class="botoes_cadastro">
+                        <a id="ir_login" href="#"><button class="botao_padrao" onclick="cadastrar_token()">Cadastrar com
+                                token</button></a>
+                        <a id="ir_cadastro2" href="#"><button class="botao_padrao" onclick="cadastrar()">Continuar e
+                                Cadastrar empresa</button></a>
+                    </div>
                 </div>
 
                 <hr class="separador_login">
@@ -119,7 +129,7 @@
     function verificar() {
         senha = senha_cadastro.value;
         var tamanho_senha = senha.length;
-        var senha_sem_especial = senha.replaceAll(/[^a-zA-Z0-9]/g,""); //troca todos os caracteres que não são números ou letras
+        var senha_sem_especial = senha.replaceAll(/[^a-zA-Z0-9]/g, ""); //troca todos os caracteres que não são números ou letras
         var tamanho_senha_sem_especial = senha_sem_especial.length;
         var senha_minuscula = senha.toLowerCase();
         var senha_maiuscula = senha.toUpperCase();
@@ -127,22 +137,22 @@
 
         div_checks_cadastro.style.display = 'flex';
 
-        if(senha_minuscula != senha) { // tem letras maiúsculas
+        if (senha_minuscula != senha) { // tem letras maiúsculas
             crit1 = 1;
             check_upper.src = '../public/assets/icons/icons-ok.png';
         } else {
-            check_upper.src =  '../public/assets/icons/icons-cancelar.png';
+            check_upper.src = '../public/assets/icons/icons-cancelar.png';
             crit1 = 0;
         }
-        
-        if(senha_maiuscula != senha) { // tem letras minúculas
+
+        if (senha_maiuscula != senha) { // tem letras minúculas
             crit2 = 1;
             check_lower.src = '../public/assets/icons/icons-ok.png';
         } else {
             check_lower.src = '../public/assets/icons/icons-cancelar.png';
             crit2 = 0;
         }
-        
+
         if (senha.includes('0') || senha.includes('1') || senha.includes('2') || senha.includes('3') || senha.includes('4') || senha.includes('5') || senha.includes('6') || senha.includes('7') || senha.includes('8') || senha.includes('9')) {
             crit3 = 1;
             check_num.src = '../public/assets/icons/icons-ok.png';
@@ -150,8 +160,8 @@
             check_num.src = '../public/assets/icons/icons-cancelar.png';
             crit3 = 0;
         }
-        
-        if(tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
+
+        if (tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
             crit4 = 1;
             check_especial.src = '../public/assets/icons/icons-ok.png';
         } else {
@@ -159,7 +169,7 @@
             crit4 = 0;
         }
 
-        if(tamanho_senha >= 8) { // tem pelo menos 8 caracteres
+        if (tamanho_senha >= 8) { // tem pelo menos 8 caracteres
             crit5 = 1;
             check_tamanho.src = '../public/assets/icons/icons-ok.png';
         } else {
@@ -168,7 +178,7 @@
         }
 
         criteriosAtendidos = crit1 + crit2 + crit3 + crit4 + crit5
-        
+
     }
 
     function cadastrar_token() {
@@ -179,13 +189,13 @@
         var confirma = confirma_cadastro.value;
         var token = token_cadastro.value;
 
-        if(nome == "" || telefone == "" || email == "" || senha == "" || confirma == "" || token == "") {
+        if (nome == "" || telefone == "" || email == "" || senha == "" || confirma == "" || token == "") {
             alert(`Todos os campos devem estar preenchidos`)
         } else if (!email.includes('@') || (!email.endsWith('.com') && !email.endsWith('.com.br'))) {
             alert(`insira um email válido`)
         } else if (criteriosAtendidos < 5) {
             alert(`Senha deve conter todos os requisitos`)
-        } else if (senha != confirma){
+        } else if (senha != confirma) {
             alert(`A senha e a confimação devem ser iguais`)
         } else if (token != tokenValido) {
             alert(`Insira um token válido`)
@@ -196,7 +206,9 @@
             guarda_confirma = confirma;
 
             alert(`Cadastro realizado com sucesso!`);
-        } 
+            ir_login.href = "login.html";
+
+        }
     }
 
     function cadastrar() {
@@ -215,7 +227,7 @@
             alert(`insira um email válido`)
         } else if (criteriosAtendidos < 5) {
             alert(`Senha deve conter todos os requisitos`)
-        } else if (senha != confirma){
+        } else if (senha != confirma) {
             alert(`A senha e a confimação devem ser iguais`)
         } else {
             guarda_nome = nome;
@@ -226,9 +238,9 @@
             alert(`Cadastro realizado com sucesso!`);
 
             ir_cadastro2.href = "cadastro2.html";
-        } 
+        }
     }
-    
+
 </script>
 
 

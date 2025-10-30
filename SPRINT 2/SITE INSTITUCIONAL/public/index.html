@@ -176,11 +176,11 @@
       <div class="div_receita_producao" id="div_receita">
         <div class="div_campos">
           <b>Receita no período <span>*</span></b> <br>
-          <input class="input_simulador" id="input_receitaAnual" placeholder="Em reais (R$):" type="number"><br><br>
+          <input class="input_simulador" id="input_receitaAnual" value="15900000000" placeholder="Em reais (R$):" type="number"><br><br>
         </div>
         <div class="div_campos">
           <b>Temperatura média na mina <span>*</span></b><br>
-          <input class="input_simulador" id="input_temperatura" placeholder="Em graus (Cº):" type="number"><br><br>
+          <input class="input_simulador" id="input_temperatura" value="25" placeholder="Em graus (Cº):" type="number"><br><br>
         </div>
       </div>
 
@@ -188,15 +188,15 @@
         <div class="div_line">
           <div>
             <b>Produção de cobre no período <span>*</span></b><br>
-            <input class="input_simulador" id="input_producao" placeholder="Em toneladas:" type="number"><br><br>
+            <input class="input_simulador" id="input_producao" value="300000" placeholder="Em toneladas:" type="number"><br><br>
           </div>
           <div>
             <b>Custo de extração do cobre <span>*</span></b> <br>
-            <input class="input_simulador" id="input_custo" placeholder="Em reais (R$):" type="number"><br><br>
+            <input class="input_simulador" id="input_custo" value="10000" placeholder="Em reais (R$):" type="number"><br><br>
           </div>
         </div>
         <b>Temperatura média na mina <span>*</span></b><br>
-        <input class="input_simulador" id="input_temperatura2" placeholder="Em graus (Cº):" type="number"><br><br>
+        <input class="input_simulador" id="input_temperatura2" value="25" placeholder="Em graus (Cº):" type="number"><br><br>
       </div>
 
       <button onclick="calcular()" class="botao_simulador">Calcular valores</button><br><br>
@@ -218,6 +218,9 @@
           <div id="div_texto_deixa_ganhar" class="div_resultado_simulador">
             <p id="textoDeixaGanhar"></p>
           </div>
+        </div>
+        <div class="div_descricao_resultado">
+          <p>Caso contrate um sistema de refrigeramento adequado</p>
         </div>
         <button class="botao_popup" onclick="fecharPopup()">Fechar</button>
       </div>
@@ -396,6 +399,10 @@
     }
   }
 
+  function transformarReais() {
+    var receita = Number(input_receitaAnual.value);
+
+  }
   function calcular() {
     metodo_escolhido = select_metodo.value;
 
@@ -406,53 +413,70 @@
     if (metodo_escolhido == '1') {
       temperatura2 = 0;
       var receita = Number(input_receitaAnual.value);
-      if (receita && temperatura) {
+      if (receita == 0) {
+        alert('Preencha todos os campos.');
+      }
+       else if (receita <= 0) {
+        alert('Insira números positivos em receita!')
+      } else if (temperatura <= 10) {
+        alert('Intervalo de temperatura abaixo de 10, insira um valor maior que 20!')
+      }else {
         var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
         var ganhoExtra = receitaLiquidaValor - receita;
         texto_receita_com_sensor = ''
         texto_deixa_de_ganhar = ''
         texto_receita_sem_sensor = ''
-
+        if (ganhoExtra <= 0) {
+          ganhoExtra = 0
+        }
         texto_receita_com_sensor = `
-          Com o monitoramento, sua receita líquida será de: <br><br>
+          Com o monitoramento, sua receita líquida será de até: <br><br>
           <span class="span_resultado">${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
         `;
         texto_deixa_de_ganhar = `
-          Por ano você poderia deixar de perder: <br><br>
+          Nesse período você poderá deixar de perder até: <br><br>
           <span class="span_resultado">${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
         `;
         abrirPopup();
-      } else {
-        alert('Preencha todos os campos.');
       }
     } else if (metodo_escolhido == '2') {
       temperatura = 0;
       var producao = Number(input_producao.value);
       var custo = Number(input_custo.value);
-      if (producao && custo && temperatura2) {
+      if (producao == 0 || custo == 0) {
+        alert('Preencha todos os campos.');
+      }
+       else if (producao <= 0 || custo <= 0) {
+        alert('Insira números positivos em toneladas ou custo!')
+      } else if (temperatura2 <= 10) {
+        alert('Intervalo de temperatura abaixo de 10, insira um valor maior que 20!')
+      } else {
         var receitaBruta = producao * 53500;
         var receitaLiquida = receitaBruta - (custo * producao);
         var receitaSemSensor = receitaLiquida * (1 - ((temperatura2 - 20) * 0.025));
         var perda = receitaLiquida - receitaSemSensor;
-
+        if (perda <= 0) {
+          perda = 0
+        }
+        if (temperatura2 >= 10 && temperatura2 < 20) {
+          receitaSemSensor = receitaLiquida
+        }
         texto_receita_com_sensor = ''
         texto_receita_sem_sensor = ''
         texto_deixa_de_ganhar = ''
 
-        texto_receita_com_sensor = `Com o sensor, sua receita líquida será de: <br><br>
+        texto_receita_com_sensor = `Com o sensor, sua receita líquida será de até: <br><br>
           <span class="span_resultado">${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
         `
         texto_receita_sem_sensor = ` 
-          Sem o sensor, seria de: <br><br>
+          Sem o sensor, seria de até: <br><br>
           <span class="span_resultado">${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
         `
         texto_deixa_de_ganhar = `
-          Por ano você poderia deixar de perder: <br><br>
+          Nesse período você poderá deixar de perder até: <br><br>
           <span class="span_resultado">${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
         `
         abrirPopup();
-      } else {
-        alert('Preencha todos os campos.');
       }
     }
 
