@@ -100,7 +100,17 @@ select * from mina;
 select * from empresa;
 select * from usuario;
 
-                
+INSERT INTO coletaDados VALUES
+(DEFAULT, 500, 28.5, '2025-11-13 20:49', 1),
+(DEFAULT, 500, 28, '2025-11-13 20:51', 1),
+(DEFAULT, 500, 28.5, '2025-11-13 20:53', 1);
+
+INSERT INTO coletaDados VALUES
+(DEFAULT, 501, 28.5, '2025-11-13 20:49', 1),
+(DEFAULT, 501, 28, '2025-11-13 20:51', 1),
+(DEFAULT, 501, 28.5, '2025-11-13 20:53', 1);
+
+
 SELECT 	nomeFantasia AS 'Nome da Empresa',
 		cnpj AS CNPJ,
         idMina AS Mina,
@@ -126,3 +136,23 @@ SELECT nomeFantasia AS 'Nome da Empresa',
 			FROM empresa JOIN mina ON mina.fkEmpresa = idEmpresa
 				JOIN sensor ON fkMina = idMina
 				JOIN coletaDados ON fkSensor = idSensor;
+                
+SELECT timediff(DAY,dataHoraColeta,now())
+			FROM coletaDados;
+            
+            
+SELECT day(dataHoraColeta)
+			FROM coletaDados;
+
+
+CREATE VIEW vwTotalAlertas AS            
+	SELECT fkSensor,
+		COUNT(*) AS total_alertas
+			FROM coletaDados
+				WHERE alerta = 1
+					GROUP BY fkSensor
+						ORDER BY total_alertas DESC
+							LIMIT 2; -- LIMITAR PARA 1 PARA A KPI 'SENSOR COM MAIS ALERTAS'
+                            
+SELECT * FROM vwTotalAlertas;
+
