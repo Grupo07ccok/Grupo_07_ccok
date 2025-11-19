@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termo Tech | LandingPage</title>
+  <link rel="stylesheet" href="styles/global.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/carroussel.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+      <span>TermoTech</span>
+    </div>
+
+    <nav class="menu">
+      <a href="#banner" class="">Início</a>
+      <a href="#sobre_nos">Sobre Nós</a>
+      <a href="#nossa_missao">Nossa Missão</a>
+      <a href="#simulador_financeiro">Simulador</a>
+      <a href="#diagrama_solucao">Diagrama de Solução</a>
+      <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+    </nav>
+
+    <div class="select_linguagem">
+      <button class="login"><a href="login.html">Login</a></button>
+      <button class="signup"><a href="cadastro.html">Cadastre-se</a></button>
+    </div>
+  </header>
+
+  <section id="banner">
+    <div class="container">
+      <div class="conteudo_banner">
+        <p class="titulo_home">SOMOS <b>ESPECIALISTAS</b> EM SENSORES PARA <b>MINERAÇÃO</b></p>
+
+        <p>
+          Há mais de 12 semanas no mercado, somos referência em tecnologias de
+          sensores IoT para mineração.
+        </p>
+        <button class="botao_home">Saiba mais →</button>
+      </div>
+
+      <div class="imagem_banner">
+      </div>
+    </div>
+  </section>
+
+
+  <section id="sobre_nos" class="sobre_nos">
+    <h1>Sobre <span>Nós</span></h1>
+    <div class="slide" id="slide1">
+      <div class="carroussel">
+        <div class="conteudo">
+          <div class="triangulo_texto">
+            <img class="imgs_triangulo" src="assets/img/trianguloRoxo.png" alt="">
+            <div class="paragrafo">
+              <b>Quem Somos</b>
+              <p>A <span>Termo Tech</span> nasceu de um projeto acadêmico com um propósito claro: unir
+                <span>tecnologia</span> e sustentabilidade no setor de <span>mineração</span>.
+              </p>
+            </div>
+          </div>
+          <img class="imgs_triangulo" src="assets/img/trianguloLaranja.png" alt="">
+
+        </div>
+      </div>
+    </div>
+    <div class="slide" id="slide2" style="display: none;">
+      <div class="carroussel">
+        <div class="conteudo">
+          <div class="triangulo_texto">
+            <img class="imgs_triangulo" src="assets/img/trianguloLaranja.png" alt="">
+            <div class="paragrafo">
+              <b>O Que Fazemos</b>
+              <p>
+                Com sensores inteligentes e análise de dados em nuvem,
+                nossa plataforma coleta informações cruciais permitindo
+                que gestores tomem decisões rápidas e precisas.
+              </p>
+            </div>
+          </div>
+          <img class="imgs_triangulo" src="assets/img/trianguloVerde.png" alt="">
+
+        </div>
+      </div>
+    </div>
+    <div class="slide" id="slide3" style="display: none;">
+      <div class="carroussel">
+        <div class="conteudo">
+          <div class="triangulo_texto">
+            <img class="imgs_triangulo" src="assets/img/trianguloVerde.png" alt="">
+            <div class="paragrafo">
+              <b>Nosso Propósito</b>
+              <p>Transformar dados em estratégias, tornando o processo de extração mais seguro, econômico
+                e sustentável.
+              </p>
+            </div>
+          </div>
+          <img class="imgs_triangulo" src="assets/img/trianguloRoxo.png" alt="">
+
+        </div>
+      </div>
+    </div>
+    <div class="radio_buttons">
+      <button type="radio" id="btn1" onclick="trocarSlide1()" style="background-color: #f97316;"
+        class="btn_radio"></button>
+      <button type="radio" id="btn2" onclick="trocarSlide2()" class="btn_radio"></button>
+      <button type="radio" id="btn3" onclick="trocarSlide3()" class="btn_radio"></button>
+    </div>
+  </section>
+
+  <section id="nossa_missao">
+    <!-- aqui fica o codigo do responsavel pela seçao  do nossaMissao - Andrei  -->
+    <div class="container">
+      <div class="texto_nossa_missao">
+        <div class="titulo_secao">
+          <h2>Nossa <span style="color: #f97316">Missão</span></h2>
+        </div>
+        <div>
+          <p>
+            Sabemos que a mineração é uma área em<br>
+            constante crescimento e evolução, e<br>
+            entendemos que temos as melhores soluções<br>
+            para os seus problemas.<br><br><br>
+            Entre em contato conosco e venha ver ver<br>
+            como podemos te ajudar.
+          </p>
+        </div>
+      </div>
+      <div class="container_imagem"></div>
+    </div>
+  </section>
+  <section id="video_pitch">
+    <!-- aqui fica o codigo do responsavel pela seçao  do pitch com video - Miyuki-->
+    <div class="container">
+      <div class="container_video">
+
+        <iframe class="video" src="https://gifer.com/embed/2dmE"frameBorder="0" allowFullScreen></iframe>
+
+      </div>
+      <div class="texto_video">
+        <div class="titulo_secao">
+          <h2>O <span style="color: #f97316">Cobre</span></h2>
+        </div>
+        <div>
+          <p>
+            O cobre é um elemento químico e metal avermelhado,
+            macio e maleável, conhecido por sua alta condutividade
+            térmica e elétrica. Foi um dos primeiros metais a ser
+            utilizado pelo ser humano, há milhares de anos, e
+            desempenhou um papel crucial no desenvolvimento tecnológico.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulador_financeiro">
+    <div class="container">
+      <h1>Simulador <span>Financeiro</span></h1>
+
+      <div class="div_select">
+        <b>Selecione o tipo de cálculo</b>
+        <select id="select_metodo" class="select_calculo" onchange="escolha()">
+          <option value="1" selected>Receita do período</option>
+          <option value="2">Produção do período</option>
+        </select><br><br>
+      </div>
+
+      <div class="div_receita_producao" id="div_receita">
+        <div class="div_campos">
+          <b>Receita no período <span>*</span></b> <br>
+          <input class="input_simulador" id="input_receitaAnual" value="15900000000" placeholder="Em reais (R$):" type="number"><br><br>
+        </div>
+        <div class="div_campos">
+          <b>Temperatura média na mina <span>*</span></b><br>
+          <input class="input_simulador" id="input_temperatura" value="25" placeholder="Em graus (Cº):" type="number"><br><br>
+        </div>
+      </div>
+
+      <div class="div_receita_producao" id="div_producao" style="display: none;">
+        <div class="div_line">
+          <div>
+            <b>Produção de cobre no período <span>*</span></b><br>
+            <input class="input_simulador" id="input_producao" value="300000" placeholder="Em toneladas:" type="number"><br><br>
+          </div>
+          <div>
+            <b>Custo de extração do cobre <span>*</span></b> <br>
+            <input class="input_simulador" id="input_custo" value="10000" placeholder="Em reais (R$):" type="number"><br><br>
+          </div>
+        </div>
+        <b>Temperatura média na mina <span>*</span></b><br>
+        <input class="input_simulador" id="input_temperatura2" value="25" placeholder="Em graus (Cº):" type="number"><br><br>
+      </div>
+
+      <button onclick="calcular()" class="botao_simulador">Calcular valores</button><br><br>
+
+      <div id="div_mensagem"></div>
+    </div>
+    </div>
+    <div id="popup">
+      <div id="popup_conteudo">
+        <span id="fechar_popup" onclick="fecharPopup()">&times;</span>
+        <h2>Resultado da Simulação</h2>
+        <div class="div_container_resultados">
+          <div id="div_texto_receita_com_sensor" class="div_resultado_simulador">
+            <p id="textoReceitaComSensor"></p>
+          </div>
+          <div id="div_texto_receita_sem_sensor" class="div_resultado_simulador">
+            <p id="textoReceitaSemSensor"></p>
+          </div>
+          <div id="div_texto_deixa_ganhar" class="div_resultado_simulador">
+            <p id="textoDeixaGanhar"></p>
+          </div>
+        </div>
+        <div class="div_descricao_resultado">
+          <p>Caso contrate um sistema de refrigeramento adequado</p>
+        </div>
+        <button class="botao_popup" onclick="fecharPopup()">Fechar</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagrama_solucao">
+    <!-- aqui fica o codigo do responsavel pela seçao  do diagrama_solucao - Leticia -->
+    <div class="container">
+      <div class="titulo_secao">
+        <h2 style="font-size: 32px;">Nossa <span style="color: #f97316">solução</span></h2>
+      </div>
+      <div class="container_diagrama">
+        <img src="assets/img/diagramaVisaoNegocio.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <section class="newsletter">
+      <h2>Fique por dentro de novidades da Terra Sensor</h2>
+      <p>Inscreva-se na nossa newsletter</p>
+      <div class="newsletter_form">
+        <input type="email" placeholder="Seu melhor endereço de e-mail">
+        <button>Inscrever-se</button>
+      </div>
+      <label class="checkbox">
+        <input type="checkbox"> Aceito receber informações de notícias, eventos, etc.
+      </label>
+    </section>
+
+    <div class="footer_content">
+      <div class="footer_col">
+        <div class="logo" style="margin-bottom: 10px; color: white;">
+          <img style="height: 35px; width: 35px;" src="assets/img/logo.png" alt="Logo Termo Tech">
+          <!--trocar pela logo de vdd-->
+          <h3>Termo Tech</h3>
+        </div>
+
+
+        <p>O seu sonho é o nosso projeto, cada detalhe é importante e cada cuidado pode mudar histórias.</p>
+        <p>Está preparado para melhorar seu negócio?</p>
+      </div>
+
+      <div class="footer_col">
+        <h4>Contato</h4>
+        <p><img style="width: 23px; height: 23px;" src="../public/assets/icons/icon_email.png" alt="icon_email">
+          contato@terrasensor.com</p> <!--ficou torto aaaa-->
+        <p><img src="../public/assets/icons/icon_phone.png" alt="icon_fone"> 0800 123 456</p>
+      </div>
+
+      <div class="footer_col">
+        <h4>Soluções</h4>
+        <ul>
+          <li>Medição de temperatura</li>
+          <li>Detecção de gás</li>
+          <li>Sensores de umidade</li>
+          <li>Sonar</li>
+        </ul>
+      </div>
+
+      <div class="footer_col">
+        <h4>Siga-nos nas redes sociais</h4>
+        <div class="sociais">
+          <span>
+            <img src="../public/assets/icons/icon_instagram.png" alt="icon_insta">
+          </span>
+
+          <span>
+            <img src="../public/assets/icons/icon_facebook.png" alt="icon_face">
+          </span>
+
+          <span>
+            <img src="../public/assets/icons/icon_youtube.png" alt="icon_youtube">
+          </span>
+
+          <span>
+            <img src="../public/assets/icons/icon_twitter.png" alt="icon_x">
+          </span>
+
+          <span>
+            <img src="../public/assets/icons/icon_github.png" alt="icon_github">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="copy">
+      © 2025 - Copyright - Terra Sensor - Todos os Direitos Reservados.
+    </div>
+  </footer>
+
+</body>
+
+</html>
+
+<script>
+  // CAROUSSEL
+  var cont = 0
+  function trocarSlide1() {
+    cont = 0
+    slide1.style.display = 'flex';
+    slide2.style.display = 'none';
+    slide3.style.display = 'none';
+
+
+    btn1.style.backgroundColor = '#F5751A';
+    btn2.style.backgroundColor = '#aaaaaa';
+    btn3.style.backgroundColor = '#aaaaaa';
+  }
+
+  function trocarSlide2() {
+    cont = 1
+
+    slide1.style.display = 'none';
+    slide2.style.display = 'flex';
+    slide3.style.display = 'none';
+
+    btn1.style.backgroundColor = '#aaaaaa';
+    btn2.style.backgroundColor = '#F5751A';
+    btn3.style.backgroundColor = '#aaaaaa';
+
+  }
+  function trocarSlide3() {
+    cont = 2
+    slide1.style.display = 'none';
+    slide2.style.display = 'none';
+    slide3.style.display = 'flex';
+
+
+    btn1.style.backgroundColor = '#aaaaaa';
+    btn2.style.backgroundColor = '#aaaaaa';
+    btn3.style.backgroundColor = '#F5751A';
+  }
+
+
+  /* Método que chama a função proximaImagem a cada 3 segundos
+    
+    setInterval(function () {
+    proximaImagem();
+    }, 3000);
+  */
+
+  function proximaImagem() {
+    ++cont
+    if (cont >= 3) {
+      cont = 0
+    }
+    if (cont == 0) {
+      trocarSlide1()
+
+    } else if (cont == 1) {
+      trocarSlide2()
+
+    } else if (cont == 2) {
+      trocarSlide3()
+    }
+  }
+
+
+
+  // SIMULADOR FINANCEIRO
+
+  var texto_receita_com_sensor = ''
+  var texto_deixa_de_ganhar = ''
+  var texto_receita_sem_sensor = ''
+  var metodo_escolhido = ''
+  function escolha() {
+    if (select_metodo.value == '1') {
+      div_receita.style.display = 'flex';
+      div_producao.style.display = 'none';
+    } else {
+      div_producao.style.display = 'flex';
+      div_receita.style.display = 'none';
+    }
+  }
+
+  function transformarReais() {
+    var receita = Number(input_receitaAnual.value);
+
+  }
+  function calcular() {
+    metodo_escolhido = select_metodo.value;
+
+    var temperatura = Number(input_temperatura.value);
+    var temperatura2 = Number(input_temperatura2.value);
+
+
+    if (metodo_escolhido == '1') {
+      temperatura2 = 0;
+      var receita = Number(input_receitaAnual.value);
+      if (receita == 0) {
+        alert('Preencha todos os campos.');
+      }
+       else if (receita <= 0) {
+        alert('Insira números positivos em receita!')
+      } else if (temperatura <= 10) {
+        alert('Intervalo de temperatura abaixo de 10, insira um valor maior que 20!')
+      }else {
+        var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
+        var ganhoExtra = receitaLiquidaValor - receita;
+        texto_receita_com_sensor = ''
+        texto_deixa_de_ganhar = ''
+        texto_receita_sem_sensor = ''
+        if (ganhoExtra <= 0) {
+          ganhoExtra = 0
+        }
+        texto_receita_com_sensor = `
+          Com o monitoramento, sua receita líquida será de até: <br><br>
+          <span class="span_resultado">${receitaLiquidaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        `;
+        texto_deixa_de_ganhar = `
+          Nesse período você poderá deixar de perder até: <br><br>
+          <span class="span_resultado">${ganhoExtra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        `;
+        abrirPopup();
+      }
+    } else if (metodo_escolhido == '2') {
+      temperatura = 0;
+      var producao = Number(input_producao.value);
+      var custo = Number(input_custo.value);
+      if (producao == 0 || custo == 0) {
+        alert('Preencha todos os campos.');
+      }
+       else if (producao <= 0 || custo <= 0) {
+        alert('Insira números positivos em toneladas ou custo!')
+      } else if (temperatura2 <= 10) {
+        alert('Intervalo de temperatura abaixo de 10, insira um valor maior que 20!')
+      } else {
+        var receitaBruta = producao * 53500;
+        var receitaLiquida = receitaBruta - (custo * producao);
+        var receitaSemSensor = receitaLiquida * (1 - ((temperatura2 - 20) * 0.025));
+        var perda = receitaLiquida - receitaSemSensor;
+        if (perda <= 0) {
+          perda = 0
+        }
+        if (temperatura2 >= 10 && temperatura2 < 20) {
+          receitaSemSensor = receitaLiquida
+        }
+        texto_receita_com_sensor = ''
+        texto_receita_sem_sensor = ''
+        texto_deixa_de_ganhar = ''
+
+        texto_receita_com_sensor = `Com o sensor, sua receita líquida será de até: <br><br>
+          <span class="span_resultado">${receitaLiquida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        `
+        texto_receita_sem_sensor = ` 
+          Sem o sensor, seria de até: <br><br>
+          <span class="span_resultado">${receitaSemSensor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        `
+        texto_deixa_de_ganhar = `
+          Nesse período você poderá deixar de perder até: <br><br>
+          <span class="span_resultado">${perda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        `
+        abrirPopup();
+      }
+    }
+
+  }
+
+  function abrirPopup() {
+    console.log(metodo_escolhido);
+    if (metodo_escolhido == '1') {
+
+      textoReceitaComSensor.innerHTML = `${texto_receita_com_sensor}`
+      textoDeixaGanhar.innerHTML = `${texto_deixa_de_ganhar}`
+      div_texto_receita_sem_sensor.style.display = 'none'
+
+    } else {
+      div_texto_receita_sem_sensor.style.display = 'flex'
+      textoReceitaComSensor.innerHTML = `${texto_receita_com_sensor}`
+      textoReceitaSemSensor.innerHTML = `${texto_receita_sem_sensor}`
+      textoDeixaGanhar.innerHTML = `${texto_deixa_de_ganhar}`
+
+    }
+    popup.style.display = 'flex';
+  }
+
+  function fecharPopup() {
+    popup.style.display = 'none';
+  }
+</script>

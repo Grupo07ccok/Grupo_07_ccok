@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro: Usuário</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <div class="pagina_login" id="id_pagina_login">
+        <div class="card_erro" id="cardErro">
+            <img id="imagem_erro" src="" alt="">
+            <span id="mensagem_erro"></span>
+        </div>
+        <!-- LATERAL IMAGEM (50%) -->
+        <section class="lateral_imagem" id="id_lateral_imagem">
+            <div class="lateral_imagem_interna">
+                <img src="/assets/img/img_page_cadastro.png" class="imagem_cadastro" alt="">
+            </div>
+        </section>
+
+        <!-- LATERAL FORM (50%) -->
+        <section class="lateral_formulario">
+            <div class="lateral_formulario_interna">
+                <h1 class="titulo_login">Cadastro</h1>
+
+                <div class="formulario_login">
+                    <label class="rotulo_login" for="nome_login">Nome</label>
+                    <input class="campo_login" value="Julia Araripe" id="nome_cadastro" type="nome"
+                        placeholder="Insira seu nome:" required>
+
+                    <label class="rotulo_login" for="telefone_cadastro">Telefone</label>
+                    <input class="campo_login" value="11902289521" id="telefone_cadastro" type="tel"
+                        placeholder="Insira seu telefone:" required>
+
+                    <label class="rotulo_login" for="email_cadastro">E-mail</label>
+                    <input class="campo_login" value="julia@gmail.com" id="email_cadastro" type="email"
+                        placeholder="email@email.com" required>
+
+                    <label class="rotulo_login" for="senha_cadastro">Senha</label>
+                    <input class="campo_login" id="senha_cadastro" value="Pedro.1005" type="password"
+                        placeholder="********" required oninput="verificar()">
+                    <div class="checks_cadastro" id="div_checks_cadastro" style="display: none;">
+                        <div class="check">
+                            Letra maiúscula
+                            <div class="check_img"><img id="check_upper" src="/assets/icons/icons-cancelar.png" alt="">
+                            </div>
+                        </div>
+                        <div class="check">
+                            Letra minúscula
+                            <div class="check_img"><img id="check_lower" src="/assets/icons/icons-cancelar.png" alt="">
+                            </div>
+                        </div>
+                        <div class="check">
+                            Número
+                            <div class="check_img"><img id="check_num" src="/assets/icons/icons-cancelar.png" alt="">
+                            </div>
+                        </div>
+                        <div class="check">
+                            Caractere especial
+                            <div class="check_img"><img id="check_especial" src="/assets/icons/icons-cancelar.png"
+                                    alt=""></div>
+                        </div>
+                        <div class="check">
+                            8 ou mais caracteres
+                            <div class="check_img"><img id="check_tamanho" src="/assets/icons/icons-cancelar.png"
+                                    alt=""></div>
+                        </div>
+
+                    </div>
+
+                    <label class="rotulo_login" for="confirma_cadastro">Confirme sua senha</label>
+                    <input class="campo_login" id="confirma_cadastro" value="Pedro.1005" type="password"
+                        placeholder="********" required>
+
+                    <label class="rotulo_login" for="token_cadastro">Confirme o token da empresa</label>
+                    <input class="campo_login" id="token_cadastro" type="text" placeholder="Insira o token da empresa:"
+                        required>
+
+                    <!-- <button type="submit" class="botao_formulario"  -->
+                    <div class="botoes_cadastro">
+                        <a id="ir_login" href="#"><button class="botao_padrao" onclick="cadastrar_com_token()">Cadastrar
+                                com
+                                token</button></a>
+                        <a id="ir_cadastro2" href="#"><button class="botao_padrao" onclick="cadastrar()">Continuar e
+                                Cadastrar empresa</button></a>
+                    </div>
+                </div>
+
+                <hr class="separador_login">
+
+                <div class="redes_login">
+                    <button class="botao_social google_login">
+                        <img src="assets/icons/icon-google.png" alt="Google">
+                        Continuar com o Google
+                    </button>
+
+                    <button class="botao_social apple_login">
+                        <img src="assets/icons/icon-apple.png" alt="Apple">
+                        Continuar com o Apple ID
+                    </button>
+                </div>
+
+                <p class="links_login">
+                    Já possui uma conta? <a class="link_login" href="login.html">Faça login</a>
+                </p>
+                <p class="links_login">
+                    <a class="link_login" href="#">Esqueci minha senha</a>
+                </p>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    var criteriosAtendidos = 0;
+
+    var tokenValido = '30/10/2025'; // TOKEN PARA VALIDAR A EMPRESA
+
+    function verificar() {
+        id_pagina_login.style.minHeight = "130vh";
+        senha = senha_cadastro.value;
+        var tamanho_senha = senha.length;
+        var senha_minuscula = senha.toLowerCase();
+        var senha_maiuscula = senha.toUpperCase();
+        var crit1 = 0;
+        var crit2 = 0;
+        var crit3 = 0;
+        var crit4 = 0;
+        var crit5 = 0;
+
+
+        div_checks_cadastro.style.display = 'flex';
+
+        // Tem letra maiúscula
+        check_upper.src = '/assets/icons/icons-cancelar.png';
+        crit1 = 0;
+
+        if (senha_minuscula != senha) {
+            crit1 = 1;
+            check_upper.src = '/assets/icons/icons-ok.png';
+        }
+
+        // Tem letra minúscula
+        check_lower.src = '/assets/icons/icons-cancelar.png';
+        crit2 = 0;
+
+        if (senha_maiuscula != senha) {
+            crit2 = 1;
+            check_lower.src = '/assets/icons/icons-ok.png';
+        }
+
+        // Tem número
+        var listaNum = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        var temNum = [];
+
+        check_num.src = '/assets/icons/icons-cancelar.png';
+        crit3 = 0;
+
+        if (listaNum.length > 0) {
+            for (var i = 0; i < senha.length; i++) {
+                if (listaNum.includes(senha[i])) {
+                    temNum.push(senha[i]);
+                }
+
+                if (temNum.length > 0) {
+                    crit3 = 1;
+                    check_num.src = '/assets/icons/icons-ok.png';
+                }
+            }
+        }
+
+        // Tem caractere especial
+        var listaEspecial = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', ';', ':', '?', '/', '`', '~', ',', '.', '[', ']', '|', '¨'];
+        var temEspecial = [];
+
+        check_especial.src = '/assets/icons/icons-cancelar.png';
+        crit4 = 0;
+
+        if (listaEspecial.length > 0) {
+            for (var i = 0; i < senha.length; i++) {
+                if (listaEspecial.includes(senha[i])) {
+                    temEspecial.push(senha[i]);
+                }
+
+                if (temEspecial.length > 0) {
+                    crit4 = 1;
+                    check_especial.src = '/assets/icons/icons-ok.png';
+                }
+            }
+        }
+
+        // Tem pelo menos 8 caracteres
+        check_tamanho.src = '/assets/icons/icons-cancelar.png';
+        crit5 = 0;
+
+        if (tamanho_senha >= 8) {
+            crit5 = 1;
+            check_tamanho.src = '/assets/icons/icons-ok.png';
+        }
+
+        criteriosAtendidos = crit1 + crit2 + crit3 + crit4 + crit5
+
+    }
+
+    function cadastrar_com_token() {
+        // Inputs:
+        var nomeUsuario = nome_cadastro.value;
+        var telefoneUsuario = telefone_cadastro.value;
+        var emailUsuario = email_cadastro.value;
+        var senhaUsuario = senha_cadastro.value;
+        var confirmaUsuario = confirma_cadastro.value;
+        var tokenUsuario = token_cadastro.value;
+        var mensagemErro = ""
+        if (
+            nomeUsuario == "" ||
+            telefoneUsuario == "" ||
+            emailUsuario == "" ||
+            senhaUsuario == "" ||
+            confirmaUsuario == "" ||
+            tokenUsuario == ""
+        ) {
+            cardErro.style.display = "flex";
+            imagem_erro.src = "/assets/icons/img_cancel.png"
+            setTimeout(sumirMensagem, 3500)
+
+            mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
+            return false;
+        } else if (nomeUsuario == "" || telefoneUsuario == "" || emailUsuario == "" || senhaUsuario == "" || confirmaUsuario == "") {
+            mensagem_erro.innerHTML = "Todos os campos (exceto o token) devem estar preenchidos"
+
+            cardErro.style.display = "flex";
+            imagem_erro.src = "/assets/icons/img_cancel.png"
+            setTimeout(sumirMensagem, 3500)
+
+
+        } else if (!emailUsuario.includes('@') || (!emailUsuario.endsWith('.com') && !emailUsuario.endsWith('.com.br'))) {
+            mensagem_erro.innerHTML = "insira um email válido"
+
+            cardErro.style.display = "flex";
+            imagem_erro.src = "/assets/icons/img_cancel.png"
+            setTimeout(sumirMensagem, 3500)
+
+
+        } else if (criteriosAtendidos < 5) {
+            mensagem_erro.innerHTML = "Senha deve conter todos os requisitos"
+
+            cardErro.style.display = "flex";
+            imagem_erro.src = "/assets/icons/img_cancel.png"
+            setTimeout(sumirMensagem, 3500)
+
+
+        } else if (senhaUsuario != confirmaUsuario) {
+            mensagem_erro.innerHTML = "A senha e a confimação devem ser iguais"
+
+            cardErro.style.display = "flex";
+            imagem_erro.src = "/assets/icons/img_cancel.png"
+            setTimeout(sumirMensagem, 3500)
+
+
+        } else {
+            fetch(`/empresas/buscar-token`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    tokenServer: tokenUsuario,
+                })
+            })
+                .then(response => response.json())
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+                    console.log(resposta.status);
+
+                    if (resposta.length > 0) {
+                        var empresaCadastro = resposta[0]
+                        var fkEmpresa = empresaCadastro.idEmpresa
+                        cadastrar_usuario_banco_de_dados(nomeUsuario, telefoneUsuario, emailUsuario, senhaUsuario, fkEmpresa)
+                    } else {
+                        mensagem_erro.innerHTML = "Não existe uma empresa cadastrada com esse token!"
+
+                        cardErro.style.display = "flex";
+                        imagem_erro.src = "/assets/icons/img_cancel.png"
+
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
+        }
+    }
+    function cadastrar_usuario_banco_de_dados(nome, telefone, email, senha, fkEmpresa) {
+        fetch(`/usuarios/cadastrar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                telefoneServer: telefone,
+                emailServer: email,
+                senhaServer: senha,
+                fkEmpresaServer: fkEmpresa
+            })
+        })
+            .then(response => response.json())
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                imagem_erro.src = "/assets/icons/img_aceitar.png"
+                mensagem_erro.innerHTML = "Usuário cadastrado com sucesso!"
+                cardErro.style.display = "flex"
+                setTimeout(function () {
+                    window.location = 'login.html'
+                }, 1500);
+            })
+        return false;
+    }
+
+    function cadastrar() {
+        // Inputs:
+        var nome = nome_cadastro.value;
+        var telefone = telefone_cadastro.value;
+        var email = email_cadastro.value;
+        var senha = senha_cadastro.value;
+        var confirma = confirma_cadastro.value;
+        var token = token_cadastro.value;
+        // Verificando se há algum campo em branco
+
+
+    }
+
+
+    // Array para armazenar empresas cadastradas para validação de código de ativação 
+    let listaEmpresasCadastradas = [];
+
+    // Listando empresas cadastradas 
+    function listar() {
+        fetch("/empresas/listar", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((empresas) => {
+                    empresas.forEach((empresa) => {
+                        listaEmpresasCadastradas.push(empresa);
+
+                        console.log("listaEmpresasCadastradas")
+                        console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+                    });
+                });
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+
+</script>

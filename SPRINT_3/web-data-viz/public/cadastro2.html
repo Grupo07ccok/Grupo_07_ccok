@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro: Empresa</title>
+    <link rel="stylesheet" href="../public/styles/style.css">
+</head>
+
+<body>
+    <div class="pagina_login">
+        <!-- LATERAL IMAGEM (50%) -->
+        <section class="lateral_imagem">
+            <div class="lateral_imagem_interna">
+                <img src="../public/assets/img/img_page_cadastro.png" class="imagem_cadastro" alt="">
+            </div>
+        </section>
+
+        <!-- LATERAL FORM (50%) -->
+        <section class="lateral_formulario">
+            <div class="lateral_formulario_interna">
+                <h1 class="titulo_login">Dados da empresa</h1>
+
+                <div class="formulario_login">
+                    <div class="line_campos">
+                        <div class="container_inputs">
+                            <label class="rotulo_login" for="nome_fantasia_login">Nome fantasia</label>
+                            <input class="campo_login" id="nome_fantasia_login" type="nome"
+                                placeholder="Insira o nome fantasia:" required>
+                        </div>
+                        <div class="container_inputs">
+                            <label class="rotulo_login" for="razao_social_login">Razão social</label>
+                            <input class="campo_login" id="razao_social_login" type="razao_social"
+                                placeholder="Insira a razão social:" required>
+                        </div>
+                    </div>
+
+                    <label class="rotulo_login" for="cnpj_login">CNPJ</label>
+                    <input class="campo_login" id="cnpj_login" type="nome" placeholder="Insira o CNPJ:" required>
+
+                    <div class="line_campos">
+                        <div class="container_inputs">
+                            <label class="rotulo_login" for="cep_login">CEP</label>
+                            <input class="campo_login" id="cep_cadastro" type="nome" placeholder="Insira o CEP:"
+                                required>
+                        </div>
+                        <div class="container_inputs">
+                            <label class="rotulo_login" for="numero_cadastro">Número</label>
+                            <input class="campo_login" id="numero_cadastro" type="text" placeholder="Insira o número:"
+                                required>
+                        </div>
+                    </div>
+
+                    <label class="rotulo_login" for="senha_cadastro">Complemento</label>
+                    <input class="campo_login" id="senha_cadastro" type="text" placeholder="Insira o complemento:"
+                        required oninput="verificar()">
+                    <div id="msg_forca"></div>
+
+                    <label class="rotulo_login" for="confirma_cadastro">Email Responsável</label>
+                    <input class="campo_login" id="confirma_cadastro" type="text"
+                        placeholder="Insira o email do responsável:" required>
+
+                    <!-- <button type="submit" class="botao_formulario"  -->
+                    <button class="botao_padrao" onclick="cadastrar()"><a id="ir_login" href="#">Cadastrar</a></button>
+                </div>
+
+                <hr class="separador_login">
+
+
+                <p class="links_login">
+                    Já possui uma conta? <a class="link_login" href="login.html">Faça login</a>
+                </p>
+                <p class="links_login">
+                    <a class="link_login" href="#">Esqueci minha senha</a>
+                </p>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Guarda em variável global:
+    var guarda_nomeFantasia = [];
+    var guarda_razaoSocial = [];
+    var guarda_cnpj = [];
+    var guarda_cep = [];
+    var guarda_num = [];
+    var guarda_complemento = [];
+    var guarda_emalResponsavel = [];
+
+    function verificar() {
+        senha = senha_cadastro.value;
+        var tamanho_senha = senha.length;
+        var senha_sem_especial = senha.replaceAll(/[^a-zA-Z0-9]/g, ""); //troca todos os caracteres que não são números ou letras
+        var tamanho_senha_sem_especial = senha_sem_especial.length;
+        var senha_minuscula = senha.toLowerCase();
+        var senha_maiuscula = senha.toUpperCase();
+        var crit1 = 0;
+        var crit2 = 0;
+        var crit3 = 0;
+        var criteriosAtendidos = 0
+
+        if (tamanho_senha >= 8) { // tem pelo menos 8 caracteres
+            ++crit1;
+        }
+
+        if (senha_minuscula != senha && senha_maiuscula != senha) { // tem letras maiúsculas e minúculas
+            ++crit2;
+        }
+
+        if (tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
+            ++crit3;
+        }
+
+        if (!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')) {
+        } else {
+            alert(`tem número`)
+        }
+
+        criteriosAtendidos = crit1 + crit2 + crit3;
+
+        if (criteriosAtendidos == 0) {
+            forca_senha = `Insegura`
+        } else if (criteriosAtendidos == 1) {
+            forca_senha = `Fraca`
+        } else if (criteriosAtendidos == 2) {
+            forca_senha = `Média`
+        } else {
+            forca_senha = `Forte`
+        }
+
+        msg_forca.innerHTML = `${forca_senha}`
+    }
+
+    function cadastrar() {
+        // Inputs:
+        var nome = nome_cadastro.value;
+        var email = email_cadastro.value;
+        var confirma = confirma_cadastro.value;
+
+        if (nome != "") {
+            guarda_nome = nome;
+        }
+
+        if (email.includes('@') && (email.endsWith('.com') || email.endsWith('.com.br'))) {
+            guarda_email = email;
+        }
+
+        if (forca_senha == 'forte') {
+            guarda_senha = senha;
+        }
+
+        if (senha == confirma) {
+            guarda_confirma = confirma;
+        }
+
+        ir_login.href = "login.html"
+    }
+</script>
+
+
+
+<!-- function verificarSenha() {
+    senha = (senha_login.value);
+    var senhaLower = senha.toLowerCase();
+    if (senha.length < 8) {
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 8 caracteres.`
+    } else if (senha.toLowerCase() == senha) {
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra maiúscula.`
+    } else if (senha.toUpperCase() == senha) {
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra minúscula.`
+    } else if (!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')) {
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 número.`
+    } else if (!senhaLower.includes('a') && !senhaLower.includes('b') && !senhaLower.includes('b') && !senhaLower.includes('c') && !senhaLower.includes('d') && !senhaLower.includes('e') && !senhaLower.includes('f') && !senhaLower.includes('g') && !senhaLower.includes('h') && !senhaLower.includes('i') && !senhaLower.includes('j') && !senhaLower.includes('k') && !senhaLower.includes('l') && !senhaLower.includes('m') && !senhaLower.includes('n') && !senhaLower.includes('o') && !senhaLower.includes('p') && !senhaLower.includes('q') && !senhaLower.includes('r') && !senhaLower.includes('s') && !senhaLower.includes('t') && !senhaLower.includes('u') && !senhaLower.includes('v') && !senhaLower.includes('w') && !senhaLower.includes('x') && !senhaLower.includes('y') && !senhaLower.includes('z')) {
+      div_mensagemSenha.innerHTML = `Digite uma senha que tenha no mínimo 1 letra.`
+    } else {
+      div_mensagemSenha.innerHTML = `Senha está com um nível forte.`
+    }
+  } -->
