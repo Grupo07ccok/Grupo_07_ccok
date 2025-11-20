@@ -245,4 +245,73 @@ WHERE
 ORDER BY diaSemana
 LIMIT 7;
 
+-- VIEW PARA PEGAR A KPI DE SENSOR COM MAIS ALERTAS
+
+ 
+CREATE VIEW vwSensorMaisAlertas AS            
+SELECT fkSensor as Sensor,
+COUNT(*) AS total_alertas
+FROM coletaDados
+WHERE alerta = 1
+GROUP BY Sensor
+ORDER BY total_alertas DESC
+LIMIT 1;
+   
+-- VIEW PARA PEGAR A KPI DE QTD. DE ALERTAS DO SENSOR ESCOLHIDO   
+   
+CREATE VIEW vwTotalAlertasSensorEscolhido AS            
+SELECT fkSensor as Sensor,
+COUNT(*) AS total_alertas
+FROM coletaDados
+WHERE alerta = 1
+GROUP BY Sensor;
+
+                        
+-- VIEW PARA MOSTRAR O GRÁFICO DA TEMPERATURA ATUAL DE TODOS OS SENSORES   
+  
+CREATE OR REPLACE VIEW vwTemperaturaAtual AS
+SELECT 
+    c.fkSensor AS Sensor,
+    c.temperatura AS Temperatura,
+    c.dataHoraColeta
+FROM coletaDados c
+JOIN (
+    SELECT fkSensor, MAX(dataHoraColeta) AS ultimaColeta
+    FROM coletaDados
+    GROUP BY fkSensor
+) AS ult
+    ON c.fkSensor = ult.fkSensor
+    AND c.dataHoraColeta = ult.ultimaColeta
+ORDER BY Sensor;
+
         
+ -- VIEW PARA MOSTRAR O GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
+ 
+CREATE or replace VIEW vwProducaoTemperatura AS
+SELECT fkSensor as Sensor,
+temperatura AS Temperatura,
+(100 - ((temperatura - 20) * 2.5)) AS Producao,
+HOUR(dataHoraColeta)
+FROM coletaDados;
+
+-- SELECT SENSOR COM MAIS ALERTAS
+        
+SELECT * FROM vwSensorMaisAlertas;
+
+-- SELECT QTD. DE ALERTAS DO SENSOR ESCOLHIDO
+
+SELECT * FROM vwTotalAlertasSensorEscolhido;
+WHERE Sensor = ${fkSensor};
+
+-- SELECT GRÁFICO DA TEMPERATURA ATUAL DE TODOS OS SENSORES
+
+select * from vwTemperaturaAtual;
+
+-- SELECT GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
+
+select * from vwProducaoTemperatura
+WHERE Sensor =  ${fkSensor};
+
+
+
+
