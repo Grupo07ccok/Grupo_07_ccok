@@ -188,9 +188,7 @@ SELECT * FROM vwTemperaturaMedia WHERE idMina = 300;
 CREATE OR REPLACE VIEW vwProdutividadeMedia AS
     SELECT 
 		mina.idMina AS idMina,
-        CONCAT(ROUND(AVG(100 - ((coletaDados.temperatura - 20) * 2.5)),
-                        1),
-                '%') AS kpiProdutividadeAtual
+        CONCAT(ROUND(AVG(100 - ((coletaDados.temperatura - 20) * 2.5)), 1), '%') AS kpiProdutividadeAtual
     FROM
         coletaDados
             JOIN
@@ -201,7 +199,6 @@ CREATE OR REPLACE VIEW vwProdutividadeMedia AS
 
 
 -- SELECT PARA FAZER NA API SUBISTITUINDO O 300 PELO ID QUE VIER DO FRONT-END
-
 SELECT * FROM vwProdutividadeMedia WHERE idMina = 300;
 
 CREATE OR REPLACE VIEW vwGraficoQteAlertasSensores AS 
@@ -220,3 +217,32 @@ CREATE OR REPLACE VIEW vwGraficoQteAlertasSensores AS
         
 -- SELECT PARA COLOCAR NA API PARA PUXAR AS INFORMAÇÕES PRO GRAFICO DE Quantidade de alertas de todos os sensores
 SELECT * FROM vwGraficoQteAlertasSensores WHERE idMina = 300;
+
+CREATE OR REPLACE VIEW vwGraficoMinMedMax AS 
+	SELECT
+		mina.idMina,
+		sensor.idSensor, 
+        DAYNAME(dataHoraColeta) AS diaSemana,
+		MAX(coletadados.temperatura) AS temperaturaMaxima,
+		ROUND(AVG(coletadados.temperatura), 1) AS temperaturaMedia,
+		MIN(coletadados.temperatura) AS temperaturaMinima
+        FROM
+        coletaDados
+            JOIN
+        sensor ON coletadados.fkSensor = sensor.idSensor
+        JOIN
+        mina ON sensor.fkMina = mina.idMina
+        
+        GROUP BY sensor.idSensor, diaSemana;
+        
+-- SELECT PARA O GRÁFICO DE MÁXIMA, MÍNIMA E MÉDIA, FAZER DESSA FORMA (ACREDITO QUE ESTEJA CERTO)
+SELECT 
+    *
+FROM
+    vwGraficoMinMedMax
+WHERE
+    idMina = 300
+ORDER BY diaSemana
+LIMIT 7;
+
+        
