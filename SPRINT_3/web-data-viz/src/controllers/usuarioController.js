@@ -20,18 +20,18 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
+                        aquarioModel.buscarMinaPorEmpresa(resultadoAutenticar[0].empresaId)
+                            .then((resultadoMina) => {
+                                if (resultadoMina.length > 0) {
                                     res.json({
                                         idUsuario: resultadoAutenticar[0].idUsuario,
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
-                                        aquarios: resultadoAquarios
+                                        mina: resultadoMina
                                     });
                                 } else {
-                                    res.status(204).json({ aquarios: [] });
+                                    res.status(204).json({ mina: [] });
                                 }
                             })
                     } else if (resultadoAutenticar.length == 0) {
