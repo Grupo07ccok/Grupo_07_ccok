@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="/styles/global.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/sessao.js"></script>
+
 </head>
 
 <body>
@@ -28,7 +30,7 @@
 
           <div id="div_mensagemSenha"></div>
 
-          <a id="ir_dash" href="#"><button class="botao_padrao" onclick="verificar()">Entrar</button></a>
+          <a id="ir_dash" href="#"><button class="botao_padrao" onclick="entrar()">Entrar</button></a>
         </div>
 
         <hr class="separador_login">
@@ -93,19 +95,19 @@
 
 
   function entrar() {
-    aguardar();
+    // aguardar();
 
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
+    var emailVar = email_login.value;
+    var senhaVar = senha_login.value;
 
     if (emailVar == "" || senhaVar == "") {
-      cardErro.style.display = "block"
+      // cardErro.style.display = "block"
       mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
       finalizarAguardar();
       return false;
     }
     else {
-      setInterval(sumirMensagem, 5000)
+      // setInterval(sumirMensagem, 5000)
     }
 
     console.log("FORM LOGIN: ", emailVar);
@@ -131,7 +133,7 @@
           console.log(JSON.stringify(json));
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nome;
-          sessionStorage.ID_USUARIO = json.id;
+          sessionStorage.ID_USUARIO = json.idUsuario;
           sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
           setTimeout(function () {
@@ -146,7 +148,7 @@
 
         resposta.text().then(texto => {
           console.error(texto);
-          finalizarAguardar(texto);
+          // finalizarAguardar(texto);
         });
       }
 
@@ -157,9 +159,9 @@
     return false;
   }
 
-  function sumirMensagem() {
-    cardErro.style.display = "none"
-  }
+  // function sumirMensagem() {
+  //   cardErro.style.display = "none"
+  // }
 
 
 </script>
