@@ -70,30 +70,6 @@
 
 <script>
 
-  var senha = '';
-  var armazenarEmail = '';
-  var mockadoEmail = 'julia@gmail.com';
-  var mockadoSenha = 'Julia.123';
-
-  function verificar() {
-    var email = (email_login.value);
-    senha = (senha_login.value);
-
-    if (email == mockadoEmail && senha == mockadoSenha) {
-      alert('Login realizado com sucesso!')
-      ir_dash.href = "dashboard.html"
-      // window.location.href = 'dashboard.html';
-      // console.log(window.location);
-
-    } else {
-      alert('Erro ao digitar o email ou senha, tente novamente.')
-    }
-  }
-
-
-
-
-
   function entrar() {
     // aguardar();
 
@@ -107,56 +83,55 @@
       return false;
     }
     else {
-      // setInterval(sumirMensagem, 5000)
+      console.log("FORM LOGIN: ", emailVar);
+      console.log("FORM SENHA: ", senhaVar);
+  
+      fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          emailServer: emailVar,
+          senhaServer: senhaVar
+        })
+      }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+        console.log(resposta);
+        
+        if (resposta.ok) {
+          console.log(resposta);
+  
+          resposta.json().then(json => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.EMAIL_USUARIO = json[0].email;
+            sessionStorage.NOME_USUARIO = json[0].nome;
+            sessionStorage.ID_USUARIO = json[0].idUsuario;
+            sessionStorage.ID_EMPRESA = json[0].empresaId;
+  
+            setTimeout(function () {
+              window.location = "tela_minas.html";
+            }, 1000); // apenas para exibir o loading
+  
+          });
+        } else {
+  
+          console.log("Houve um erro ao tentar realizar o login!");
+  
+          resposta.text().then(texto => {
+            console.error(texto);
+            // finalizarAguardar(texto);
+          });
+        }
+  
+      }).catch(function (erro) {
+        console.log(erro);
+      })
+  
+      return false;
     }
 
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
-
-    fetch("/usuarios/autenticar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        emailServer: emailVar,
-        senhaServer: senhaVar
-      })
-    }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-          sessionStorage.EMAIL_USUARIO = json.email;
-          sessionStorage.NOME_USUARIO = json.nome;
-          sessionStorage.ID_USUARIO = json.idUsuario;
-          sessionStorage.MINA = JSON.stringify(json.mina)
-
-          setTimeout(function () {
-            window.location = "./dashboard.html";
-          }, 1000); // apenas para exibir o loading
-
-        });
-
-      } else {
-
-        console.log("Houve um erro ao tentar realizar o login!");
-
-        resposta.text().then(texto => {
-          console.error(texto);
-          // finalizarAguardar(texto);
-        });
-      }
-
-    }).catch(function (erro) {
-      console.log(erro);
-    })
-
-    return false;
   }
 
   // function sumirMensagem() {

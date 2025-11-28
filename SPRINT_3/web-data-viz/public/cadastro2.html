@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro: Empresa</title>
-    <link rel="stylesheet" href="../public/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         <!-- LATERAL IMAGEM (50%) -->
         <section class="lateral_imagem">
             <div class="lateral_imagem_interna">
-                <img src="../public/assets/img/img_page_cadastro.png" class="imagem_cadastro" alt="">
+                <img src="assets/img/img_page_cadastro.png" class="imagem_cadastro" alt="">
             </div>
         </section>
 
@@ -25,44 +25,43 @@
                 <div class="formulario_login">
                     <div class="line_campos">
                         <div class="container_inputs">
-                            <label class="rotulo_login" for="nome_fantasia_login">Nome fantasia</label>
-                            <input class="campo_login" id="nome_fantasia_login" type="nome"
+                            <label class="rotulo_login" for="input_nome_fantasia">Nome fantasia</label>
+                            <input class="campo_login" id="input_nome_fantasia" type="nome"
                                 placeholder="Insira o nome fantasia:" required>
                         </div>
                         <div class="container_inputs">
-                            <label class="rotulo_login" for="razao_social_login">Razão social</label>
-                            <input class="campo_login" id="razao_social_login" type="razao_social"
+                            <label class="rotulo_login" for="input_razao_social">Razão social</label>
+                            <input class="campo_login" id="input_razao_social" type="razao_social"
                                 placeholder="Insira a razão social:" required>
                         </div>
                     </div>
 
-                    <label class="rotulo_login" for="cnpj_login">CNPJ</label>
-                    <input class="campo_login" id="cnpj_login" type="nome" placeholder="Insira o CNPJ:" required>
+                    <label class="rotulo_login" for="input_cnpj">CNPJ</label>
+                    <input class="campo_login" id="input_cnpj" type="nome" placeholder="Insira o CNPJ:" required>
 
                     <div class="line_campos">
                         <div class="container_inputs">
-                            <label class="rotulo_login" for="cep_login">CEP</label>
-                            <input class="campo_login" id="cep_cadastro" type="nome" placeholder="Insira o CEP:"
-                                required>
+                            <label class="rotulo_login" for="input_cep">CEP</label>
+                            <input class="campo_login" id="input_cep" type="nome" placeholder="Insira o CEP:" required>
                         </div>
                         <div class="container_inputs">
-                            <label class="rotulo_login" for="numero_cadastro">Número</label>
-                            <input class="campo_login" id="numero_cadastro" type="text" placeholder="Insira o número:"
+                            <label class="rotulo_login" for="input_numero">Número</label>
+                            <input class="campo_login" id="input_numero" type="text" placeholder="Insira o número:"
                                 required>
                         </div>
                     </div>
 
-                    <label class="rotulo_login" for="senha_cadastro">Complemento</label>
-                    <input class="campo_login" id="senha_cadastro" type="text" placeholder="Insira o complemento:"
-                        required oninput="verificar()">
-                    <div id="msg_forca"></div>
+                    <label class="rotulo_login" for="input_complemento">Complemento</label>
+                    <input class="campo_login" id="input_complemento" type="text" placeholder="Insira o complemento:"
+                        required>
 
-                    <label class="rotulo_login" for="confirma_cadastro">Email Responsável</label>
-                    <input class="campo_login" id="confirma_cadastro" type="text"
-                        placeholder="Insira o email do responsável:" required>
+                    <label class="rotulo_login" for="input_email">Email Responsável</label>
+                    <input class="campo_login" id="input_email" type="text" placeholder="Insira o email do responsável:"
+                        required>
 
                     <!-- <button type="submit" class="botao_formulario"  -->
-                    <button class="botao_padrao" onclick="cadastrar()"><a id="ir_login" href="#">Cadastrar</a></button>
+                    <button class="botao_padrao" onclick="listar_empresa()"><a id="ir_login"
+                            href="#">Cadastrar</a></button>
                 </div>
 
                 <hr class="separador_login">
@@ -78,87 +77,107 @@
         </section>
 
     </div>
+    <div class="card_erro" id="cardErro">
+        <img id="imagem_erro" src="" alt="">
+        <span id="mensagem_erro"></span>
+    </div>
 </body>
 
 </html>
 
 <script>
-    // Guarda em variável global:
-    var guarda_nomeFantasia = [];
-    var guarda_razaoSocial = [];
-    var guarda_cnpj = [];
-    var guarda_cep = [];
-    var guarda_num = [];
-    var guarda_complemento = [];
-    var guarda_emalResponsavel = [];
 
-    function verificar() {
-        senha = senha_cadastro.value;
-        var tamanho_senha = senha.length;
-        var senha_sem_especial = senha.replaceAll(/[^a-zA-Z0-9]/g, ""); //troca todos os caracteres que não são números ou letras
-        var tamanho_senha_sem_especial = senha_sem_especial.length;
-        var senha_minuscula = senha.toLowerCase();
-        var senha_maiuscula = senha.toUpperCase();
-        var crit1 = 0;
-        var crit2 = 0;
-        var crit3 = 0;
-        var criteriosAtendidos = 0
+    function listar_empresa() {
+        // Inputs:
+        var nome_fantasia = input_nome_fantasia.value
+        var razao_social = input_razao_social.value
+        var cnpj = input_cnpj.value
+        var cep = input_cep.value
+        var numero = input_numero.value
+        var complemento = input_complemento.value
+        var email = input_email.value
 
-        if (tamanho_senha >= 8) { // tem pelo menos 8 caracteres
-            ++crit1;
-        }
-
-        if (senha_minuscula != senha && senha_maiuscula != senha) { // tem letras maiúsculas e minúculas
-            ++crit2;
-        }
-
-        if (tamanho_senha != tamanho_senha_sem_especial) { // tem caracteres especiais
-            ++crit3;
-        }
-
-        if (!senha.includes('0') && !senha.includes('1') && !senha.includes('2') && !senha.includes('3') && !senha.includes('4') && !senha.includes('5') && !senha.includes('6') && !senha.includes('7') && !senha.includes('8') && !senha.includes('9')) {
+        if (nome_fantasia == "" || razao_social == "" || cnpj == "" || cep == "" || numero == "" || email == "") {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Preencha todos os campos para cadastrar a empresa!"
+            card_erro.style.display = "flex"
+        } else if (cnpj.length != 14) {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira um CNPJ com 14 caracteres!"
+            card_erro.style.display = "flex"
+        } else if (cep.length != 8) {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira um CEP com 8 caracteres!"
+            card_erro.style.display = "flex"
+        } else if (email.includes('@') == false && (email.endsWith('.com') || email.endsWith('.com.br')) == false) {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira um email que contenha @ e .com!"
+            card_erro.style.display = "flex"
         } else {
-            alert(`tem número`)
+
+            if (complemento == "") {
+                complemento == null
+            }
+            fetch(`/empresas/listar_empresas`)
+                .then(response => response.json())
+                .then(function (resposta) {
+                    console.log(resposta);
+
+                    if (resposta.length > 0) {
+                        var token = ""
+                        for (var i = 0; i < resposta.length; i++) {
+                            var empresa_atual = resposta[i];
+                            token = empresa_atual.idEmpresa
+                            console.log(token);
+                        }
+
+                        var token_final = `${token}${Math.floor(Math.random() * 1000000)}`
+
+                        console.log('TOKEN FINAL', token_final);
+
+                        cadastrar_empresa(nome_fantasia, razao_social, cnpj, cep, numero, complemento, email, token_final)
+
+                    }
+
+                })
+
+
         }
 
-        criteriosAtendidos = crit1 + crit2 + crit3;
-
-        if (criteriosAtendidos == 0) {
-            forca_senha = `Insegura`
-        } else if (criteriosAtendidos == 1) {
-            forca_senha = `Fraca`
-        } else if (criteriosAtendidos == 2) {
-            forca_senha = `Média`
-        } else {
-            forca_senha = `Forte`
-        }
-
-        msg_forca.innerHTML = `${forca_senha}`
     }
 
-    function cadastrar() {
-        // Inputs:
-        var nome = nome_cadastro.value;
-        var email = email_cadastro.value;
-        var confirma = confirma_cadastro.value;
+    function cadastrar_empresa(nome_fantasia, razao_social, cnpj, cep, numero, complemento, email, token) {
+        fetch(`/empresas/cadastrar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeFantasiaServer: nome_fantasia,
+                razaoSocialServer: razao_social,
+                cnpjServer: cnpj,
+                cepServer: cep,
+                numeroServer: numero,
+                complementoServer: complemento,
+                emailResponsavelServer: email,
+                tokenServer: token,
+            })
+        })
+            .then(response => response.json())
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-        if (nome != "") {
-            guarda_nome = nome;
-        }
+                imagem_erro.src = "/assets/icons/img_aceitar.png"
+                mensagem_erro.innerHTML = "Empresa cadastrada com sucesso!"
+                cardErro.style.display = "flex"
+                setTimeout(function () {
 
-        if (email.includes('@') && (email.endsWith('.com') || email.endsWith('.com.br'))) {
-            guarda_email = email;
-        }
+                    window.location = 'cadastro.html'
 
-        if (forca_senha == 'forte') {
-            guarda_senha = senha;
-        }
+                }, 1500);
+            })
+        return false;
 
-        if (senha == confirma) {
-            guarda_confirma = confirma;
-        }
-
-        ir_login.href = "login.html"
     }
 </script>
 

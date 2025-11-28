@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: Escolha a mina</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/dash.css">
+    <link rel="stylesheet" href="styles/tela_minas.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <header class="navbar">
+            <div class="logo">
+                <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+                <span>TermoTech</span>
+            </div>
+
+            <nav class="menu">
+                <a id="cont_link1" onclick="irPaginaInicial()" class="">Página inicial</a>
+                <a id="cont_link2" onclick="irCadastroMina()" class="">Cadastrar mina</a>
+                <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+            </nav>
+            <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></p>
+        </header>
+
+
+        <section id="cont_minas">
+
+        </section>
+
+
+        <section class="mina_cadastro" id="div_cadastro_mina">
+            <div class="mina_cadastro_interna">
+                <h1 class="titulo_mina">Cadastro da mina</h1>
+                <div class="formulario_mina">
+                    <b><label class="rotulo_mina" for="input_longitude">Longitude</label></b>
+                    <input class="campo_mina" id="input_longitude" type="longitude" placeholder="Insira seu longitude:"
+                        required>
+
+                    <b> <label class="rotulo_mina" for="input_latitude">Latitude</label></b>
+                    <input class="campo_mina" id="input_latitude" type="tel" placeholder="Insira seu latitude:"
+                        required>
+
+                    <b><label class="rotulo_mina" for="input_temperatura">Temperatura de alerta:</label></b>
+                    <input class="campo_mina" id="input_temperatura" type="number"
+                        placeholder="Insira sua temperatura de alerta:" required>
+                    <hr class="separador_mina">
+
+                    <div class="botoes_mina">
+                        <a id="ir_cadastro2" href="#"><button class="botao_padrao" onclick="cadastrar_mina()">Cadastrar
+                                mina</button></a>
+                    </div>
+                </div>
+
+        </section>
+        <div class="cardErro" id="card_erro">
+            <img id="imagem_erro" src="" alt="">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+
+    nome_usuario.innerHTML = sessionStorage.NOME_USUARIO
+
+    function listar_minas() {
+        var idEmpresa = sessionStorage.ID_EMPRESA
+        console.log(idEmpresa);
+
+        fetch(`minas/listar_minas/${idEmpresa}`)
+            .then(response => response.json())
+            .then(function (resposta) {
+                console.log(resposta);
+                for (var i = 0; i < resposta.length; i++) {
+                    var mina_atual = resposta[i];
+                    cont_minas.innerHTML += `
+                        <a href="dashboard.html?id=${mina_atual.idMina}">
+                            <div class="card_mina">
+                                <p class="id_mina">ID da mina: ${mina_atual.idMina}</p>
+                                <p class="temperatura_mina">Temperatura da mina: ${mina_atual.temperaturaAlerta}</p>
+                            </div>
+                        </a>
+                    `
+                }
+
+            })
+
+    }
+    listar_minas()
+
+
+    function irPaginaInicial() {
+        cont_link1.style.backgroundColor = '#f5f5f5'
+        cont_link2.style.backgroundColor = '#f5f5f500'
+        cont_minas.style.display = 'flex'
+        div_cadastro_mina.style.display = 'none'
+
+    }
+
+    function irCadastroMina() {
+        cont_link1.style.backgroundColor = '#f5f5f500'
+        cont_link2.style.backgroundColor = '#f5f5f5'
+        cont_minas.style.display = 'none'
+        div_cadastro_mina.style.display = 'flex'
+
+    }
+
+
+    function cadastrar_mina() {
+        var idEmpresa = sessionStorage.ID_EMPRESA
+        var longitude = input_longitude.value
+        var latitude = input_latitude.value
+        var temperatura_alerta = input_temperatura.value
+
+
+
+
+        if (idEmpresa == "" || longitude == "" || latitude == "" || temperatura_alerta == "") {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira campos válidos para cadastrar!"
+            card_erro.style.display = "flex"
+        } else if (longitude.length != 10 || latitude.length != 10) {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira latitude e longitude adequadas!"
+            card_erro.style.display = "flex"
+        } else {
+            idEmpresa = Number(idEmpresa)
+            longitude = Number(longitude)
+            latitude = Number(latitude)
+            temperatura_alerta = Number(temperatura_alerta)
+            fetch(`minas/cadastrar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idEmpresaServer: idEmpresa,
+                    longitudeServer: longitude,
+                    latitudeServer: latitude,
+                    temperaturaAlertaServer: temperatura_alerta
+                })
+            })
+                .then(response => response.json())
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    imagem_erro.src = "/assets/icons/img_aceitar.png"
+                    mensagem_erro.innerHTML = "Empresa cadastrada com sucesso!"
+                    card_erro.style.display = "flex"
+
+                    setTimeout(function () {
+                        listar_minas()
+
+                    }, 1500);
+                })
+            return false;
+        }
+
+
+
+    }
+</script>
+
+</html>

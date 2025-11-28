@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+var aquarioModel = require("../models/minaModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -19,21 +19,7 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-
-                        aquarioModel.buscarMinaPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoMina) => {
-                                if (resultadoMina.length > 0) {
-                                    res.json({
-                                        idUsuario: resultadoAutenticar[0].idUsuario,
-                                        email: resultadoAutenticar[0].email,
-                                        nome: resultadoAutenticar[0].nome,
-                                        senha: resultadoAutenticar[0].senha,
-                                        mina: resultadoMina
-                                    });
-                                } else {
-                                    res.status(204).json({ mina: [] });
-                                }
-                            })
+                        res.status(200).json(resultadoAutenticar);
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
