@@ -20,8 +20,8 @@ const serial = async (
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: 'localhost',
-            user: 'aluno', // NAO USAR O ROOT, CRIAR UM USUARIO
+            host: '10.18.32.44',
+            user: 'termotech', // NAO USAR O ROOT, CRIAR UM USUARIO
             password: 'Sptech#2024',
             database: 'termotech',
             port: 3307
@@ -95,7 +95,8 @@ const serial = async (
                                     var sensor_atual = lista_sensores_formatada[k];
 
                                     var id_sensor = sensor_atual.idSensor;
-                                    var temperatura = data * (Math.random() * 10)
+                                    var temperatura_sem_format = Number(data) + (Math.random() * (11) - 5);
+                                    var temperatura = (temperatura_sem_format);
                                     
                                     console.log(temperatura);
 
