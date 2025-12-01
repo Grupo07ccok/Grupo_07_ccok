@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro: Empresa</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/cadastro_login.css">
+    <link rel="stylesheet" href="styles/global.css">
 </head>
 
 <body>
     <div class="pagina_login">
+
         <!-- LATERAL IMAGEM (50%) -->
         <section class="lateral_imagem">
             <div class="lateral_imagem_interna">
@@ -81,6 +83,21 @@
         <img id="imagem_erro" src="" alt="">
         <span id="mensagem_erro"></span>
     </div>
+
+
+    <div class="pop_up" id="id_pop_up">
+        <div class="pop_up_conteudo">
+            <img id="imagem_pop_up" src="assets/icons/img_aceitar.png" alt="">
+            <span id="mensagem_token">O seu token é: <span id="valor_token"></span></span>
+            <br><br>
+            <span>Guarde-o e salve em algum lugar, pois não será enviado em outro local!</span>
+            <div class="cont_btns">
+                <a href="login.html"><button class="botao_padrao">Ir para a página de login</button></a>
+                <a href="cadastro.html"><button class="botao_padrao">Ir para a página de cadastro</button></a>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
@@ -123,7 +140,6 @@
                 .then(function (resposta) {
                     console.log(resposta);
 
-                    if (resposta.length > 0) {
                         var token = ""
                         for (var i = 0; i < resposta.length; i++) {
                             var empresa_atual = resposta[i];
@@ -134,11 +150,9 @@
                         var token_final = `${token}${Math.floor(Math.random() * 1000000)}`
 
                         console.log('TOKEN FINAL', token_final);
+                        valor_token.innerHTML = token_final
 
                         cadastrar_empresa(nome_fantasia, razao_social, cnpj, cep, numero, complemento, email, token_final)
-
-                    }
-
                 })
 
 
@@ -166,14 +180,8 @@
             .then(response => response.json())
             .then(function (resposta) {
                 console.log("resposta: ", resposta);
-
-                imagem_erro.src = "/assets/icons/img_aceitar.png"
-                mensagem_erro.innerHTML = "Empresa cadastrada com sucesso!"
-                cardErro.style.display = "flex"
                 setTimeout(function () {
-
-                    window.location = 'cadastro.html'
-
+                    id_pop_up.style.display = "flex"
                 }, 1500);
             })
         return false;

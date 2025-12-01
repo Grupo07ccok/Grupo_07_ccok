@@ -93,10 +93,11 @@ function listar_sensores(req, res) {
 }
 function buscar_kpi_qte_alertas_sensor(req, res) {
   var idSensor = req.params.idSensor
+  var idMina = req.params.idMina
   if (idSensor == undefined) {
     res.status(400).send("ID do sensor está undefined!");
   }  else {
-    minaModel.buscar_kpi_qte_alertas_sensor(idSensor)
+    minaModel.buscar_kpi_qte_alertas_sensor(idSensor, idMina)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
@@ -213,6 +214,47 @@ function obterDadosGraficoAlertasSensores(req, res) {
 }
 
 
+function obterDadosGraficoProducaoXTemperatura(req, res) {
+  var idSensor = req.params.idSensor
+  if (idSensor == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.obterDadosGraficoProducaoXTemperatura(idSensor)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+function obterDadosGraficoMinMedMax(req, res) {
+  var idSensor = req.params.idSensor
+  if (idSensor == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.obterDadosGraficoMinMedMax(idSensor)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
+
+
 module.exports = {
   buscarMinaPorEmpresa,
   cadastrar_mina,
@@ -224,6 +266,6 @@ module.exports = {
   buscar_kpi_produtividade_media,
   obterDadosGraficoTemperaturaSensores,
   obterDadosGraficoAlertasSensores,
-
-
+  obterDadosGraficoProducaoXTemperatura,
+  obterDadosGraficoMinMedMax
 }

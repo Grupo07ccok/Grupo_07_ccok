@@ -53,16 +53,16 @@ function listar_sensores(fkMina) {
 
 
 
-function buscar_kpi_qte_alertas_sensor(idSensor) {
+function buscar_kpi_qte_alertas_sensor(idSensor, idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwTotalAlertasSensorEscolhido WHERE Sensor = ${idSensor};
+    SELECT * FROM vwTotalAlertasSensorEscolhido WHERE Sensor = ${idSensor} AND idMina = ${idMina};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 function buscar_kpi_sensor_mais_alertas(idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwSensorMaisAlertas WHERE Mina = ${idMina} LIMIT 1;
+    SELECT * FROM vwSensorMaisAlertas WHERE idMina = ${idMina};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -81,7 +81,7 @@ function buscar_kpi_temperatura_media(idMina) {
 
 function buscar_kpi_produtividade_media(idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwProdutividadeMedia WHERE Mina = ${idMina};
+    SELECT * FROM vwProdutividadeMedia WHERE idMina = ${idMina};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -103,6 +103,23 @@ function obterDadosGraficoAlertasSensores(idMina) {
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
+
+function obterDadosGraficoProducaoXTemperatura(idSensor) {
+  var instrucaoSql = `
+    SELECT * FROM vwProducaoTemperatura WHERE Sensor = ${idSensor};
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function obterDadosGraficoMinMedMax(idSensor) {
+  var instrucaoSql = `
+    SELECT * FROM vwGraficoMinMedMax WHERE idSensor = ${idSensor};
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarMinaPorEmpresa,
   cadastrar_mina,
@@ -114,6 +131,7 @@ module.exports = {
   buscar_kpi_produtividade_media,
   obterDadosGraficoTemperaturaSensores,
   obterDadosGraficoAlertasSensores,
-
+  obterDadosGraficoProducaoXTemperatura,
+  obterDadosGraficoMinMedMax
 
 }

@@ -87,7 +87,7 @@
 
         <div class="caixa_grafico">
           <p class="titulo_grafico">Mínina, máxima e média do sensor escolhido</p>
-          <canvas id="MMM_Chart"><!--EXEMPLO--></canvas>
+          <canvas id="grafico_minMedMax"><!--EXEMPLO--></canvas>
         </div>
       </div>
 
@@ -139,13 +139,14 @@
 
     var idSensor = event.target.value
     console.log(idSensor);
-
+    obterDadosGraficoProducaoXTemperatura(idSensor)
     buscar_kpi_qte_alertas_sensor(idSensor)
+    obterDadosGraficoMinMedMax(idSensor)
 
   })
 
   function buscar_kpi_qte_alertas_sensor(idSensor) {
-    fetch(`minas/buscar_kpi_qte_alertas_sensor/${idSensor}`)
+    fetch(`minas/buscar_kpi_qte_alertas_sensor/${idSensor}/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
         console.log(resposta);
@@ -181,11 +182,19 @@
       })
   }
 
+    buscar_kpi_temperatura_media()
+    buscar_kpi_produtividade_media()
+    obterDadosGraficoTemperaturaSensores()
+    buscar_kpi_sensor_mais_alertas()
+    obterDadosGraficoAlertasSensores()
   setInterval(() => {
     buscar_kpi_sensor_mais_alertas()
     buscar_kpi_temperatura_media()
     buscar_kpi_produtividade_media()
-  }, 5000);
+    obterDadosGraficoTemperaturaSensores()
+    obterDadosGraficoAlertasSensores()
+
+  }, 100000);
 
 
   function obterDadosGraficoTemperaturaSensores() {
@@ -193,13 +202,17 @@
       .then(response => response.json())
       .then(function (resposta) {
         console.log("obterDadosGraficoTemperaturaSensores ", resposta);
-
-        plotarGraficoTemperaturaSensores(resposta)
-
+        if (resposta.length > 0) {
+          plotarGraficoTemperaturaSensores(resposta)
+        } else {
+          console.log('Nenhum dado encontrado ou erro na API');
+        }
 
       })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoTemperaturaSensores: ${error.message}`);
+      });
   }
-  obterDadosGraficoTemperaturaSensores()
 
   function plotarGraficoTemperaturaSensores(dados_para_plotar) {
     var labels_sensores = []
@@ -209,9 +222,9 @@
     for (var i = 0; i < dados_para_plotar.length; i++) {
       var dado_atual = dados_para_plotar[i];
       var temperatura_atual = dado_atual.temperatura
-      var sensor_atual = dado_atual.fkSensor
+      var sensor_atual = dado_atual.idSensor
       var temperatura_alerta = dado_atual.temperaturaAlerta
-      linha_temperaturaAlerta.push(temperatura_alerta)
+      
       linha_temperaturaAlerta.push(temperatura_alerta)
       labels_sensores.push(`Sensor ${sensor_atual}`)
       dados_temperaturas.push(temperatura_atual)
@@ -266,12 +279,16 @@
       .then(response => response.json())
       .then(function (resposta) {
         console.log("obterDadosGraficoAlertasSensores", resposta);
-        plotarGraficoAlertasSensores(resposta)
-
-
+        if (resposta.length > 0) {
+          plotarGraficoAlertasSensores(resposta)
+        } else {
+          console.log('Nenhum dado encontrado ou erro na API do gráfico');
+        }
       })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoAlertasSensores: ${error.message}`);
+      });
   }
-  obterDadosGraficoAlertasSensores()
 
   function plotarGraficoAlertasSensores(dados_para_plotar) {
     var labels_sensores = []
@@ -320,6 +337,167 @@
     );
   }
 
+
+  function obterDadosGraficoProducaoXTemperatura(idSensor) {
+    fetch(`minas/obterDadosGraficoProducaoXTemperatura/${idSensor}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log("obterDadosGraficoProducaoXTemperatura ", resposta);
+        if (resposta.length > 0) {
+          plotarGraficoProducaoXTemperatura(resposta)
+        } else {
+          console.log('Nenhum dado encontrado ou erro na API');
+        }
+
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoTemperaturaSensores: ${error.message}`);
+      });
+  }
+  function plotarGraficoProducaoXTemperatura(dados_para_plotar) {
+    var labels_horas = []
+    var produtividade_dados = []
+    var temperatura_dados = []
+
+    for (var k = 0; k < dados_para_plotar.length; k++) {
+      var dado_atual = dados_para_plotar[k];
+      var hora_atual = dado_atual.Hora
+      var temperatura_atual = dado_atual.mediaTemperatura
+      var producao_atual = dado_atual.Producao
+      labels_horas.push(`${hora_atual}:00`)
+      temperatura_dados.push(Number(temperatura_atual))
+      produtividade_dados.push(Number(producao_atual))
+    }
+
+    var dados = {
+      labels: labels_horas,
+      datasets: [
+      {
+        label: "Produtividade média em %",
+        data: produtividade_dados,
+        borderColor: '#F5751A',
+        backgroundColor: "#F5751A",
+        borderWidth: 2.5
+      }  
+      ,{
+        label: "Temperatura média em Cº",
+        data: temperatura_dados,
+        backgroundColor: "#333e77",
+        borderColor: '#333e77',
+        borderWidth: 2.5
+      }
+      ]
+    };
+    var config2 = {
+      type: 'line',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    };
+
+    var myChart2 = new Chart(
+      document.getElementById(`grafico_producao`),
+      config2
+    );
+
+
+
+  }
+
+  function obterDadosGraficoMinMedMax(idSensor) {
+    fetch(`minas/obterDadosGraficoMinMedMax/${idSensor}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log("obterDadosGraficoMinMedMax ", resposta);
+        if (resposta.length > 0) {
+          plotarGraficoMinMedMax(resposta)
+        } else {
+          console.log('Nenhum dado encontrado ou erro na API');
+        }
+
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoTemperaturaSensores: ${error.message}`);
+      });
+  }
+  function plotarGraficoMinMedMax(dados_para_plotar) {
+    var labels_horas = []
+    var maximas_dados = []
+    var minimas_dados = []
+    var medias_dados = []
+
+    for (var k = 0; k < dados_para_plotar.length; k++) {
+      var dado_atual = dados_para_plotar[k];
+      var hora_atual = dado_atual.horaAtual
+      var maxima_atual = dado_atual.temperaturaMaxima
+      var minima_atual = dado_atual.temperaturaMinima
+      var media_atual = dado_atual.temperaturaMedia
+      labels_horas.push(`${hora_atual}:00`)
+      maximas_dados.push(Number(maxima_atual))
+      minimas_dados.push(Number(minima_atual))
+      medias_dados.push(Number(media_atual))
+    }
+
+    var dados = {
+      labels: labels_horas,
+      datasets: [
+      {
+        label: "Máxima",
+        data: maximas_dados,
+        borderColor: '#F5751A',
+        backgroundColor: "#F5751A",
+        borderWidth: 2.5
+      } ,{
+        label: "Média",
+        data: medias_dados,
+        borderColor: 'rgba(108, 117, 125, 0.7)',
+        backgroundColor: "rgba(108, 117, 125, 0.7)",
+        borderWidth: 2.5
+      }  
+      ,{
+        label: "Mínima",
+        data: minimas_dados,
+        backgroundColor: "#333e77",
+        borderColor: '#333e77',
+        borderWidth: 2.5
+      }
+      ]
+    };
+    var config2 = {
+      type: 'line',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    };
+
+    var myChart2 = new Chart(
+      document.getElementById(`grafico_minMedMax`),
+      config2
+    );
+
+
+
+  }
 
 
   // --- barra Temperatura Atual ---
@@ -373,7 +551,7 @@
 
 
   // --- linha Temp X Produção ---
-  const ctx3 = document.getElementById('grafico_producao');
+  /*const ctx3 = document.getElementById('grafico_producao');
 
   new Chart(ctx3, {
     data: {
@@ -418,10 +596,10 @@
     },
   });
 
-
+  */
 
   // --- linha Mínima, Máxima e Média ---
-  const linha_MMM_Ctx = document.getElementById('MMM_Chart');
+  /*const linha_MMM_Ctx = document.getElementById('MMM_Chart');
 
   new Chart(linha_MMM_Ctx, {
     type: 'line',
@@ -451,7 +629,7 @@
         {
           label: 'Média',
           data: [30, 30, 30, 33, 32, 34, 31],
-          borderColor: 'rgba(108, 117, 125, 0.7)', // cinza
+          borderColor: '', // cinza
           backgroundColor: 'rgba(108, 117, 125, 0.7)',
           pointBackgroundColor: 'rgba(108, 117, 125, 0.7)',
           borderWidth: 2,
@@ -485,7 +663,7 @@
         }
       }
     }
-  });
+  });*/
 
 
   // --- barra Qtd Alerta ---

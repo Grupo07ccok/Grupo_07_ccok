@@ -5,16 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login: Usuário</title>
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="styles/cadastro_login.css">
+    <link rel="stylesheet" href="styles/global.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="./js/sessao.js"></script>
+  <script src="./js/sessao.js"></script>
 
 </head>
 
 <body>
   <div id="div_login" class="pagina_login" style="display: flex;">
-
+    <div class="card_erro" id="cardErro">
+      <img id="imagem_erro" src="" alt="">
+      <span id="mensagem_erro"></span>
+    </div>
     <!-- LATERAL FORM (50%) -->
     <section class="lateral_formulario">
       <div class="lateral_formulario_interna">
@@ -77,15 +80,17 @@
     var senhaVar = senha_login.value;
 
     if (emailVar == "" || senhaVar == "") {
-      // cardErro.style.display = "block"
-      mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+      cardErro.style.display = "block"
+      imagem_erro.src = "/assets/icons/img_cancel.png"
+
+      mensagem_erro.innerHTML = "Preencha todos os campos para seguir em frente";
       finalizarAguardar();
       return false;
     }
     else {
       console.log("FORM LOGIN: ", emailVar);
       console.log("FORM SENHA: ", senhaVar);
-  
+
       fetch("/usuarios/autenticar", {
         method: "POST",
         headers: {
@@ -98,10 +103,10 @@
       }).then(function (resposta) {
         console.log("ESTOU NO THEN DO entrar()!")
         console.log(resposta);
-        
+
         if (resposta.ok) {
           console.log(resposta);
-  
+
           resposta.json().then(json => {
             console.log(json);
             console.log(JSON.stringify(json));
@@ -109,26 +114,26 @@
             sessionStorage.NOME_USUARIO = json[0].nome;
             sessionStorage.ID_USUARIO = json[0].idUsuario;
             sessionStorage.ID_EMPRESA = json[0].empresaId;
-  
+
             setTimeout(function () {
               window.location = "tela_minas.html";
             }, 1000); // apenas para exibir o loading
-  
+
           });
         } else {
-  
+
           console.log("Houve um erro ao tentar realizar o login!");
-  
+
           resposta.text().then(texto => {
             console.error(texto);
             // finalizarAguardar(texto);
           });
         }
-  
+
       }).catch(function (erro) {
         console.log(erro);
       })
-  
+
       return false;
     }
 

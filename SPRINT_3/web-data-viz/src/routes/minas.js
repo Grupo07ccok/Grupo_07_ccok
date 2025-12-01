@@ -17,7 +17,7 @@ router.post("/cadastrar_sensores", function (req, res) {
 router.get("/listar_sensores/:minaId", function (req, res) {
   minasController.listar_sensores(req, res);
 });
-router.get("/buscar_kpi_qte_alertas_sensor/:idSensor", function (req, res) {
+router.get("/buscar_kpi_qte_alertas_sensor/:idSensor/:idMina", function (req, res) {
   minasController.buscar_kpi_qte_alertas_sensor(req, res);
 });
 router.get("/buscar_kpi_sensor_mais_alertas/:idMina", function (req, res) {
@@ -34,5 +34,12 @@ router.get("/obterDadosGraficoTemperaturaSensores/:idMina", function (req, res) 
 });
 router.get("/obterDadosGraficoAlertasSensores/:idMina", function (req, res) {
   minasController.obterDadosGraficoAlertasSensores(req, res);
+});
+router.get("/obterDadosGraficoProducaoXTemperatura/:idSensor", function (req, res) {
+  minasController.obterDadosGraficoProducaoXTemperatura(req, res);
+});
+
+router.get("/obterDadosGraficoMinMedMax/:idSensor", function (req, res) {
+  minasController.obterDadosGraficoMinMedMax(req, res);
 });
 module.exports = router;

@@ -28,7 +28,7 @@
 
 
         <section id="cont_minas">
-
+            <p>Você ainda não tem nenhuma captura em suas minas...</p>
         </section>
         <div class="cardErro" id="card_erro">
             <img id="imagem_erro" src="" alt="">
@@ -71,8 +71,11 @@
                         <a href="dashboard.html?id=${mina_atual.idMina}">
                             <div class="card_mina" style="border: 3px solid ${cor_borda};" >
                                 <p class="texto_card"><b>ID da mina:</b> ${mina_atual.idMina}</p>
-                                <p class="texto_card"><b>Temperatura máxima:</b> ${temperatura_maxima_atual}</p>
-                                <p class="texto_card"><b>Temperatura de alerta:</b> ${temperatura_alerta}</p>
+                                <p class="texto_card">
+                                    <b>Temperatura atual:</b>
+                                    <br> 
+                                    <b>${temperatura_maxima_atual}</b>
+                                </p>
                             </div>
                         </a>
                     `

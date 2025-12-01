@@ -29,11 +29,11 @@
                 <h1 class="titulo_mina">Cadastro da mina</h1>
                 <div class="formulario_mina">
                     <b><label class="rotulo_mina" for="input_longitude">Longitude</label></b>
-                    <input class="campo_mina" id="input_longitude" type="longitude" placeholder="Insira seu longitude:"
+                    <input class="campo_mina" oninput="validar_mascara()" id="input_longitude" type="longitude" placeholder="Insira seu longitude:"
                         required>
 
                     <b> <label class="rotulo_mina" for="input_latitude">Latitude</label></b>
-                    <input class="campo_mina" id="input_latitude" type="tel" placeholder="Insira seu latitude:"
+                    <input class="campo_mina" oninput="validar_mascara()" id="input_latitude" type="tel" placeholder="Insira seu latitude:"
                         required>
 
                     <b><label class="rotulo_mina" for="input_temperatura">Temperatura de alerta:</label></b>
@@ -58,6 +58,19 @@
 
 </html>
 <script>
+    function validar_mascara() {
+        var longitude = input_longitude.value
+        var latitude = input_latitude.value
+
+        if (longitude.length == 4) {
+            input_longitude.value += "."
+        }
+
+        if (latitude.length == 4) {
+            input_latitude.value += "."
+        }
+
+    }
     function cadastrar_mina() {
         var idEmpresa = sessionStorage.ID_EMPRESA
         var longitude = input_longitude.value
@@ -68,7 +81,7 @@
             imagem_erro.src = "assets/icons/img_cancel.png"
             mensagem_erro.innerHTML = "Insira campos válidos para cadastrar!"
             cardErro.style.display = "flex"
-        } else if (longitude.length != 10 || latitude.length != 10) {
+        } else if (longitude.length != 11 || latitude.length != 11) {
             imagem_erro.src = "assets/icons/img_cancel.png"
             mensagem_erro.innerHTML = "Insira latitude e longitude adequadas!"
             cardErro.style.display = "flex"
