@@ -10,5 +10,29 @@ router.get("/listar_minas/:empresaId", function (req, res) {
 router.post("/cadastrar", function (req, res) {
   minasController.cadastrar_mina(req, res);
 })
+router.post("/cadastrar_sensores", function (req, res) {
+  minasController.cadastrar_sensores(req, res);
+})
 
+router.get("/listar_sensores/:minaId", function (req, res) {
+  minasController.listar_sensores(req, res);
+});
+router.get("/buscar_kpi_qte_alertas_sensor/:idSensor", function (req, res) {
+  minasController.buscar_kpi_qte_alertas_sensor(req, res);
+});
+router.get("/buscar_kpi_sensor_mais_alertas/:idMina", function (req, res) {
+  minasController.buscar_kpi_sensor_mais_alertas(req, res);
+});
+router.get("/buscar_kpi_temperatura_media/:idMina", function (req, res) {
+  minasController.buscar_kpi_temperatura_media(req, res);
+});
+router.get("/buscar_kpi_produtividade_media/:idMina", function (req, res) {
+  minasController.buscar_kpi_produtividade_media(req, res);
+});
+router.get("/obterDadosGraficoTemperaturaSensores/:idMina", function (req, res) {
+  minasController.obterDadosGraficoTemperaturaSensores(req, res);
+});
+router.get("/obterDadosGraficoAlertasSensores/:idMina", function (req, res) {
+  minasController.obterDadosGraficoAlertasSensores(req, res);
+});
 module.exports = router;

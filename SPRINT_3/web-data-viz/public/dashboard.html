@@ -8,58 +8,33 @@
   <link rel="stylesheet" href="styles/dash.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/global.css">
 </head>
 
 <body style="background-color: #fffdef;">
 
-  <header class="navbar_dashboard">
-
-    <a href="#" id="ir_site_institucional" onclick="irSiteInstitucional()">
-      <div class="logo">
-        <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
-        <span>TermoTech</span>
-      </div>
-    </a>
-
-    <nav class="menu_dashboard">
-      <a onclick="irDashboard()" id="cont_link1" class="link active">
-        <i class="fa-regular fa-clock"></i>
-        Dashboard
-      </a>
-      <a onclick="irCadastroMina()" id="cont_link2" class="link">
-        <i class="fa-solid fa-plus"></i>
-        Cadastrar mina
-      </a>
-    </nav>
-
-    <div class="perfil">
-      <p>Bem vindo(a), Julia!</p>
-      <i class="fa-regular fa-user"></i>
+  <header class="navbar">
+    <div class="logo">
+      <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+      <span>TermoTech</span>
     </div>
+
+    <nav class="menu">
+      <a id="cont_link1" href="tela_minas.html#" class="">Página inicial</a>
+      <a id="cont_link2" href="tela_minas.html#div_cadastro_mina" class="">Cadastrar mina</a>
+      <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+    </nav>
+    <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></p>
   </header>
 
   <!--CONTEUDO PRINCIPAL-->
 
   <div class="container_conteudo" id="div_dashboard">
-    <h1>Mina <span style="color: #f97316">01</span></h1>
+    <h1>Mina <span id="id_mina" style="color: #f97316"></span></h1>
 
     <div class="selects_mina_sensor">
-      <select id="select_mina">
-        <option selected disabled value="#">Selecionar Mina</option>
-        <option value="opcao_mina1" selected>Mina 1</option>
-        <option value="opcao_mina2">Mina 2</option>
-        <option value="opcao_mina3">Mina 3</option>
-      </select>
-
       <select id="select_sensor">
         <option selected disabled value="#">Selecionar Sensor</option>
-        <option value="opcao_sensor1" selected>Sensor 1</option>
-        <option value="opcao_sensor2">Sensor 2</option>
-        <option value="opcao_sensor3">Sensor 3</option>
-        <option value="opcao_sensor4">Sensor 4</option>
-        <option value="opcao_sensor5">Sensor 5</option>
-
       </select>
     </div>
 
@@ -69,22 +44,22 @@
 
         <div class="caixa_kpi">
           <p class="texto_azul">Qte. de Alertas do Sensor Escolhido</p>
-          <span class="dados">3</span>
+          <p class="dados" id="kpi_qte_alertas_sensor_escolhido">Selecione</p>
         </div>
 
         <div class="caixa_kpi">
           <p class="texto_azul">Sensor com mais Alertas</p>
-          <span class="dados">Sensor 3</span>
+          <span class="dados" id="kpi_sensor_com_mais_alertas">Sem dados</span>
         </div>
 
         <div class="caixa_kpi">
           <p class="texto_azul">Temperatura Média Atual</p>
-          <span class="dados">27º</span>
+          <span class="dados" id="kpi_temperatura_media">Sem dados</span>
         </div>
 
         <div class="caixa_kpi">
           <p class="texto_azul">Produtividade Média Atual</p>
-          <span class="dados">87%</span>
+          <span class="dados" id="kpi_produtividade_media">Sem dados</span>
         </div>
       </div>
 
@@ -95,7 +70,7 @@
       <div class="primeira_linha">
         <div class="caixa_grafico">
           <p class="titulo_grafico">Temperatura atual de todos os sensores</p>
-          <canvas id="temp_atual_chart"> <!--EXEMPLOO--></canvas>
+          <canvas id="temp_atual_chart"></canvas>
         </div>
 
         <div class="caixa_grafico">
@@ -119,95 +94,282 @@
     </div>
 
   </div>
-  <section class="mina_cadastro" id="div_cadastro_mina">
-    <div class="mina_cadastro_interna">
-      <h1 class="titulo_mina">Cadastro da mina</h1>
-      <div class="formulario_mina">
-        <b><label class="rotulo_mina" for="longitude_mina">Longitude</label></b>
-        <input class="campo_mina" value="-50.534961" id="longitude_mina" type="longitude"
-          placeholder="Insira seu longitude:" required>
-
-        <b> <label class="rotulo_mina" for="latitude_mina">Latitude</label></b>
-        <input class="campo_mina" value="-5.789885" id="latitude_mina" type="tel" placeholder="Insira seu latitude:"
-          required>
-        <hr class="separador_mina">
-
-        <div class="botoes_mina">
-          <a id="ir_cadastro2" href="#"><button class="botao_padrao" onclick="cadastrar()">Cadastrar mina</button></a>
-        </div>
-      </div>
-
-  </section>
 
 </body>
 
 </html>
 
 <script>
-  function irSiteInstitucional() {
-    ir_site_institucional.href = 'index.html'
-  }
-  function irDashboard() {
-    cont_link1.style.backgroundColor = '#f5f5f5'
-    cont_link2.style.backgroundColor = '#f5f5f500'
-    div_dashboard.style.display = 'flex'
-    div_cadastro_mina.style.display = 'none'
+
+
+  var urlParametros = window.location
+
+  var idMina = (urlParametros.search).replace("?id=", "")
+
+  document.getElementById('id_mina').innerHTML = idMina
+
+  console.log(idMina);
+  function listar_sensores() {
+    fetch(`minas/listar_sensores/${idMina}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log(resposta);
+        var options = ""
+        for (var i = 0; i < resposta.length; i++) {
+          var sensor_atual = resposta[i]
+
+          options += `
+            <option value="${sensor_atual.idSensor}">Sensor ${sensor_atual.idSensor}</option>
+          `
+        }
+        select_sensor.innerHTML += options
+
+
+
+      })
 
   }
 
-  function irCadastroMina() {
-    cont_link1.style.backgroundColor = '#f5f5f500'
+  listar_sensores()
 
-    cont_link2.style.backgroundColor = '#f5f5f5'
-    div_dashboard.style.display = 'none'
-    div_cadastro_mina.style.display = 'flex'
+  var select_sensores = document.getElementById("select_sensor")
 
+  select_sensores.addEventListener('change', function (event) {
+    console.log(event);
+
+    var idSensor = event.target.value
+    console.log(idSensor);
+
+    buscar_kpi_qte_alertas_sensor(idSensor)
+
+  })
+
+  function buscar_kpi_qte_alertas_sensor(idSensor) {
+    fetch(`minas/buscar_kpi_qte_alertas_sensor/${idSensor}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log(resposta);
+        var total_alertas = resposta[0].total_alertas
+        kpi_qte_alertas_sensor_escolhido.innerHTML = total_alertas
+      })
   }
-  // --- barra Temperatura Atual ---
-  const barraCtx = document.getElementById('temp_atual_chart');
+  function buscar_kpi_sensor_mais_alertas() {
+    fetch(`minas/buscar_kpi_sensor_mais_alertas/${idMina}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log(resposta);
+        var sensor = resposta[0].Sensor
+        kpi_sensor_com_mais_alertas.innerHTML = sensor
+      })
+  }
+  function buscar_kpi_temperatura_media() {
+    fetch(`minas/buscar_kpi_temperatura_media/${idMina}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log(resposta);
+        var kpiTemperaturaAtual = resposta[0].kpiTemperaturaAtual
+        kpi_temperatura_media.innerHTML = kpiTemperaturaAtual
+      })
+  }
+  function buscar_kpi_produtividade_media() {
+    fetch(`minas/buscar_kpi_produtividade_media/${idMina}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log(resposta);
+        var kpiProdutividadeAtual = resposta[0].kpiProdutividadeAtual
+        kpi_produtividade_media.innerHTML = kpiProdutividadeAtual
+      })
+  }
 
-  new Chart(barraCtx, {
-    type: 'bar',
-    data: {
-      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
+  setInterval(() => {
+    buscar_kpi_sensor_mais_alertas()
+    buscar_kpi_temperatura_media()
+    buscar_kpi_produtividade_media()
+  }, 5000);
+
+
+  function obterDadosGraficoTemperaturaSensores() {
+    fetch(`minas/obterDadosGraficoTemperaturaSensores/${idMina}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log("obterDadosGraficoTemperaturaSensores ", resposta);
+
+        plotarGraficoTemperaturaSensores(resposta)
+
+
+      })
+  }
+  obterDadosGraficoTemperaturaSensores()
+
+  function plotarGraficoTemperaturaSensores(dados_para_plotar) {
+    var labels_sensores = []
+    var dados_temperaturas = []
+    var linha_temperaturaAlerta = []
+
+    for (var i = 0; i < dados_para_plotar.length; i++) {
+      var dado_atual = dados_para_plotar[i];
+      var temperatura_atual = dado_atual.temperatura
+      var sensor_atual = dado_atual.fkSensor
+      var temperatura_alerta = dado_atual.temperaturaAlerta
+      linha_temperaturaAlerta.push(temperatura_alerta)
+      linha_temperaturaAlerta.push(temperatura_alerta)
+      labels_sensores.push(`Sensor ${sensor_atual}`)
+      dados_temperaturas.push(temperatura_atual)
+    }
+    var dados = {
+      labels: labels_sensores,
       datasets: [
         {
           type: 'line',
           label: 'Temperatura Alerta (°C)',
-          data: [27, 27, 27, 27, 27],
+          data: linha_temperaturaAlerta,
           backgroundColor: '#F5751A', // laranja
           borderColor: '#F5751A',
           borderWidth: 2,
           padding: 0
         },
         {
-          label: 'Temperatura Média (°C)',
-          data: [20, 30, 35, 26, 23],
-          backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
-          borderRadius: 4
+          label: "Temperatura do sensor",
+          data: dados_temperaturas,
+          backgroundColor: "#333e77",
+          borderWidth: 1
         }
       ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'bottom' },
-        title: { display: false }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#444', font: { size: 13 } },
-          grid: { color: 'rgba(0,0,0,0.05)' }
+    };
+    var config = {
+      type: 'bar',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
         },
-        y: {
-          beginAtZero: true,
-          ticks: { color: '#444', font: { size: 13 } },
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          max: 40,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
-      }
+      },
+    };
+
+    var myChart = new Chart(
+      document.getElementById(`temp_atual_chart`),
+      config
+    );
+  }
+
+
+
+  function obterDadosGraficoAlertasSensores() {
+    fetch(`minas/obterDadosGraficoAlertasSensores/${idMina}`)
+      .then(response => response.json())
+      .then(function (resposta) {
+        console.log("obterDadosGraficoAlertasSensores", resposta);
+        plotarGraficoAlertasSensores(resposta)
+
+
+      })
+  }
+  obterDadosGraficoAlertasSensores()
+
+  function plotarGraficoAlertasSensores(dados_para_plotar) {
+    var labels_sensores = []
+    var dados_alertas = []
+
+
+    for (var i = 0; i < dados_para_plotar.length; i++) {
+      var dado_atual = dados_para_plotar[i];
+      var alerta_atual = dado_atual.qteAlerta
+      var sensor_atual = dado_atual.idSensor
+      var temperatura_alerta = dado_atual.temperaturaAlerta
+
+      labels_sensores.push(`Sensor ${sensor_atual}`)
+      dados_alertas.push(alerta_atual)
     }
-  });
+    var dados = {
+      labels: labels_sensores,
+      datasets: [{
+        label: "Temperatura do sensor",
+        data: dados_alertas,
+        backgroundColor: "#333e77",
+        borderWidth: 1
+      }
+      ]
+    };
+    var config2 = {
+      type: 'bar',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    };
+
+    var myChart2 = new Chart(
+      document.getElementById(`qtdAlerta_Ctx`),
+      config2
+    );
+  }
+
+
+
+  // --- barra Temperatura Atual ---
+  /*
+      const barraCtx = document.getElementById('temp_atual_chart');
+ 
+     new Chart(barraCtx, {
+       type: 'bar',
+       data: {
+         labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
+         datasets: [
+           {
+             type: 'line',
+             label: 'Temperatura Alerta (°C)',
+             data: [27, 27, 27, 27, 27],
+             backgroundColor: '#F5751A', // laranja
+             borderColor: '#F5751A',
+             borderWidth: 2,
+             padding: 0
+           },
+           {
+             label: 'Temperatura Média (°C)',
+             data: [20, 30, 35, 26, 23],
+             backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
+             borderRadius: 4
+           }
+         ]
+       },
+       options: {
+         responsive: true,
+         plugins: {
+           legend: { position: 'bottom' },
+           title: { display: false }
+         },
+         scales: {
+           x: {
+             ticks: { color: '#444', font: { size: 13 } },
+             grid: { color: 'rgba(0,0,0,0.05)' }
+           },
+           y: {
+             beginAtZero: true,
+             ticks: { color: '#444', font: { size: 13 } },
+             grid: { color: 'rgba(0,0,0,0.05)' },
+             max: 40,
+           }
+         }
+       }
+     });
+   
+  */
 
 
   // --- linha Temp X Produção ---
@@ -327,54 +489,56 @@
 
 
   // --- barra Qtd Alerta ---
-  const barra_qtdAlerta_Ctx = document.getElementById('qtdAlerta_Ctx');
+  /*
+      const barra_qtdAlerta_Ctx = document.getElementById('qtdAlerta_Ctx');
 
-  new Chart(barra_qtdAlerta_Ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
-      datasets: [
-        {
-          label: 'Qtd. Alertas',
-          data: [15, 30, 60, 27, 10],
-          backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
-          borderRadius: 4
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'bottom' },
-        title: { display: false },
-        tooltip: {
-          callbacks: {
-            //isso nao vai ficar - era so um teste 
-            label: function (context) {
-              const mina = context.chart.data.labels[context.dataIndex]; // MinaX, MinaY, MinaZ
-              const sensorBase = context.dataset.label.split(' ')[1]; // A, B, C
-              const sensorCompleto = `${mina.replace('Mina', 'Sensor ')}${sensorBase}`;
-              const valor = context.raw;
-              return `${sensorCompleto}: ${valor}`;
+      new Chart(barra_qtdAlerta_Ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
+          datasets: [
+            {
+              label: 'Qtd. Alertas',
+              data: [15, 30, 60, 27, 10],
+              backgroundColor: ['#333e77', '#333e77', '#F5751A', '#333e77', '#333e77'], // azul
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom' },
+            title: { display: false },
+            tooltip: {
+              callbacks: {
+                //isso nao vai ficar - era so um teste 
+                label: function (context) {
+                  const mina = context.chart.data.labels[context.dataIndex]; // MinaX, MinaY, MinaZ
+                  const sensorBase = context.dataset.label.split(' ')[1]; // A, B, C
+                  const sensorCompleto = `${mina.replace('Mina', 'Sensor ')}${sensorBase}`;
+                  const valor = context.raw;
+                  return `${sensorCompleto}: ${valor}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#444' },
+              grid: { color: 'rgba(0,0,0,0.05)' }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { color: '#444' },
+              grid: { color: 'rgba(0,0,0,0.05)' },
+              max: 70,
             }
           }
         }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#444' },
-          grid: { color: 'rgba(0,0,0,0.05)' }
-        },
-        y: {
-          beginAtZero: true,
-          ticks: { color: '#444' },
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          max: 70,
-        }
-      }
-    }
-  });
+      });
 
+  */
 
 
 </script>

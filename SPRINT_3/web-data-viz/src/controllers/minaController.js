@@ -39,6 +39,7 @@ function cadastrar_mina(req, res) {
     minaModel.cadastrar_mina(idEmpresa, longitude, latitude, temperaturaAlerta)
       .then((resultado) => {
         res.status(201).json(resultado);
+        
       }
       ).catch((erro) => {
         console.log(erro);
@@ -50,8 +51,179 @@ function cadastrar_mina(req, res) {
       });
   }
 }
+function cadastrar_sensores(req, res) {
+  var fkMina = req.body.fkMinaServer
+
+  if (fkMina == undefined) {
+    res.status(400).send("ID da mina está undefined!");
+  }  else {
+    minaModel.cadastrar_sensores(fkMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+function listar_sensores(req, res) {
+  var fkMina = req.params.minaId
+  if (fkMina == undefined) {
+    res.status(400).send("ID da mina está undefined!");
+  }  else {
+    minaModel.listar_sensores(fkMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+        
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+function buscar_kpi_qte_alertas_sensor(req, res) {
+  var idSensor = req.params.idSensor
+  if (idSensor == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.buscar_kpi_qte_alertas_sensor(idSensor)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+function buscar_kpi_sensor_mais_alertas(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.buscar_kpi_sensor_mais_alertas(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+function buscar_kpi_temperatura_media(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.buscar_kpi_temperatura_media(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+function buscar_kpi_produtividade_media(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.buscar_kpi_produtividade_media(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
+function obterDadosGraficoTemperaturaSensores(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.obterDadosGraficoTemperaturaSensores(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
+
+
+
+
+function obterDadosGraficoAlertasSensores(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do sensor está undefined!");
+  }  else {
+    minaModel.obterDadosGraficoAlertasSensores(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela kpi_qte_alertas_sensor! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
 
 module.exports = {
   buscarMinaPorEmpresa,
-  cadastrar_mina
+  cadastrar_mina,
+  cadastrar_sensores,
+  listar_sensores,
+  buscar_kpi_qte_alertas_sensor,
+  buscar_kpi_sensor_mais_alertas,
+  buscar_kpi_temperatura_media,
+  buscar_kpi_produtividade_media,
+  obterDadosGraficoTemperaturaSensores,
+  obterDadosGraficoAlertasSensores,
+
+
 }

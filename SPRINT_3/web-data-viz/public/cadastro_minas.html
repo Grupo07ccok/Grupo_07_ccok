@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro: Mina</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/cadastro_mina.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+            <span>TermoTech</span>
+        </div>
+
+        <nav class="menu">
+            <a id="cont_link1" href="tela_minas.html" class="">Página inicial</a>
+            <a id="cont_link2" href="" class="ativado">Cadastrar mina</a>
+            <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+        </nav>
+        <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></p>
+    </header>
+    <div class="container">
+        <section class="mina_cadastro" id="div_cadastro_mina">
+            <div class="mina_cadastro_interna">
+                <h1 class="titulo_mina">Cadastro da mina</h1>
+                <div class="formulario_mina">
+                    <b><label class="rotulo_mina" for="input_longitude">Longitude</label></b>
+                    <input class="campo_mina" id="input_longitude" type="longitude" placeholder="Insira seu longitude:"
+                        required>
+
+                    <b> <label class="rotulo_mina" for="input_latitude">Latitude</label></b>
+                    <input class="campo_mina" id="input_latitude" type="tel" placeholder="Insira seu latitude:"
+                        required>
+
+                    <b><label class="rotulo_mina" for="input_temperatura">Temperatura de alerta:</label></b>
+                    <input class="campo_mina" id="input_temperatura" type="number"
+                        placeholder="Insira sua temperatura de alerta:" required>
+                    <hr class="separador_mina">
+
+                    <div class="botoes_mina">
+                        <a id="ir_cadastro2" href="#"><button class="botao_padrao" onclick="cadastrar_mina()">Cadastrar
+                                mina</button></a>
+                    </div>
+                </div>
+
+        </section>
+    </div>
+    <div class="card_erro" id="cardErro">
+        <img id="imagem_erro" src="" alt="">
+        <span id="mensagem_erro"></span>
+    </div>
+
+</body>
+
+</html>
+<script>
+    function cadastrar_mina() {
+        var idEmpresa = sessionStorage.ID_EMPRESA
+        var longitude = input_longitude.value
+        var latitude = input_latitude.value
+        var temperatura_alerta = input_temperatura.value
+
+        if (idEmpresa == "" || longitude == "" || latitude == "" || temperatura_alerta == "") {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira campos válidos para cadastrar!"
+            cardErro.style.display = "flex"
+        } else if (longitude.length != 10 || latitude.length != 10) {
+            imagem_erro.src = "assets/icons/img_cancel.png"
+            mensagem_erro.innerHTML = "Insira latitude e longitude adequadas!"
+            cardErro.style.display = "flex"
+        } else {
+            idEmpresa = Number(idEmpresa)
+            longitude = Number(longitude)
+            latitude = Number(latitude)
+            temperatura_alerta = Number(temperatura_alerta)
+            fetch(`minas/cadastrar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idEmpresaServer: idEmpresa,
+                    longitudeServer: longitude,
+                    latitudeServer: latitude,
+                    temperaturaAlertaServer: temperatura_alerta
+                })
+            })
+                .then(response => response.json())
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta.insertId);
+
+                    var id_mina = resposta.insertId
+                    imagem_erro.src = "/assets/icons/img_aceitar.png"
+                    mensagem_erro.innerHTML = "Mina cadastrada com sucesso!"
+                    cardErro.style.display = "flex"
+
+                    cadastrar_sensores(id_mina)
+                    setTimeout(function () {
+                        sumirMensagem()
+                    }, 1500);
+                })
+            return false;
+        }
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+    function cadastrar_sensores(fkMina) {
+        fetch(`minas/cadastrar_sensores`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkMinaServer: fkMina
+            })
+        })
+            .then(response => response.json())
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+            })
+
+        return false;
+    }
+</script>

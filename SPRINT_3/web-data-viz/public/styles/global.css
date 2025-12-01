@@ -183,3 +183,24 @@ html {
 
 
 /*Esse pode ser o arquivo para adicionar tudo que vai se repetir nas paginas (tipo a navbar e footer)*/
+
+
+
+
+
+.card_erro {
+    display: none ;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: black;
+    width: 20vw;
+    height: 20vh;
+    position: absolute;
+    border-radius: 0.5rem;
+    margin-left: 70%;
+    margin-top: -40%;
+    transition: all 0.5s ease-out;
+}
