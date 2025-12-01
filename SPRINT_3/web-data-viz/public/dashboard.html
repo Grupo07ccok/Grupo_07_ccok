@@ -158,8 +158,8 @@
     fetch(`minas/buscar_kpi_sensor_mais_alertas/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log(resposta);
-        var sensor = resposta[0].Sensor
+        console.log("buscar_kpi_sensor_mais_alertas: ",resposta);
+        var sensor = resposta[0].sensor
         kpi_sensor_com_mais_alertas.innerHTML = sensor
       })
   }
@@ -351,18 +351,22 @@
 
       })
       .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoTemperaturaSensores: ${error.message}`);
+        console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoProducaoXTemperatura: ${error.message}`);
       });
   }
+  var grafico_prod_x_temp = null
   function plotarGraficoProducaoXTemperatura(dados_para_plotar) {
+    if (grafico_prod_x_temp != null) {
+      grafico_prod_x_temp.destroy()
+    }
     var labels_horas = []
     var produtividade_dados = []
     var temperatura_dados = []
 
     for (var k = 0; k < dados_para_plotar.length; k++) {
       var dado_atual = dados_para_plotar[k];
-      var hora_atual = dado_atual.Hora
-      var temperatura_atual = dado_atual.mediaTemperatura
+      var hora_atual = dado_atual.horaColeta
+      var temperatura_atual = dado_atual.Temperatura
       var producao_atual = dado_atual.Producao
       labels_horas.push(`${hora_atual}:00`)
       temperatura_dados.push(Number(temperatura_atual))
@@ -404,8 +408,9 @@
         }
       },
     };
-
-    var myChart2 = new Chart(
+    
+    
+    grafico_prod_x_temp = new Chart(
       document.getElementById(`grafico_producao`),
       config2
     );
@@ -430,7 +435,12 @@
         console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoTemperaturaSensores: ${error.message}`);
       });
   }
+    var grafico_min_med_max = null
+
   function plotarGraficoMinMedMax(dados_para_plotar) {
+        if (grafico_min_med_max != null) {
+      grafico_min_med_max.destroy()
+    }
     var labels_horas = []
     var maximas_dados = []
     var minimas_dados = []
@@ -438,7 +448,7 @@
 
     for (var k = 0; k < dados_para_plotar.length; k++) {
       var dado_atual = dados_para_plotar[k];
-      var hora_atual = dado_atual.horaAtual
+      var hora_atual = dado_atual.horaColeta
       var maxima_atual = dado_atual.temperaturaMaxima
       var minima_atual = dado_atual.temperaturaMinima
       var media_atual = dado_atual.temperaturaMedia
@@ -490,7 +500,7 @@
       },
     };
 
-    var myChart2 = new Chart(
+    grafico_min_med_max = new Chart(
       document.getElementById(`grafico_minMedMax`),
       config2
     );

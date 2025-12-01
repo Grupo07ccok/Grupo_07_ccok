@@ -62,8 +62,14 @@ function buscar_kpi_qte_alertas_sensor(idSensor, idMina) {
 }
 function buscar_kpi_sensor_mais_alertas(idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwSensorMaisAlertas WHERE idMina = ${idMina};
-  `;
+    SELECT 
+      *
+    FROM
+      vwSensorMaisAlertas
+      WHERE idMina = ${idMina}
+      ORDER BY total_alertas DESC
+      LIMIT 1; 
+    `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -106,7 +112,7 @@ function obterDadosGraficoAlertasSensores(idMina) {
 
 function obterDadosGraficoProducaoXTemperatura(idSensor) {
   var instrucaoSql = `
-    SELECT * FROM vwProducaoTemperatura WHERE Sensor = ${idSensor};
+    SELECT * FROM vwGraficoProducaoTemperatura WHERE fkSensor = ${idSensor};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
