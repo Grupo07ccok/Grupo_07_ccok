@@ -19,17 +19,47 @@
             </div>
 
             <nav class="menu">
-                <a id="cont_link1" href=""  class="">Página inicial</a>
+                <a id="cont_link1" href="" class="">Página inicial</a>
                 <a id="cont_link2" href="cadastro_minas.html" class="">Cadastrar mina</a>
                 <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
             </nav>
-            <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></p>
+            <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></b>
         </header>
 
 
-        <section id="cont_minas">
-            <p>Você ainda não tem nenhuma captura em suas minas...</p>
-        </section>
+        <div class="cont_conteudo">
+            <h1 class="titulo">Visão geral de todas as suas minas</h1>
+            <div class="cont_faixa">
+                <div class="titulo_faixa">
+                    <b>Faixas de alerta base</b>
+                </div>
+                <div class="cont_cards_faixa">
+                    <div class="card_faixa faixa_critico">
+                        <b class="nome_faixa">Crítico</b>
+                        <b class="descricao_faixa">Temperatura > 30</b>
+                    </div>
+                    <div class="card_faixa faixa_perigoso">
+                        <b class="nome_faixa">Perigoso</b>
+                        <b class="descricao_faixa">Temperatura > 27 e <= 30</b>
+                    </div>
+                    <div class="card_faixa faixa_moderado">
+                        <b class="nome_faixa">Moderado</b>
+                        <b class="descricao_faixa">Temperatura > 23 e <= 27</b>
+                    </div>
+                    <div class="card_faixa faixa_bom">
+                        <b class="nome_faixa">Bom</b>
+                        <b class="descricao_faixa">Temperatura > 20 e <= 23</b>
+                    </div>
+                    <div class="card_faixa faixa_excelente">
+                        <b class="nome_faixa">Excelente</b>
+                        <b class="descricao_faixa">Temperatura <= 20</b>
+                    </div>
+                </div>
+            </div>
+            <section id="cont_minas">
+                
+            </section>
+        </div>
         <div class="cardErro" id="card_erro">
             <img id="imagem_erro" src="" alt="">
             <span id="mensagem_erro"></span>
@@ -58,33 +88,41 @@
                     var temperatura_maxima_atual = Number(mina_atual.temperatura_maxima_atual)
                     var temperatura_alerta = Number(mina_atual.temperaturaAlerta)
 
-                    var cor_borda = ""
+                    var cor_letra = ""
 
-                    if (temperatura_maxima_atual >= temperatura_alerta) {
-                        cor_borda = "red"
-                    } else if (temperatura_maxima_atual < temperatura_alerta && temperatura_maxima_atual > 20) {
-                        cor_borda = "yellow"
+                    if (temperatura_maxima_atual > 30) {
+                        cor_letra = "#FF0000"
+                    } else if (temperatura_maxima_atual < 30 && temperatura_maxima_atual > 27) {
+                        cor_letra = "#FF8800"
+                    } else if (temperatura_maxima_atual < 27 && temperatura_maxima_atual > 23){
+                        cor_letra = "#D0CA03"
+                    } else if (temperatura_maxima_atual < 23 && temperatura_maxima_atual > 20){
+                        cor_letra = "#80DB00"
                     } else {
-                        cor_borda = "green"
+                        cor_letra = "#0BD700"
+                        
                     }
                     cont_minas.innerHTML += `
-                        <a href="dashboard.html?id=${mina_atual.idMina}">
-                            <div class="card_mina" style="border: 3px solid ${cor_borda};" >
-                                <p class="texto_card"><b>ID da mina:</b> ${mina_atual.idMina}</p>
-                                <p class="texto_card">
-                                    <b>Temperatura atual:</b>
-                                    <br> 
-                                    <b>${temperatura_maxima_atual}</b>
-                                </p>
+
+                    <a href="dashboard.html?id=${mina_atual.idMina}">
+                        <div class="card_mina">
+                            <div class="cont_id">
+                                <p class="texto_card"><b>ID da mina: ${mina_atual.idMina}</b>
                             </div>
-                        </a>
+                            <p class="texto_card">
+                                <b>Temperatura atual:</b>
+                                <br>
+                                <b class="valor_temperatura" style="color: ${cor_letra};">${temperatura_maxima_atual}º</b>
+                                </b>
+                        </div>
+                    </a>
                     `
                 }
 
             })
 
-        }
-        listar_minas()
+    }
+    listar_minas()
     setInterval(() => {
         listar_minas()
     }, 10000);
@@ -93,7 +131,7 @@
 
 
 
-    
+
 </script>
 
 </html>
