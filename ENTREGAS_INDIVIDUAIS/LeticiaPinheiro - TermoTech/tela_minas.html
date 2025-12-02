@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: Escolha a mina</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/dash.css">
+    <link rel="stylesheet" href="styles/tela_minas.css">
+</head>
+
+<style>
+    body {
+        height: 100vh;
+        width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        display: flex;
+    }
+
+    .container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /*mudei isso */
+        align-items: center;
+        gap: 15px; /*adicionei isso*/
+    }
+
+    #cont_minas {
+        margin-top: 10vh;
+        display: flex;
+        width: 80%;
+        height: 100%;
+        justify-content:space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #cont_minas a {
+        width: 20%;
+        height: 20%;
+        text-decoration: none;
+        color: black;
+    }
+
+
+    .card_mina {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid rgb(0, 0, 187); /*dps ver como isso funciona dentro do js*/
+        border-radius: 1rem;
+        padding: 10px;
+    }
+
+    .card_mina .texto_card {
+        width: 90%;
+        text-align: center;
+    }
+
+
+    .mina_cadastro {
+        margin-top: 10vh;
+        width: 100%;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url('../assets/img/Nossa_Missão.png');
+        background-size: cover;
+    }
+
+    .mina_cadastro_interna {
+        width: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        background-color: #faf9f0;
+        border-radius: 5vh;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        height: 90%;
+    }
+
+    .formulario_mina {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+    }
+</style>
+
+<body>
+    <div class="container">
+        <header class="navbar">
+            <div class="logo">
+                <img src="assets/img/logo.png" alt="Logo Termo Tech"> <!--trocar pela logo de vdd-->
+                <span>TermoTech</span>
+            </div>
+
+            <nav class="menu">
+                <a id="cont_link1" href="" class="">Página inicial</a>
+                <a id="cont_link2" href="cadastro_minas.html" class="">Cadastrar mina</a>
+                <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
+            </nav>
+            <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></p>
+        </header>
+
+
+        <section id="cont_minas">
+        
+            <!--teste em cima do q o js vai fazer-->
+            <a href="dashboard.html?id=${mina_atual.idMina}">
+                <div class="card_mina" style="border: 3px solid rgb(224, 8, 30);">
+                    <p class="texto_card"><b>ID da mina:</b> ${mina_atual.idMina}</p>
+                    <p class="texto_card">
+                        <b>Temperatura atual:</b>
+                        <br>
+                        <b>${temperatura_maxima_atual}</b>
+                    </p>
+                </div>
+
+                <div class="card_mina" style="border: 3px solid rgb(255, 208, 0);">
+                    <p class="texto_card"><b>ID da mina:</b> ${mina_atual.idMina}</p>
+                    <p class="texto_card">
+                        <b>Temperatura atual:</b>
+                        <br>
+                        <b>${temperatura_maxima_atual}</b>
+                    </p>
+                </div>
+
+                <div class="card_mina" style="border: 3px solid green;">
+                    <p class="texto_card"><b>ID da mina:</b> ${mina_atual.idMina}</p>
+                    <p class="texto_card">
+                        <b>Temperatura atual:</b>
+                        <br>
+                        <b>${temperatura_maxima_atual}</b>
+                    </p>
+                </div>
+            </a>
+        </section>
+        <div class="cardErro" id="card_erro">
+            <img id="imagem_erro" src="" alt="">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+
+
+</body>
