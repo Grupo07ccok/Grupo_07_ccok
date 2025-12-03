@@ -20,6 +20,7 @@ drop table empresa;
 DESC empresa;
 
 INSERT INTO empresa VALUES
+	(DEFAULT,'Termotech', 'Termotech S.A.', '00000000000000', '000000000', '158', '3º andar sala A', 'termotech@suporte.com', '0000'),
 	(DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com', '30102025'),
     (DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com', 'sprint2');
     
@@ -36,9 +37,10 @@ CREATE TABLE usuario (
 );
 
 INSERT INTO usuario VALUES
-	(DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
-    (DEFAULT, 'Fernando Brandão', '11987654320', 'brandao@gmail.com', '12345678aA@', 1),
-    (DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 2);
+	(DEFAULT, 'Suporte N2', '11999999999', 'termotech@suporte.com', 'Sptech#2024', 1),
+	(DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 2),
+    (DEFAULT, 'Fernando Brandão', '11987654320', 'brandao@gmail.com', '12345678aA@', 2),
+    (DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 3);
 CREATE TABLE mina(
 idMina INT PRIMARY KEY AUTO_INCREMENT,
 fkEmpresa INT,
@@ -53,10 +55,10 @@ REFERENCES empresa(idEmpresa)
 select * from mina;
 
 INSERT INTO mina VALUES
-	(DEFAULT, 1, '-19.810300' , '-42.863221', 25),
-    (DEFAULT, 1, '-6.710625', '-52.706971', 27),
-    (DEFAULT, 2, '-17.646297', '-43.170836', 26),
-    (DEFAULT, 2, '-13.712354', '-50.070253', 23);
+	(DEFAULT, 2, '-19.810300' , '-42.863221', 25),
+    (DEFAULT, 2, '-6.710625', '-52.706971', 27),
+    (DEFAULT, 3, '-17.646297', '-43.170836', 26),
+    (DEFAULT, 3, '-13.712354', '-50.070253', 23);
        
 CREATE TABLE sensor (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -319,15 +321,7 @@ SELECT * FROM vwSensorMaisAlertas;
 -- select * from vwProducaoTemperatura
 -- WHERE Sensor =  ${fkSensor};
 
-use termotech;
-desc usuario;
 
 
--- ----------------------------------------- INSERT empresa Termotech -----------------------------------------
-INSERT INTO empresa VALUES
-	(DEFAULT,'Termotech', 'Termotech S.A.', '00000000000000', '000000000', '158', '3º andar sala A', 'termotech@suporte.com', '0000');
-    
-INSERT INTO usuario VALUES
-	(DEFAULT, 'Suporte N2', '11999999999', 'termotech@suporte.com', 'Sptech#2024', 7);
--- ----------------------------------------- INSERT empresa Termotech -----------------------------------------
+
     

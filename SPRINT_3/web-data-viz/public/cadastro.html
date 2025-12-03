@@ -7,6 +7,7 @@
     <title>Cadastro: Usuário</title>
     <link rel="stylesheet" href="styles/cadastro_login.css">
     <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/style.css">
     
     <link rel="stylesheet" href="js/usuario.js">
 </head>
@@ -48,27 +49,27 @@
                     <div class="checks_cadastro" id="div_checks_cadastro" style="display: none;">
                         <div class="check">
                             Letra maiúscula
-                            <div class="check_img"><img id="check_upper" src="assets/icons/icons-cancelar.png" alt="">
+                            <div class="check_img"><img id="check_upper" src="./assets/icons/icons-cancelar.png" alt="">
                             </div>
                         </div>
                         <div class="check">
                             Letra minúscula
-                            <div class="check_img"><img id="check_lower" src="assets/icons/icons-cancelar.png" alt="">
+                            <div class="check_img"><img id="check_lower" src="./assets/icons/icons-cancelar.png" alt="">
                             </div>
                         </div>
                         <div class="check">
                             Número
-                            <div class="check_img"><img id="check_num" src="assets/icons/icons-cancelar.png" alt="">
+                            <div class="check_img"><img id="check_num" src="./assets/icons/icons-cancelar.png" alt="">
                             </div>
                         </div>
                         <div class="check">
                             Caractere especial
-                            <div class="check_img"><img id="check_especial" src="assets/icons/icons-cancelar.png"
+                            <div class="check_img"><img id="check_especial" src="./assets/icons/icons-cancelar.png"
                                     alt=""></div>
                         </div>
                         <div class="check">
                             8 ou mais caracteres
-                            <div class="check_img"><img id="check_tamanho" src="assets/icons/icons-cancelar.png" alt="">
+                            <div class="check_img"><img id="check_tamanho" src="./assets/icons/icons-cancelar.png" alt="">
                             </div>
                         </div>
 
@@ -94,7 +95,7 @@
 
                 <hr class="separador_login">
 
-                <div class="redes_login">
+                <!-- <div class="redes_login">
                     <button class="botao_social google_login">
                         <img src="assets/icons/icon-google.png" alt="Google">
                         Continuar com o Google
@@ -104,13 +105,13 @@
                         <img src="assets/icons/icon-apple.png" alt="Apple">
                         Continuar com o Apple ID
                     </button>
-                </div>
+                </div> -->
 
                 <p class="links_login">
                     Já possui uma conta? <a class="link_login" href="login.html">Faça login</a>
                 </p>
                 <p class="links_login">
-                    <a class="link_login" href="#">Esqueci minha senha</a>
+                    <a class="link_login" href="https://sptech-team-termotech.atlassian.net/servicedesk/customer/portals">Esqueci minha senha</a>
                 </p>
             </div>
         </section>
@@ -141,28 +142,28 @@
         div_checks_cadastro.style.display = 'flex';
 
         // Tem letra maiúscula
-        check_upper.src = '/assets/icons/icons-cancelar.png';
+        check_upper.src = './assets/icons/icons-cancelar.png';
         crit1 = 0;
 
         if (senha_minuscula != senha) {
             crit1 = 1;
-            check_upper.src = '/assets/icons/icons-ok.png';
+            check_upper.src = './assets/icons/icons-ok.png';
         }
 
         // Tem letra minúscula
-        check_lower.src = '/assets/icons/icons-cancelar.png';
+        check_lower.src = './assets/icons/icons-cancelar.png';
         crit2 = 0;
 
         if (senha_maiuscula != senha) {
             crit2 = 1;
-            check_lower.src = '/assets/icons/icons-ok.png';
+            check_lower.src = './assets/icons/icons-ok.png';
         }
 
         // Tem número
         var listaNum = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
         var temNum = [];
 
-        check_num.src = '/assets/icons/icons-cancelar.png';
+        check_num.src = './assets/icons/icons-cancelar.png';
         crit3 = 0;
 
         if (listaNum.length > 0) {
@@ -173,7 +174,7 @@
 
                 if (temNum.length > 0) {
                     crit3 = 1;
-                    check_num.src = '/assets/icons/icons-ok.png';
+                    check_num.src = './assets/icons/icons-ok.png';
                 }
             }
         }
@@ -182,7 +183,7 @@
         var listaEspecial = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', ';', ':', '?', '/', '`', '~', ',', '.', '[', ']', '|', '¨'];
         var temEspecial = [];
 
-        check_especial.src = '/assets/icons/icons-cancelar.png';
+        check_especial.src = './assets/icons/icons-cancelar.png';
         crit4 = 0;
 
         if (listaEspecial.length > 0) {
@@ -193,18 +194,18 @@
 
                 if (temEspecial.length > 0) {
                     crit4 = 1;
-                    check_especial.src = '/assets/icons/icons-ok.png';
+                    check_especial.src = './assets/icons/icons-ok.png';
                 }
             }
         }
 
         // Tem pelo menos 8 caracteres
-        check_tamanho.src = '/assets/icons/icons-cancelar.png';
+        check_tamanho.src = './assets/icons/icons-cancelar.png';
         crit5 = 0;
 
         if (tamanho_senha >= 8) {
             crit5 = 1;
-            check_tamanho.src = '/assets/icons/icons-ok.png';
+            check_tamanho.src = './assets/icons/icons-ok.png';
         }
 
         criteriosAtendidos = crit1 + crit2 + crit3 + crit4 + crit5
@@ -229,7 +230,7 @@
             tokenUsuario == ""
         ) {
             cardErro.style.display = "flex";
-            imagem_erro.src = "/assets/icons/img_cancel.png"
+            imagem_erro.src = "./assets/icons/img_cancel.png"
             setTimeout(sumirMensagem, 3500)
 
             mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
@@ -238,7 +239,7 @@
             mensagem_erro.innerHTML = "Todos os campos (exceto o token) devem estar preenchidos"
 
             cardErro.style.display = "flex";
-            imagem_erro.src = "/assets/icons/img_cancel.png"
+            imagem_erro.src = "./assets/icons/img_cancel.png"
             setTimeout(sumirMensagem, 3500)
 
 
@@ -246,7 +247,7 @@
             mensagem_erro.innerHTML = "insira um email válido"
 
             cardErro.style.display = "flex";
-            imagem_erro.src = "/assets/icons/img_cancel.png"
+            imagem_erro.src = "./assets/icons/img_cancel.png"
             setTimeout(sumirMensagem, 3500)
 
 
@@ -254,7 +255,7 @@
             mensagem_erro.innerHTML = "Senha deve conter todos os requisitos"
 
             cardErro.style.display = "flex";
-            imagem_erro.src = "/assets/icons/img_cancel.png"
+            imagem_erro.src = "./assets/icons/img_cancel.png"
             setTimeout(sumirMensagem, 3500)
 
 
@@ -262,7 +263,7 @@
             mensagem_erro.innerHTML = "A senha e a confimação devem ser iguais"
 
             cardErro.style.display = "flex";
-            imagem_erro.src = "/assets/icons/img_cancel.png"
+            imagem_erro.src = "./assets/icons/img_cancel.png"
             setTimeout(sumirMensagem, 3500)
 
 
@@ -289,7 +290,7 @@
                         mensagem_erro.innerHTML = "Não existe uma empresa cadastrada com esse token!"
 
                         cardErro.style.display = "flex";
-                        imagem_erro.src = "/assets/icons/img_cancel.png"
+                        imagem_erro.src = "./assets/icons/img_cancel.png"
 
                     }
                 })
@@ -316,7 +317,7 @@
             .then(function (resposta) {
                 console.log("resposta: ", resposta);
 
-                imagem_erro.src = "/assets/icons/img_aceitar.png"
+                imagem_erro.src = "./assets/icons/img_aceitar.png"
                 mensagem_erro.innerHTML = "Usuário cadastrado com sucesso!"
                 cardErro.style.display = "flex"
                 setTimeout(function () {

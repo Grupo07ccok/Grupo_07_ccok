@@ -1,3 +1,5 @@
+-- drop DATABASE termotech;
+
 CREATE DATABASE termotech;
 
 USE termotech;
@@ -5,9 +7,9 @@ USE termotech;
 show tables;
 
 CREATE TABLE empresa (
-      idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
     nomeFantasia VARCHAR(100), -- Nome fantasia da Empresa
-      razaoSocial VARCHAR(100), -- Razão Social da Empresa
+    razaoSocial VARCHAR(100), -- Razão Social da Empresa
     cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
     cep CHAR(9), -- CEP da Empresa 
     numero VARCHAR(6), -- Número do endereço da Empresa
@@ -15,71 +17,73 @@ CREATE TABLE empresa (
     emailResponsavel VARCHAR(100), -- Email do responsável para envio do token
     token VARCHAR(45)
 );
+
+desc empresa;
 INSERT INTO empresa VALUES
-      (DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com', '30102025'),
+(DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com', '30102025'),
     (DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com', 'sprint2');
     
 CREATE TABLE usuario (
-    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(200),
-    telefone CHAR(11) NOT NULL,
-    email VARCHAR(255) NOT NULL, -- Email para login do usuário
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(200),
+telefone CHAR(11) NOT NULL,
+email VARCHAR(255) NOT NULL, -- Email para login do usuário
     senha VARCHAR(255) NOT NULL, -- Senha de acesso do usuário
     fkEmpresa INT, -- Será utilizado para pegar dados de email e senha da tabela empresa para verificar o login
     CONSTRAINT fkEmpresaUsuario
-            FOREIGN KEY (fkEmpresa)
-                  REFERENCES empresa(idEmpresa)
+    FOREIGN KEY (fkEmpresa)
+    REFERENCES empresa(idEmpresa)
 ) AUTO_INCREMENT = 100;
     
 INSERT INTO usuario VALUES
-      (DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
+(DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
     (DEFAULT, 'Fernando Brandão', '11987654320', 'brandao@gmail.com', '12345678aA@', 1),
     (DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 2);
     
-    CREATE TABLE mina(
-            idMina INT PRIMARY KEY AUTO_INCREMENT,
-        fkEmpresa INT,
-        latitude DECIMAL(10,6),
-        longitude DECIMAL(10,6),
-        temperaturaAlerta DECIMAL(3,1),
-        CONSTRAINT fkEmpresaMina
-                  FOREIGN KEY (fkEmpresa)
-                  REFERENCES empresa(idEmpresa)
+CREATE TABLE mina(
+idMina INT PRIMARY KEY AUTO_INCREMENT,
+fkEmpresa INT,
+latitude DECIMAL(10,6),
+longitude DECIMAL(10,6),
+temperaturaAlerta DECIMAL(3,1),
+CONSTRAINT fkEmpresaMina
+FOREIGN KEY (fkEmpresa)
+REFERENCES empresa(idEmpresa)
 ) AUTO_INCREMENT = 300;
 
 select * from mina;
 
 INSERT INTO mina VALUES
-      (DEFAULT, 1, '-19.810300' , '-42.863221', 25),
+(DEFAULT, 1, '-19.810300' , '-42.863221', 25),
     (DEFAULT, 1, '-6.710625', '-52.706971', 27),
     (DEFAULT, 2, '-17.646297', '-43.170836', 26),
     (DEFAULT, 2, '-13.712354', '-50.070253', 23);
        
 CREATE TABLE sensor (
-      idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
-    fkMina INT,
-    setor VARCHAR(45),
-    statusS VARCHAR(50), -- Status se está funcionando
-    CONSTRAINT fkMinaSensor
-            FOREIGN KEY (fkMina)
-                  REFERENCES mina(idMina),
-      CONSTRAINT chkStatus
-            CHECK (statusS IN ('funcionando', 'manutenção', 'parado')) 
+idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
+fkMina INT,
+setor VARCHAR(45),
+statusS VARCHAR(50), -- Status se está funcionando
+CONSTRAINT fkMinaSensor
+FOREIGN KEY (fkMina)
+REFERENCES mina(idMina),
+CONSTRAINT chkStatus
+CHECK (statusS IN ('funcionando', 'manutenção', 'parado')) 
 ) AUTO_INCREMENT = 500;
 
 INSERT INTO sensor VALUES
-      (DEFAULT, 300, '1A', 'funcionando'),
-      (DEFAULT, 300, '1A', 'funcionando'),
-      (DEFAULT, 301, '2A', 'funcionando'),
-      (DEFAULT, 301, '2A','funcionando'),
-      (DEFAULT, 301, '2B', 'funcionando'),
-      (DEFAULT, 302, '5A','funcionando'),
-      (DEFAULT, 303, '1B','funcionando');
+(DEFAULT, 300, '1A', 'funcionando'),
+(DEFAULT, 300, '1A', 'funcionando'),
+(DEFAULT, 301, '2A', 'funcionando'),
+(DEFAULT, 301, '2A','funcionando'),
+(DEFAULT, 301, '2B', 'funcionando'),
+(DEFAULT, 302, '5A','funcionando'),
+(DEFAULT, 303, '1B','funcionando');
     
     select * from sensor;
     
 CREATE TABLE coletaDados (
-    idColeta INT AUTO_INCREMENT PRIMARY KEY, fkSensor INT, CONSTRAINT fkSensorDados FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor), temperatura DECIMAL(3,1), dataHoraColeta DATETIME DEFAULT current_timestamp, alerta TINYINT ) AUTO_INCREMENT = 700;
+    idColeta INT AUTO_INCREMENT PRIMARY KEY, fkSensor INT, CONSTRAINT fkSensorDados FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor), temperatura DECIMAL(3,1), dataHoraColeta DATETIME DEFAULT current_timestamp, alerta TINYINT ) AUTO_INCREMENT = 700;
 
 
 SHOW TABLES;
@@ -99,8 +103,8 @@ INSERT INTO coletaDados VALUES
 (DEFAULT, 501, 28, '2025-11-13 20:51', 1),
 (DEFAULT, 501, 28.5, '2025-11-13 20:53', 1);
 
-SELECT  nomeFantasia AS 'Nome da Empresa',
-        cnpj AS CNPJ,
+SELECT  nomeFantasia AS 'Nome da Empresa',
+    cnpj AS CNPJ,
         idMina AS Mina,
         idSensor AS Sensor,
         temperatura AS Temperatura,
@@ -113,7 +117,7 @@ SELECT  nomeFantasia AS 'Nome da Empresa',
             JOIN coletaDados ON fkSensor = idSensor;
                         
 SELECT nomeFantasia AS 'Nome da Empresa',
-        cnpj AS CNPJ,
+    cnpj AS CNPJ,
         idMina AS Mina,
         setor AS 'Setor da mina',
         idSensor AS Sensor,
@@ -191,8 +195,8 @@ SELECT * FROM vwProdutividadeMedia WHERE idMina = 300;
 
 CREATE OR REPLACE VIEW vwGraficoQteAlertasSensores AS
 SELECT mina.idMina,
-           sensor.idSensor, 
-           COUNT(coletaDados.alerta) AS qteAlerta
+    sensor.idSensor, 
+    COUNT(coletaDados.alerta) AS qteAlerta
         FROM coletaDados
             JOIN sensor ON coletaDados.fkSensor = sensor.idSensor
             JOIN mina ON sensor.fkMina = mina.idMina
@@ -255,7 +259,7 @@ SELECT * FROM vwGraficoMinMedMax WHERE idMina = 300;
 DESC vwGraficoProducaoTemperatura;
 
 
-CREATE OR REPLACE VIEW vwSensorMaisAlertas AS
+CREATE OR REPLACE VIEW vwKpiSensorMaisAlertas AS
     SELECT 
         fkSensor AS Sensor, COUNT(*) AS total_alertas, mina.idMina
     FROM
@@ -344,3 +348,4 @@ select * from vwTemperaturaAtual;
 -- SELECT GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
 select * from vwProducaoTemperatura
 WHERE Sensor =  3;
+

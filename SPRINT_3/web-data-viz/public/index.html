@@ -141,7 +141,7 @@
     <div class="container">
       <div class="container_video">
 
-        <iframe class="video" src="https://gifer.com/embed/2dmE"frameBorder="0" allowFullScreen></iframe>
+        <iframe class="video" src="https://gifer.com/embed/2dmE" frameBorder="0" allowFullScreen></iframe>
 
       </div>
       <div class="texto_video">
@@ -176,11 +176,13 @@
       <div class="div_receita_producao" id="div_receita">
         <div class="div_campos">
           <b>Receita no período <span>*</span></b> <br>
-          <input class="input_simulador" id="input_receitaAnual" value="15900000000" placeholder="Em reais (R$):" type="number"><br><br>
+          <input class="input_simulador" id="input_receitaAnual" value="15900000000" placeholder="Em reais (R$):"
+            type="number"><br><br>
         </div>
         <div class="div_campos">
           <b>Temperatura média na mina <span>*</span></b><br>
-          <input class="input_simulador" id="input_temperatura" value="25" placeholder="Em graus (Cº):" type="number"><br><br>
+          <input class="input_simulador" id="input_temperatura" value="25" placeholder="Em graus (Cº):"
+            type="number"><br><br>
         </div>
       </div>
 
@@ -188,15 +190,18 @@
         <div class="div_line">
           <div>
             <b>Produção de cobre no período <span>*</span></b><br>
-            <input class="input_simulador" id="input_producao" value="300000" placeholder="Em toneladas:" type="number"><br><br>
+            <input class="input_simulador" id="input_producao" value="300000" placeholder="Em toneladas:"
+              type="number"><br><br>
           </div>
           <div>
             <b>Custo de extração do cobre <span>*</span></b> <br>
-            <input class="input_simulador" id="input_custo" value="10000" placeholder="Em reais (R$):" type="number"><br><br>
+            <input class="input_simulador" id="input_custo" value="10000" placeholder="Em reais (R$):"
+              type="number"><br><br>
           </div>
         </div>
         <b>Temperatura média na mina <span>*</span></b><br>
-        <input class="input_simulador" id="input_temperatura2" value="25" placeholder="Em graus (Cº):" type="number"><br><br>
+        <input class="input_simulador" id="input_temperatura2" value="25" placeholder="Em graus (Cº):"
+          type="number"><br><br>
       </div>
 
       <button onclick="calcular()" class="botao_simulador">Calcular valores</button><br><br>
@@ -268,8 +273,10 @@
 
       <div class="footer_col">
         <h4>Contato</h4>
-        <p><img style="width: 23px; height: 23px;" src="./assets/icons/icon_email.png" alt="icon_email">
-          contato@terrasensor.com</p> <!--ficou torto aaaa-->
+        <p>
+          <img style="width: 23px; height: 23px;" src="./assets/icons/icon_email.png" alt="icon_email">
+          <a href="https://sptech-team-termotech.atlassian.net/servicedesk/customer/portals">Suporte</a>
+        </p>
         <p><img src="./assets/icons/icon_phone.png" alt="icon_fone"> 0800 123 456</p>
       </div>
 
@@ -416,11 +423,11 @@
       if (receita == 0) {
         alert('Preencha todos os campos.');
       }
-       else if (receita <= 0) {
+      else if (receita <= 0) {
         alert('Insira números positivos em receita!')
       } else if (temperatura <= 10) {
         alert('Intervalo de temperatura abaixo de 10, insira um valor maior que 20!')
-      }else {
+      } else {
         var receitaLiquidaValor = (receita / (1 - ((temperatura - 20) * 0.025)));
         var ganhoExtra = receitaLiquidaValor - receita;
         texto_receita_com_sensor = ''
@@ -446,7 +453,7 @@
       if (producao == 0 || custo == 0) {
         alert('Preencha todos os campos.');
       }
-       else if (producao <= 0 || custo <= 0) {
+      else if (producao <= 0 || custo <= 0) {
         alert('Insira números positivos em toneladas ou custo!')
       } else if (temperatura2 <= 10) {
         alert('Intervalo de temperatura abaixo de 10, insira um valor maior que 20!')
