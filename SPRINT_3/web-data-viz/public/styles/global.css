@@ -189,11 +189,13 @@ html {
 
 
 .card_erro {
-    display: none ;
-    flex-direction: row;
-    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: #fff;
+    text-align: center;
+    /* vertical-align: center; */
+    background-color: #f4e8d4;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     color: black;
     width: 20vw;
@@ -203,4 +205,13 @@ html {
     margin-left: 70%;
     margin-top: -40%;
     transition: all 0.5s ease-out;
+}
+
+
+
+.card_erro img {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  justify-self: center;
 }
