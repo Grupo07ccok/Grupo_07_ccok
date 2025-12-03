@@ -255,11 +255,11 @@ function obterDadosGraficoMinMedMax(req, res) {
 
 
 function grafico_producao_tempo_real(req, res) {
-  var idMina = req.params.idMina
-  if (idMina == undefined) {
+  var idSensor = req.params.idSensor
+  if (idSensor == undefined) {
     res.status(400).send("ID do mina está undefined!");
   }  else {
-    minaModel.grafico_producao_tempo_real(idMina)
+    minaModel.grafico_producao_tempo_real(idSensor)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
@@ -276,11 +276,11 @@ function grafico_producao_tempo_real(req, res) {
 
 
 function grafico_min_med_max(req, res) {
-  var idMina = req.params.idMina
-  if (idMina == undefined) {
+  var idSensor = req.params.idSensor
+  if (idSensor == undefined) {
     res.status(400).send("ID do mina está undefined!");
   }  else {
-    minaModel.grafico_min_med_max(idMina)
+    minaModel.grafico_min_med_max(idSensor)
       .then((resultado) => {
         res.status(201).json(resultado);
       }

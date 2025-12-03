@@ -112,7 +112,7 @@ function obterDadosGraficoAlertasSensores(idMina) {
 
 function obterDadosGraficoProducaoXTemperatura(idSensor) {
   var instrucaoSql = `
-    SELECT * FROM vwGraficoProducaoTemperatura WHERE fkSensor = ${idSensor} AND diaColeta = DATE(NOW());
+    SELECT * FROM vwGraficoProducaoTemperatura WHERE fkSensor = ${idSensor} AND DATE(diaColeta) = DATE(NOW());
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
