@@ -4,17 +4,21 @@ USE termotech;
 
 show tables;
 
+
 CREATE TABLE empresa (
-      idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
-    nomeFantasia VARCHAR(100), -- Nome fantasia da Empresa
-      razaoSocial VARCHAR(100), -- Razão Social da Empresa
-    cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
-    cep CHAR(9), -- CEP da Empresa 
-    numero VARCHAR(6), -- Número do endereço da Empresa
-    complemento VARCHAR(100), -- Complemento
-    emailResponsavel VARCHAR(100), -- Email do responsável para envio do token
-    token VARCHAR(45)
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
+nomeFantasia VARCHAR(100), -- Nome fantasia da Empresa
+razaoSocial VARCHAR(100), -- Razão Social da Empresa
+cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
+cep CHAR(9), -- CEP da Empresa 
+numero VARCHAR(6), -- Número do endereço da Empresa
+complemento VARCHAR(100), -- Complemento
+emailResponsavel VARCHAR(100), -- Email do responsável para envio do token
+token VARCHAR(45)
 );
+drop table empresa;
+DESC empresa;
+
 INSERT INTO empresa VALUES
 	(DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com', '30102025'),
     (DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com', 'sprint2');
@@ -26,25 +30,24 @@ CREATE TABLE usuario (
     email VARCHAR(255) NOT NULL, -- Email para login do usuário
     senha VARCHAR(255) NOT NULL, -- Senha de acesso do usuário
     fkEmpresa INT, -- Será utilizado para pegar dados de email e senha da tabela empresa para verificar o login
-    CONSTRAINT fkEmpresaUsuario
+    CONSTRAINT fkEmpresaUser
 		FOREIGN KEY (fkEmpresa)
 			REFERENCES empresa(idEmpresa)
-) AUTO_INCREMENT = 100;
-    
+);
+
 INSERT INTO usuario VALUES
 	(DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
     (DEFAULT, 'Fernando Brandão', '11987654320', 'brandao@gmail.com', '12345678aA@', 1),
     (DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 2);
-    
-    CREATE TABLE mina(
-            idMina INT PRIMARY KEY AUTO_INCREMENT,
-        fkEmpresa INT,
-        latitude DECIMAL(10,6),
-        longitude DECIMAL(10,6),
-        temperaturaAlerta DECIMAL(3,1),
-        CONSTRAINT fkEmpresaMina
-			FOREIGN KEY (fkEmpresa)
-			REFERENCES empresa(idEmpresa)
+CREATE TABLE mina(
+idMina INT PRIMARY KEY AUTO_INCREMENT,
+fkEmpresa INT,
+latitude DECIMAL(10,6),
+longitude DECIMAL(10,6),
+temperaturaAlerta DECIMAL(3,1),
+CONSTRAINT fkEmpresaMina
+FOREIGN KEY (fkEmpresa)
+REFERENCES empresa(idEmpresa)
 ) AUTO_INCREMENT = 300;
 
 select * from mina;
@@ -56,16 +59,14 @@ INSERT INTO mina VALUES
     (DEFAULT, 2, '-13.712354', '-50.070253', 23);
        
 CREATE TABLE sensor (
-      idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
+    idSensor INT PRIMARY KEY AUTO_INCREMENT,
     fkMina INT,
     setor VARCHAR(45),
-    statusS VARCHAR(50), -- Status se está funcionando
-    CONSTRAINT fkMinaSensor
-		FOREIGN KEY (fkMina)
-			REFERENCES mina(idMina),
-	CONSTRAINT chkStatus
-		CHECK (statusS IN ('funcionando', 'manutenção', 'parado')) 
-) AUTO_INCREMENT = 500;
+    statusS VARCHAR(50),
+    CONSTRAINT fkMinaSensor FOREIGN KEY (fkMina)
+        REFERENCES mina (idMina),
+    CONSTRAINT chkStatus CHECK (statusS IN ('funcionando' , 'manutenção', 'parado'))
+)  AUTO_INCREMENT=500;
 
 INSERT INTO sensor VALUES
 	(DEFAULT, 300, '1A', 'funcionando'),
@@ -79,17 +80,15 @@ INSERT INTO sensor VALUES
     select * from sensor;
     
 CREATE TABLE coletaDados (
-      idColeta INT AUTO_INCREMENT,
-    fkSensor INT,
-    CONSTRAINT pkSensorDados
-		PRIMARY KEY (idColeta, fkSensor),
-    CONSTRAINT fkSensorDados
-		FOREIGN KEY (fkSensor)
-			REFERENCES sensor(idSensor),
-    temperatura DECIMAL(3,1),
-    dataHoraColeta DATETIME DEFAULT current_timestamp, 
-    alerta TINYINT
-) AUTO_INCREMENT = 700;
+idColeta INT AUTO_INCREMENT,
+fkSensor INT,
+CONSTRAINT pkSensorDados PRIMARY KEY (idColeta , fkSensor),
+CONSTRAINT fkSensorDados FOREIGN KEY (fkSensor)
+REFERENCES sensor (idSensor),
+temperatura DECIMAL(3 , 1 ),
+dataHoraColeta DATETIME DEFAULT CURRENT_TIMESTAMP,
+alerta TINYINT
+)  AUTO_INCREMENT=700;
 
 
 SHOW TABLES;
@@ -121,6 +120,7 @@ SELECT  nomeFantasia AS 'Nome da Empresa',
 			JOIN mina ON mina.fkEmpresa = idEmpresa
             JOIN sensor ON fkMina = idMina
             JOIN coletaDados ON fkSensor = idSensor;
+                        
                         
 SELECT nomeFantasia AS 'Nome da Empresa',
         cnpj AS CNPJ,

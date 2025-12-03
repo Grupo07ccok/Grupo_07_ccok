@@ -55,7 +55,7 @@ function listar_sensores(fkMina) {
 
 function buscar_kpi_qte_alertas_sensor(idSensor, idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwTotalAlertasSensorEscolhido WHERE Sensor = ${idSensor} AND idMina = ${idMina};
+    SELECT * FROM vwKpiTotalAlertasSensorEscolhido WHERE Sensor = ${idSensor} AND idMina = ${idMina};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -78,7 +78,7 @@ function buscar_kpi_sensor_mais_alertas(idMina) {
 
 function buscar_kpi_temperatura_media(idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwTemperaturaMedia WHERE idMina = ${idMina};
+    SELECT * FROM vwKpiTemperaturaMedia WHERE idMina = ${idMina};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -87,7 +87,7 @@ function buscar_kpi_temperatura_media(idMina) {
 
 function buscar_kpi_produtividade_media(idMina) {
   var instrucaoSql = `
-    SELECT * FROM vwProdutividadeMedia WHERE idMina = ${idMina};
+    SELECT * FROM vwKpiProdutividadeMedia WHERE idMina = ${idMina};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
