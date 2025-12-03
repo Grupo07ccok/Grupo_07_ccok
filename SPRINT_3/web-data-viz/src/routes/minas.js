@@ -42,4 +42,14 @@ router.get("/obterDadosGraficoProducaoXTemperatura/:idSensor", function (req, re
 router.get("/obterDadosGraficoMinMedMax/:idSensor", function (req, res) {
   minasController.obterDadosGraficoMinMedMax(req, res);
 });
+
+router.get("/grafico_producao_tempo_real/:idMina", function (req, res) {
+  minasController.grafico_producao_tempo_real(req, res);
+});
+
+
+router.get("/grafico_min_med_max/:idMina", function (req, res) {
+  minasController.grafico_min_med_max(req, res);
+});
+
 module.exports = router;

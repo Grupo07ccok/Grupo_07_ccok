@@ -34,7 +34,6 @@
 
     <div class="selects_mina_sensor">
       <select id="select_sensor">
-        <option selected disabled value="#">Selecionar Sensor</option>
       </select>
     </div>
 
@@ -95,6 +94,11 @@
 
   </div>
 
+  <div class="card_erro" id="cardErro">
+        <img id="imagem_erro" src="" alt="">
+        <span id="mensagem_erro"></span>
+    </div>
+
 </body>
 
 </html>
@@ -108,37 +112,57 @@
 
   document.getElementById('id_mina').innerHTML = idMina
 
-  console.log(idMina);
+  // console.log(idMina);
+
+  listar_sensores()
+
   function listar_sensores() {
     fetch(`minas/listar_sensores/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log(resposta);
+        // console.log(resposta);
         var options = ""
         for (var i = 0; i < resposta.length; i++) {
           var sensor_atual = resposta[i]
 
           options += `
-            <option value="${sensor_atual.idSensor}">Sensor ${sensor_atual.idSensor}</option>
+            <option select value="${sensor_atual.idSensor}">Sensor ${sensor_atual.idSensor}</option>
           `
         }
         select_sensor.innerHTML += options
 
-
+        setTimeout(
+          buscar_graficos_sensor() ,
+          buscar_kpi_temperatura_media(),
+          buscar_kpi_produtividade_media(),
+          obterDadosGraficoTemperaturaSensores(),
+          buscar_kpi_sensor_mais_alertas(),
+          obterDadosGraficoAlertasSensores(),
+     10000)
 
       })
 
   }
 
-  listar_sensores()
+
+  
+
+  function buscar_graficos_sensor(){
+    var id_sensor_escolhido = document.getElementById('select_sensor').value
+
+    obterDadosGraficoProducaoXTemperatura(id_sensor_escolhido)
+    buscar_kpi_qte_alertas_sensor(id_sensor_escolhido)
+    obterDadosGraficoMinMedMax(id_sensor_escolhido)
+
+  }
 
   var select_sensores = document.getElementById("select_sensor")
 
   select_sensores.addEventListener('change', function (event) {
-    console.log(event);
+    // console.log(event);
 
     var idSensor = event.target.value
-    console.log(idSensor);
+    // console.log(idSensor);
     obterDadosGraficoProducaoXTemperatura(idSensor)
     buscar_kpi_qte_alertas_sensor(idSensor)
     obterDadosGraficoMinMedMax(idSensor)
@@ -149,8 +173,10 @@
     fetch(`minas/buscar_kpi_qte_alertas_sensor/${idSensor}/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log(resposta);
+        // console.log("buscar_kpi_qte_alertas_sensor", resposta);
         var total_alertas = resposta[0].total_alertas
+        // console.log("total_alertas", total_alertas);
+        
         kpi_qte_alertas_sensor_escolhido.innerHTML = total_alertas
       })
   }
@@ -158,8 +184,8 @@
     fetch(`minas/buscar_kpi_sensor_mais_alertas/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log("buscar_kpi_sensor_mais_alertas: ",resposta);
-        var sensor = resposta[0].sensor
+        // console.log("buscar_kpi_sensor_mais_alertas: ",resposta);
+        var sensor = resposta[0].fkSensor
         kpi_sensor_com_mais_alertas.innerHTML = sensor
       })
   }
@@ -167,7 +193,7 @@
     fetch(`minas/buscar_kpi_temperatura_media/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log(resposta);
+        // console.log(resposta);
         var kpiTemperaturaAtual = resposta[0].kpiTemperaturaAtual
         kpi_temperatura_media.innerHTML = kpiTemperaturaAtual
       })
@@ -176,24 +202,24 @@
     fetch(`minas/buscar_kpi_produtividade_media/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log(resposta);
-        var kpiProdutividadeAtual = resposta[0].kpiProdutividadeAtual
-        kpi_produtividade_media.innerHTML = kpiProdutividadeAtual
+        // console.log(resposta);
+        var kpiProdutividadeAtual = Number(resposta[0].kpiProdutividadeAtual.replace('%', ''))
+
+        if (kpiProdutividadeAtual > 100) {
+          kpiProdutividadeAtual = 100
+        }
+
+        kpi_produtividade_media.innerHTML = `${kpiProdutividadeAtual}%`
       })
   }
 
-    buscar_kpi_temperatura_media()
-    buscar_kpi_produtividade_media()
-    obterDadosGraficoTemperaturaSensores()
-    buscar_kpi_sensor_mais_alertas()
-    obterDadosGraficoAlertasSensores()
+
   setInterval(() => {
     buscar_kpi_sensor_mais_alertas()
     buscar_kpi_temperatura_media()
     buscar_kpi_produtividade_media()
     obterDadosGraficoTemperaturaSensores()
     obterDadosGraficoAlertasSensores()
-
   }, 100000);
 
 
@@ -201,11 +227,11 @@
     fetch(`minas/obterDadosGraficoTemperaturaSensores/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log("obterDadosGraficoTemperaturaSensores ", resposta);
+        // console.log("obterDadosGraficoTemperaturaSensores ", resposta);
         if (resposta.length > 0) {
           plotarGraficoTemperaturaSensores(resposta)
         } else {
-          console.log('Nenhum dado encontrado ou erro na API');
+          // console.log('Nenhum dado encontrado ou erro na API');
         }
 
       })
@@ -214,7 +240,11 @@
       });
   }
 
+  var grafico_temperatura_todos_sensores = null
   function plotarGraficoTemperaturaSensores(dados_para_plotar) {
+    if (grafico_temperatura_todos_sensores != null) {
+      grafico_temperatura_todos_sensores.destroy()
+    }
     var labels_sensores = []
     var dados_temperaturas = []
     var linha_temperaturaAlerta = []
@@ -266,11 +296,12 @@
       },
     };
 
-    var myChart = new Chart(
+    grafico_temperatura_todos_sensores = new Chart(
       document.getElementById(`temp_atual_chart`),
       config
     );
   }
+  var atualizarGraficoTemperaturaSensores = setInterval(obterDadosGraficoTemperaturaSensores(), 5000)
 
 
 
@@ -278,22 +309,25 @@
     fetch(`minas/obterDadosGraficoAlertasSensores/${idMina}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log("obterDadosGraficoAlertasSensores", resposta);
+        // console.log("obterDadosGraficoAlertasSensores", resposta);
         if (resposta.length > 0) {
           plotarGraficoAlertasSensores(resposta)
         } else {
-          console.log('Nenhum dado encontrado ou erro na API do gráfico');
+          // console.log('Nenhum dado encontrado ou erro na API do gráfico');
         }
       })
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico obterDadosGraficoAlertasSensores: ${error.message}`);
       });
   }
+  var grafico_qte_alerta_por_sensor = null
 
   function plotarGraficoAlertasSensores(dados_para_plotar) {
     var labels_sensores = []
     var dados_alertas = []
-
+    if (grafico_qte_alerta_por_sensor != null) {
+      grafico_qte_alerta_por_sensor.destroy()
+    }
 
     for (var i = 0; i < dados_para_plotar.length; i++) {
       var dado_atual = dados_para_plotar[i];
@@ -331,22 +365,22 @@
       },
     };
 
-    var myChart2 = new Chart(
+    grafico_qte_alerta_por_sensor = new Chart(
       document.getElementById(`qtdAlerta_Ctx`),
       config2
     );
   }
-
-
+  var atualizarGraficoAlertasSensores = setInterval(obterDadosGraficoAlertasSensores(), 5000)
   function obterDadosGraficoProducaoXTemperatura(idSensor) {
+    
     fetch(`minas/obterDadosGraficoProducaoXTemperatura/${idSensor}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log("obterDadosGraficoProducaoXTemperatura ", resposta);
+        // console.log("obterDadosGraficoProducaoXTemperatura ", resposta);
         if (resposta.length > 0) {
           plotarGraficoProducaoXTemperatura(resposta)
         } else {
-          console.log('Nenhum dado encontrado ou erro na API');
+          // console.log('Nenhum dado encontrado ou erro na API');
         }
 
       })
@@ -362,15 +396,27 @@
     var labels_horas = []
     var produtividade_dados = []
     var temperatura_dados = []
-
-    for (var k = 0; k < dados_para_plotar.length; k++) {
-      var dado_atual = dados_para_plotar[k];
-      var hora_atual = dado_atual.horaColeta
-      var temperatura_atual = dado_atual.Temperatura
-      var producao_atual = dado_atual.Producao
-      labels_horas.push(`${hora_atual}:00`)
-      temperatura_dados.push(Number(temperatura_atual))
-      produtividade_dados.push(Number(producao_atual))
+    if (dados_para_plotar.length > 10) {
+      for (var k = dados_para_plotar.length - 10; k < dados_para_plotar.length; k++) {
+        var dado_atual = dados_para_plotar[k];
+        var hora_atual = dado_atual.horaColeta
+        var temperatura_atual = dado_atual.temperatura
+        var producao_atual = dado_atual.Producao
+        labels_horas.push(`${hora_atual}`)
+        temperatura_dados.push(Number(temperatura_atual))
+        produtividade_dados.push(Number(producao_atual))
+      }
+      
+    } else {
+      for (var k = 0; k < dados_para_plotar.length; k++) {
+        var dado_atual = dados_para_plotar[k];
+        var hora_atual = dado_atual.horaColeta
+        var temperatura_atual = dado_atual.temperatura
+        var producao_atual = dado_atual.Producao
+        labels_horas.push(`${hora_atual}`)
+        temperatura_dados.push(Number(temperatura_atual))
+        produtividade_dados.push(Number(producao_atual))
+      }
     }
 
     var dados = {
@@ -414,20 +460,71 @@
       document.getElementById(`grafico_producao`),
       config2
     );
-
-
+    setTimeout(() => atualizarGraficoProducaoXTemperatura(idMina, dados, grafico_prod_x_temp), 1000);
 
   }
+
+  function atualizarGraficoProducaoXTemperatura(idMina, dados, grafico_prod_x_temp) {
+      var dados_grafico_producao_x_temperatura = dados
+        fetch(`minas/grafico_producao_tempo_real/${idMina}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    // console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    // console.log(`Dados atuais do gráfico:`);
+                    // console.log(dados);
+                    // console.log("Gráfico ", grafico_prod_x_temp);
+
+                    if (`${novoRegistro[0].horaColeta}` == dados.labels[dados.labels.length - 1]) {
+                        // console.log("---------------------------------------------------------------")
+                        // console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        // console.log("Horário do novo dado capturado:")
+                        // console.log(novoRegistro[0].horaColeta)
+                        // console.log("Horário do último dado capturado:")
+                        // console.log(dados.labels[dados.labels.length - 1])
+                        // console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].horaColeta); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].Producao); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+                        dados_grafico_producao_x_temperatura = dados
+                        grafico_prod_x_temp.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            
+      setTimeout(() => atualizarGraficoProducaoXTemperatura(idMina, dados_grafico_producao_x_temperatura, grafico_prod_x_temp), 1000);
+
+    }
+ 
+
 
   function obterDadosGraficoMinMedMax(idSensor) {
     fetch(`minas/obterDadosGraficoMinMedMax/${idSensor}`)
       .then(response => response.json())
       .then(function (resposta) {
-        console.log("obterDadosGraficoMinMedMax ", resposta);
+        // console.log("obterDadosGraficoMinMedMax ", resposta);
         if (resposta.length > 0) {
           plotarGraficoMinMedMax(resposta)
         } else {
-          console.log('Nenhum dado encontrado ou erro na API');
+          // console.log('Nenhum dado encontrado ou erro na API');
         }
 
       })
@@ -438,26 +535,41 @@
     var grafico_min_med_max = null
 
   function plotarGraficoMinMedMax(dados_para_plotar) {
-        if (grafico_min_med_max != null) {
+    if (grafico_min_med_max != null) {
       grafico_min_med_max.destroy()
     }
+
     var labels_horas = []
     var maximas_dados = []
     var minimas_dados = []
     var medias_dados = []
 
-    for (var k = 0; k < dados_para_plotar.length; k++) {
-      var dado_atual = dados_para_plotar[k];
-      var hora_atual = dado_atual.horaColeta
-      var maxima_atual = dado_atual.temperaturaMaxima
-      var minima_atual = dado_atual.temperaturaMinima
-      var media_atual = dado_atual.temperaturaMedia
-      labels_horas.push(`${hora_atual}:00`)
-      maximas_dados.push(Number(maxima_atual))
-      minimas_dados.push(Number(minima_atual))
-      medias_dados.push(Number(media_atual))
+    if (dados_para_plotar.length > 10) {
+       for (var k = dados_para_plotar.length - 10; k < dados_para_plotar.length; k++) {
+        var dado_atual = dados_para_plotar[k];
+        var hora_atual = dado_atual.horaColeta
+        var maxima_atual = dado_atual.temperaturaMaxima
+        var minima_atual = dado_atual.temperaturaMinima
+        var media_atual = dado_atual.temperaturaMedia
+        labels_horas.push(hora_atual)
+        maximas_dados.push(Number(maxima_atual))
+        minimas_dados.push(Number(minima_atual))
+        medias_dados.push(Number(media_atual))
+      }
+    } else {
+      for (var k = 0; k < dados_para_plotar.length; k++) {
+        var dado_atual = dados_para_plotar[k];
+        var hora_atual = dado_atual.horaCOleta
+        var maxima_atual = dado_atual.temperaturaMaxima
+        var minima_atual = dado_atual.temperaturaMinima
+        var media_atual = dado_atual.temperaturaMedia
+        labels_horas.push(`${hora_atual}:00`)
+        maximas_dados.push(Number(maxima_atual))
+        minimas_dados.push(Number(minima_atual))
+        medias_dados.push(Number(media_atual))
+      }
     }
-
+   
     var dados = {
       labels: labels_horas,
       datasets: [
@@ -505,9 +617,71 @@
       config2
     );
 
-
+    setTimeout(() => atualizarGraficoMinMedMax(idMina, dados, grafico_min_med_max), 1000);
 
   }
+
+  
+  function atualizarGraficoMinMedMax(idMina, dados, grafico_min_med_max) {
+        var dados_grafico_min_med_max = dados
+        fetch(`minas/grafico_min_med_max/${idMina}`, { cache: 'no-store' }).then(function (response) {
+              console.log(`response: ${response}`);
+
+          if (response.ok) {
+            response.json().then(function (novoRegistro) {
+              
+              console.log(`NOVO REGISTRO NO IF: ${novoRegistro[0].temperaturaMaxima}`);
+
+                    console.log(`NOVO REGISTRO: ${JSON.stringify(novoRegistro)}`);
+                    // console.log(`Dados atuais do grafico_min_med_max :`);
+                    // console.log(dados);
+                    // console.log("Gráfico ", grafico_min_med_max);
+
+                    if (`${novoRegistro[0].horaColeta}` == dados.labels[dados.labels.length - 1]) {
+                        // console.log("---------------------------------------------------------------")
+                        // console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        // console.log("Horário do novo dado capturado:")
+                        // console.log(novoRegistro[0].horaColeta)
+                    console.log(`NOVO REGISTRO NO IF: ${novoRegistro[0].temperaturaMaxima}`);
+                        // console.log("Horário do último dado capturado:")
+                        // console.log(dados.labels[dados.labels.length - 1])
+                        // console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].horaColeta); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(Number(novoRegistro[0].temperaturaMaxima)); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                        dados.datasets[1].data.push(Number(novoRegistro[0].temperaturaMedia)); // incluir uma nova medida de temperatura
+
+
+                        dados.datasets[2].data.shift();  // apagar o primeiro de temperatura
+                        dados.datasets[2].data.push(Number(novoRegistro[0].temperaturaMinima))
+                        console.log(`Dados recebidos: No else${JSON.stringify(novoRegistro)}`);
+                        dados_grafico_min_med_max = dados
+                        grafico_min_med_max.update();
+                        
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+      
+      setTimeout(() => atualizarGraficoMinMedMax(idMina, dados_grafico_min_med_max, grafico_min_med_max), 1000);
+      
+    }
+    
 
 
   // --- barra Temperatura Atual ---

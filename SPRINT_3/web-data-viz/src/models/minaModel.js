@@ -65,7 +65,7 @@ function buscar_kpi_sensor_mais_alertas(idMina) {
     SELECT 
       *
     FROM
-      vwSensorMaisAlertas
+      vwKpiSensorMaisAlertas
       WHERE idMina = ${idMina}
       ORDER BY total_alertas DESC
       LIMIT 1; 
@@ -112,7 +112,7 @@ function obterDadosGraficoAlertasSensores(idMina) {
 
 function obterDadosGraficoProducaoXTemperatura(idSensor) {
   var instrucaoSql = `
-    SELECT * FROM vwGraficoProducaoTemperatura WHERE fkSensor = ${idSensor};
+    SELECT * FROM vwGraficoProducaoTemperatura WHERE fkSensor = ${idSensor} AND diaColeta = DATE(NOW());
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -121,6 +121,21 @@ function obterDadosGraficoProducaoXTemperatura(idSensor) {
 function obterDadosGraficoMinMedMax(idSensor) {
   var instrucaoSql = `
     SELECT * FROM vwGraficoMinMedMax WHERE idSensor = ${idSensor};
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function grafico_producao_tempo_real(idMina) {
+  var instrucaoSql = `
+    SELECT * FROM vwGraficoProducaoTemperatura WHERE idMina = ${idMina} AND DATE(diaColeta) = DATE(NOW()) ORDER BY horaColeta DESC LIMIT 1;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+function grafico_min_med_max(idMina) {
+  var instrucaoSql = `
+    SELECT * FROM vwGraficoMinMedMax WHERE idMina = ${idMina} AND DATE(diaColeta) = DATE(NOW()) ORDER BY horaColeta DESC LIMIT 1;
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -138,6 +153,8 @@ module.exports = {
   obterDadosGraficoTemperaturaSensores,
   obterDadosGraficoAlertasSensores,
   obterDadosGraficoProducaoXTemperatura,
-  obterDadosGraficoMinMedMax
+  obterDadosGraficoMinMedMax,
+  grafico_producao_tempo_real,
+  grafico_min_med_max
 
 }

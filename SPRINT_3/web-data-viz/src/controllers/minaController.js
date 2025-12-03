@@ -254,6 +254,47 @@ function obterDadosGraficoMinMedMax(req, res) {
 }
 
 
+function grafico_producao_tempo_real(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do mina está undefined!");
+  }  else {
+    minaModel.grafico_producao_tempo_real(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela grafico_producao_tempo_real! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
+
+function grafico_min_med_max(req, res) {
+  var idMina = req.params.idMina
+  if (idMina == undefined) {
+    res.status(400).send("ID do mina está undefined!");
+  }  else {
+    minaModel.grafico_min_med_max(idMina)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar a buscar pela grafico_min_med_max! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
 
 module.exports = {
   buscarMinaPorEmpresa,
@@ -267,5 +308,7 @@ module.exports = {
   obterDadosGraficoTemperaturaSensores,
   obterDadosGraficoAlertasSensores,
   obterDadosGraficoProducaoXTemperatura,
-  obterDadosGraficoMinMedMax
+  obterDadosGraficoMinMedMax,
+  grafico_producao_tempo_real,
+  grafico_min_med_max
 }
