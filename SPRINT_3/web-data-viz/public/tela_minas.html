@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/dash.css">
     <link rel="stylesheet" href="styles/tela_minas.css">
+    <script src="./js/sessao.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,10 @@
                 <a id="cont_link2" href="cadastro_minas.html" class="">Cadastrar mina</a>
                 <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
             </nav>
-            <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></b>
+            <div>
+                <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></b>
+                    <button class="signup" onclick="limparSessao()">SAIR</button>
+            </div>
         </header>
 
 
@@ -57,7 +61,7 @@
                 </div>
             </div>
             <section id="cont_minas">
-                
+
             </section>
         </div>
         <div class="cardErro" id="card_erro">
@@ -94,13 +98,13 @@
                         cor_letra = "#FF0000"
                     } else if (temperatura_maxima_atual < 30 && temperatura_maxima_atual > 27) {
                         cor_letra = "#FF8800"
-                    } else if (temperatura_maxima_atual < 27 && temperatura_maxima_atual > 23){
+                    } else if (temperatura_maxima_atual < 27 && temperatura_maxima_atual > 23) {
                         cor_letra = "#D0CA03"
-                    } else if (temperatura_maxima_atual < 23 && temperatura_maxima_atual > 20){
+                    } else if (temperatura_maxima_atual < 23 && temperatura_maxima_atual > 20) {
                         cor_letra = "#80DB00"
                     } else {
                         cor_letra = "#0BD700"
-                        
+
                     }
                     cont_minas.innerHTML += `
 

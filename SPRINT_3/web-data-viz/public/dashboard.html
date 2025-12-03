@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="styles/global.css">
+  
+  <script src="./js/sessao.js"></script>
 </head>
 
 <body style="background-color: #fffdef;">
@@ -24,8 +26,11 @@
       <a id="cont_link2" href="tela_minas.html#div_cadastro_mina" class="">Cadastrar mina</a>
       <!-- classe >active< funfa como um "agora" - dps colocar nas outras-->
     </nav>
-    <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></p>
-  </header>
+    <div>
+          <p>Olá, seja bem vindo(a) <span id="nome_usuario"></span></b>
+          <button class="signup" onclick="limparSessao()">SAIR</button>
+    </div>
+    </header>
 
   <!--CONTEUDO PRINCIPAL-->
 

@@ -311,10 +311,23 @@ CREATE or replace VIEW vwGraficoProducaoTemperatura AS
         
 SELECT * FROM vwSensorMaisAlertas;
 -- SELECT QTD. DE ALERTAS DO SENSOR ESCOLHIDO
-SELECT * FROM vwTotalAlertasSensorEscolhido
-WHERE Sensor = ${fkSensor};
--- SELECT GRÁFICO DA TEMPERATURA ATUAL DE TODOS OS SENSORES
-select * from vwTemperaturaAtual;
--- SELECT GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
-select * from vwProducaoTemperatura
-WHERE Sensor =  ${fkSensor};
+-- SELECT * FROM vwTotalAlertasSensorEscolhido
+-- WHERE Sensor = ${fkSensor};
+-- -- SELECT GRÁFICO DA TEMPERATURA ATUAL DE TODOS OS SENSORES
+-- select * from vwTemperaturaAtual;
+-- -- SELECT GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
+-- select * from vwProducaoTemperatura
+-- WHERE Sensor =  ${fkSensor};
+
+use termotech;
+desc usuario;
+
+
+-- ----------------------------------------- INSERT empresa Termotech -----------------------------------------
+INSERT INTO empresa VALUES
+	(DEFAULT,'Termotech', 'Termotech S.A.', '00000000000000', '000000000', '158', '3º andar sala A', 'termotech@suporte.com', '0000');
+    
+INSERT INTO usuario VALUES
+	(DEFAULT, 'Suporte N2', '11999999999', 'termotech@suporte.com', 'Sptech#2024', 7);
+-- ----------------------------------------- INSERT empresa Termotech -----------------------------------------
+    

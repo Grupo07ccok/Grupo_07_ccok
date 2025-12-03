@@ -115,9 +115,21 @@
             sessionStorage.ID_USUARIO = json[0].idUsuario;
             sessionStorage.ID_EMPRESA = json[0].empresaId;
 
+
+            if(sessionStorage.EMAIL_USUARIO.includes('suporte')) {
+
             setTimeout(function () {
-              window.location = "tela_minas.html";
-            }, 1000); // apenas para exibir o loading
+              window.location = "suporte.html";
+            }, 1000); // se for suporte, vai pro suporte.html
+
+            } else {
+
+              setTimeout(function () {
+                window.location = "tela_minas.html";
+              }, 1000); // se for usuário vai pra tela_minas
+
+            }
+
 
           });
         } else {
