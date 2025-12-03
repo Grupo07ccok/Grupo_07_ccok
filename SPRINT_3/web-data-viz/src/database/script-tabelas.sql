@@ -1,62 +1,346 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+CREATE DATABASE termotech;
 
-/*
-comandos para mysql server
-*/
+USE termotech;
 
-CREATE DATABASE aquatech;
-
-USE aquatech;
+show tables;
 
 CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
+      idEmpresa INT PRIMARY KEY AUTO_INCREMENT, -- ID da Empresa (Autoincrementado)
+    nomeFantasia VARCHAR(100), -- Nome fantasia da Empresa
+      razaoSocial VARCHAR(100), -- Razão Social da Empresa
+    cnpj CHAR(14) UNIQUE NOT NULL, -- CNPJ da Empresa
+    cep CHAR(9), -- CEP da Empresa 
+    numero VARCHAR(6), -- Número do endereço da Empresa
+    complemento VARCHAR(100), -- Complemento
+    emailResponsavel VARCHAR(100), -- Email do responsável para envio do token
+    token VARCHAR(45)
 );
-
+INSERT INTO empresa VALUES
+      (DEFAULT, 'Copper Cotia', 'Cobre Cia', '54808068000120', '06725120', '50', null, 'copper_cotia@email.com', '30102025'),
+    (DEFAULT, 'Cobre Nosso', 'Mineradoras SA', '88614491000101', '02614100', '170', '10o andar', 'cobre_nosso@email.com', 'sprint2');
+    
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(200),
+    telefone CHAR(11) NOT NULL,
+    email VARCHAR(255) NOT NULL, -- Email para login do usuário
+    senha VARCHAR(255) NOT NULL, -- Senha de acesso do usuário
+    fkEmpresa INT, -- Será utilizado para pegar dados de email e senha da tabela empresa para verificar o login
+    CONSTRAINT fkEmpresaUsuario
+            FOREIGN KEY (fkEmpresa)
+                  REFERENCES empresa(idEmpresa)
+) AUTO_INCREMENT = 100;
+    
+INSERT INTO usuario VALUES
+      (DEFAULT, 'Julia Lopes', '11987654321', 'julia@gmail.com', 'julia123', 1),
+    (DEFAULT, 'Fernando Brandão', '11987654320', 'brandao@gmail.com', '12345678aA@', 1),
+    (DEFAULT, 'João Dias', '11987654322', 'joao@gmail.com', 'Joao#2025', 2);
+    
+    CREATE TABLE mina(
+            idMina INT PRIMARY KEY AUTO_INCREMENT,
+        fkEmpresa INT,
+        latitude DECIMAL(10,6),
+        longitude DECIMAL(10,6),
+        temperaturaAlerta DECIMAL(3,1),
+        CONSTRAINT fkEmpresaMina
+                  FOREIGN KEY (fkEmpresa)
+                  REFERENCES empresa(idEmpresa)
+) AUTO_INCREMENT = 300;
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
-);
+select * from mina;
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+INSERT INTO mina VALUES
+      (DEFAULT, 1, '-19.810300' , '-42.863221', 25),
+    (DEFAULT, 1, '-6.710625', '-52.706971', 27),
+    (DEFAULT, 2, '-17.646297', '-43.170836', 26),
+    (DEFAULT, 2, '-13.712354', '-50.070253', 23);
+       
+CREATE TABLE sensor (
+      idSensor INT PRIMARY KEY AUTO_INCREMENT, -- ID do Sensor
+    fkMina INT,
+    setor VARCHAR(45),
+    statusS VARCHAR(50), -- Status se está funcionando
+    CONSTRAINT fkMinaSensor
+            FOREIGN KEY (fkMina)
+                  REFERENCES mina(idMina),
+      CONSTRAINT chkStatus
+            CHECK (statusS IN ('funcionando', 'manutenção', 'parado')) 
+) AUTO_INCREMENT = 500;
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+INSERT INTO sensor VALUES
+      (DEFAULT, 300, '1A', 'funcionando'),
+      (DEFAULT, 300, '1A', 'funcionando'),
+      (DEFAULT, 301, '2A', 'funcionando'),
+      (DEFAULT, 301, '2A','funcionando'),
+      (DEFAULT, 301, '2B', 'funcionando'),
+      (DEFAULT, 302, '5A','funcionando'),
+      (DEFAULT, 303, '1B','funcionando');
+    
+    select * from sensor;
+    
+CREATE TABLE coletaDados (
+    idColeta INT AUTO_INCREMENT PRIMARY KEY, fkSensor INT, CONSTRAINT fkSensorDados FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor), temperatura DECIMAL(3,1), dataHoraColeta DATETIME DEFAULT current_timestamp, alerta TINYINT ) AUTO_INCREMENT = 700;
 
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
-);
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+SHOW TABLES;
+select * from coletaDados;
+select * from sensor;
+select * from mina;
+select * from empresa;
+select * from usuario;
+
+INSERT INTO coletaDados VALUES
+(DEFAULT, 500, 28.5, '2025-11-13 20:49', 1),
+(DEFAULT, 500, 28, '2025-11-13 20:51', 1),
+(DEFAULT, 500, 28.5, '2025-11-13 20:53', 1);
+
+INSERT INTO coletaDados VALUES
+(DEFAULT, 501, 28.5, '2025-11-13 20:49', 1),
+(DEFAULT, 501, 28, '2025-11-13 20:51', 1),
+(DEFAULT, 501, 28.5, '2025-11-13 20:53', 1);
+
+SELECT  nomeFantasia AS 'Nome da Empresa',
+        cnpj AS CNPJ,
+        idMina AS Mina,
+        idSensor AS Sensor,
+        temperatura AS Temperatura,
+        dataHoraColeta AS 'Data e hora da coleta',
+        alerta AS Alerta
+        FROM usuario 
+			JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
+            JOIN mina ON mina.fkEmpresa = idEmpresa
+            JOIN sensor ON fkMina = idMina
+            JOIN coletaDados ON fkSensor = idSensor;
+                        
+SELECT nomeFantasia AS 'Nome da Empresa',
+        cnpj AS CNPJ,
+        idMina AS Mina,
+        setor AS 'Setor da mina',
+        idSensor AS Sensor,
+        temperaturaAlerta AS 'Temperatura para alerta',
+        temperatura AS Temperatura,
+        dataHoraColeta AS 'Data e hora da coleta',
+        alerta AS Alerta
+        FROM empresa JOIN mina ON mina.fkEmpresa = idEmpresa
+            JOIN sensor ON fkMina = idMina
+            JOIN coletaDados ON fkSensor = idSensor;
+                
+SELECT timediff(DAY,dataHoraColeta,now())
+FROM coletaDados;
+            
+            
+SELECT day(dataHoraColeta)
+FROM coletaDados;
+    
+    
+CREATE OR REPLACE VIEW vwTotalAlertas AS
+SELECT fkSensor,
+COUNT(*) AS total_alertas
+FROM coletaDados
+WHERE alerta = 1
+GROUP BY fkSensor
+ORDER BY total_alertas DESC
+LIMIT 2; -- LIMITAR PARA 1 PARA A KPI 'SENSOR COM MAIS ALERTAS'
+                            
+SELECT * FROM vwTotalAlertas;
+
+SELECT 
+    mina.idMina AS idMina,
+    ROUND(AVG(coletaDados.temperatura), 1) AS kpiTemperaturaAtual
+    FROM coletaDados
+        JOIN sensor ON coletadados.fkSensor = sensor.idSensor
+        JOIN mina ON sensor.fkMina = mina.idMina
+        GROUP BY idMina;
+            
+            
+-- VIEW PARA PEGAR A KPI DE TEMPERATURA MÉDIA ATUAL
+
+CREATE OR REPLACE VIEW vwTemperaturaMedia AS
+    SELECT
+    mina.idMina AS idMina,
+    concat(ROUND(AVG(coletaDados.temperatura), 1), " Cº") AS kpiTemperaturaAtual
+    FROM coletaDados
+    JOIN (
+    SELECT fkSensor, MAX(dataHoraColeta) AS ultimaColeta
+    GROUP BY fkSensor
+    ) AS ult
+    ON coletaDados.fkSensor = ult.fkSensor AND coletaDados.dataHoraColeta = ult.ultimaColeta
+    JOIN sensor ON coletaDados.fkSensor = sensor.idSensor
+    JOIN mina ON sensor.fkMina = mina.idMina
+    GROUP BY idMina;
+        
+        
+-- SELECT PARA FAZER NA API, COLOCAR NO 300 O ID DA MINA QUE VIRÁ DO FRONT-END
+
+SELECT * FROM vwTemperaturaMedia WHERE idMina = 300;
+
+
+-- VIEW PARA PEGAR A KPI DE PRODUTIVIDADE MÉDIA ATUAL
+CREATE OR REPLACE VIEW vwProdutividadeMedia AS
+    SELECT mina.idMina AS idMina,
+    CONCAT(ROUND(AVG(100 - ((coletaDados.temperatura - 20) * 2.5)), 1), '%') AS kpiProdutividadeAtual
+    FROM coletaDados JOIN( SELECT fkSensor, MAX(dataHoraColeta) AS ultimaColeta FROM coletaDados GROUP BY fkSensor) AS ult
+    ON coletaDados.fkSensor = ult.fkSensor AND coletaDados.dataHoraColeta = ult.ultimaColeta
+    JOIN sensor ON coletaDados.fkSensor = sensor.idSensor
+    JOIN mina ON sensor.fkMina = mina.idMina
+    GROUP BY idMina;
+        
+        
+-- SELECT PARA FAZER NA API SUBISTITUINDO O 300 PELO ID QUE VIER DO FRONT-END
+SELECT * FROM vwProdutividadeMedia WHERE idMina = 300;
+
+CREATE OR REPLACE VIEW vwGraficoQteAlertasSensores AS
+SELECT mina.idMina,
+           sensor.idSensor, 
+           COUNT(coletaDados.alerta) AS qteAlerta
+        FROM coletaDados
+            JOIN sensor ON coletaDados.fkSensor = sensor.idSensor
+            JOIN mina ON sensor.fkMina = mina.idMina
+            WHERE alerta = 1
+            GROUP BY idSensor;
+
+CREATE OR REPLACE VIEW vwGraficoTemperaturaSensores AS
+SELECT mina.idMina,
+sensor.idSensor,
+coletaDados.temperatura,
+mina.temperaturaAlerta
+FROM coletaDados
+JOIN (
+SELECT
+fkSensor,
+MAX(dataHoraColeta) AS ultimaColeta
+FROM coletaDados
+GROUP BY fkSensor) AS ult
+ON coletaDados.fkSensor = ult.fkSensor
+AND coletaDados.dataHoraColeta = ult.ultimaColeta
+JOIN sensor ON sensor.idSensor = coletaDados.fkSensor
+JOIN mina ON sensor.fkMina = mina.idMina;
+        
+        
+  
+-- SELECT PARA COLOCAR NA API PARA PUXAR AS INFORMAÇÕES PRO GRAFICO DE Quantidade de alertas de todos os sensores
+SELECT * FROM vwGraficoQteAlertasSensores WHERE idMina = 300;
+
+
+select temperatura, minute(dataHoraColeta) from coletaDados;
+
+
+CREATE OR REPLACE VIEW vwGraficoMinMedMax AS
+SELECT 
+    m.idMina,
+    s.idSensor,
+    DATE(cd.dataHoraColeta) AS diaColeta,
+    HOUR(cd.dataHoraColeta) AS horaColeta,
+    FLOOR(MINUTE(cd.dataHoraColeta)/10)*10 AS minutoBloco,
+    MAX(cd.temperatura) AS temperaturaMaxima,
+    ROUND(AVG(cd.temperatura), 1) AS temperaturaMedia,
+    MIN(cd.temperatura) AS temperaturaMinima
+FROM coletaDados cd
+JOIN sensor s ON cd.fkSensor = s.idSensor
+JOIN mina m ON s.fkMina = m.idMina
+GROUP BY 
+    m.idMina,
+    s.idSensor,
+    DATE(cd.dataHoraColeta),
+    HOUR(cd.dataHoraColeta),
+    FLOOR(MINUTE(cd.dataHoraColeta)/10)*10;
+
+
+-- SELECT PARA O GRÁFICO DE MÁXIMA, MÍNIMA E MÉDIA, FAZER DESSA FORMA (ACREDITO QUE ESTEJA CERTO)
+
+
+SELECT * FROM vwGraficoMinMedMax WHERE idMina = 300;
+
+
+DESC vwGraficoProducaoTemperatura;
+
+
+CREATE OR REPLACE VIEW vwSensorMaisAlertas AS
+    SELECT 
+        fkSensor AS Sensor, COUNT(*) AS total_alertas, mina.idMina
+    FROM
+        coletaDados
+            JOIN
+        sensor ON coletaDados.fkSensor = sensor.idSensor
+            JOIN
+        mina ON sensor.fkMina = mina.idMina
+    WHERE
+        alerta = 1
+    GROUP BY Sensor
+    ORDER BY total_alertas DESC
+    LIMIT 1;
+   
+-- VIEW PARA PEGAR A KPI DE QTD. DE ALERTAS DO SENSOR ESCOLHIDO   
+   
+CREATE OR REPLACE VIEW vwTotalAlertasSensorEscolhido AS
+    SELECT 
+        coletaDados.fkSensor AS Sensor,
+        COUNT(*) AS total_alertas,
+        mina.idMina
+    FROM
+        coletaDados
+            JOIN
+        sensor ON coletaDados.fkSensor = sensor.idSensor
+            JOIN
+        mina ON sensor.fkMina = mina.idMina
+    WHERE
+        coletaDados.alerta = 1
+    GROUP BY Sensor , idMina;
+                        
+-- VIEW PARA MOSTRAR O GRÁFICO DA TEMPERATURA ATUAL DE TODOS OS SENSORES   
+  
+CREATE OR REPLACE VIEW vwTemperaturaAtual AS
+    SELECT 
+        c.fkSensor AS Sensor,
+        c.temperatura AS Temperatura,
+        c.dataHoraColeta
+    FROM
+        coletaDados c
+            JOIN
+        (SELECT 
+            fkSensor, MAX(dataHoraColeta) AS ultimaColeta
+        FROM
+            coletaDados
+        GROUP BY fkSensor) AS ult ON c.fkSensor = ult.fkSensor
+            AND c.dataHoraColeta = ult.ultimaColeta
+    ORDER BY Sensor;
+        
+ -- VIEW PARA MOSTRAR O GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
+ 
+CREATE OR REPLACE VIEW vwGraficoProducaoTemperatura AS
+    SELECT 
+        mina.idMina,
+        coletaDados.fkSensor,
+        temperatura AS temperatura,
+        (100 - ((temperatura - 20) * 2.5)) AS producao,
+        TIME(dataHoraColeta) AS horaColeta,
+        DATE(dataHoraColeta) AS diaColeta
+    FROM
+        coletaDados
+            JOIN sensor
+            ON coletaDados.fkSensor = sensor.idSensor
+            JOIN mina 
+            ON mina.idMina = sensor.fkMina;
+
+desc usuario;
+
+INSERT INTO empresa VALUES
+	(DEFAULT,'Termotech', 'Termotech S.A.', '00000000000000', '000000000', '158', '3º andar sala A', 'termotech@suporte.com', '0000');
+select * from empresa;
+
+INSERT INTO usuario VALUES
+	(DEFAULT, 'Suporte N2', '11999999999', 'termotech@suporte.com', 'Sptech#2024', 3);
+ 
+SELECT * FROM vwGraficoProducaoTemperatura WHERE fkSensor = 515 AND DATE(diaColeta) = DATE(NOW());
+select * from vwGraficoProducaoTemperatura;
+-- SELECT SENSOR COM MAIS ALERTAS
+        
+SELECT * FROM vwSensorMaisAlertas;
+-- SELECT QTD. DE ALERTAS DO SENSOR ESCOLHIDO
+SELECT * FROM vwTotalAlertasSensorEscolhido
+WHERE Sensor = 1;
+-- SELECT GRÁFICO DA TEMPERATURA ATUAL DE TODOS OS SENSORES
+select * from vwTemperaturaAtual;
+-- SELECT GRÁFICO DE PRODUÇÃO X TEMPERATURA DO SENSOR ESCOLHIDO
+select * from vwProducaoTemperatura
+WHERE Sensor =  3;
