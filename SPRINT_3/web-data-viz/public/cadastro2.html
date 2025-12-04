@@ -29,36 +29,36 @@
                         <div class="container_inputs">
                             <label class="rotulo_login" for="input_nome_fantasia">Nome fantasia</label>
                             <input class="campo_login" id="input_nome_fantasia" type="nome"
-                                placeholder="Insira o nome fantasia:" required>
+                            value="WEnterprises" placeholder="Insira o nome fantasia:" required>
                         </div>
                         <div class="container_inputs">
                             <label class="rotulo_login" for="input_razao_social">Razão social</label>
                             <input class="campo_login" id="input_razao_social" type="razao_social"
-                                placeholder="Insira a razão social:" required>
+                               value="Wayne Enterprises" placeholder="Insira a razão social:" required>
                         </div>
                     </div>
 
                     <label class="rotulo_login" for="input_cnpj">CNPJ</label>
-                    <input class="campo_login" id="input_cnpj" type="nome" placeholder="Insira o CNPJ:" required>
+                    <input class="campo_login" id="input_cnpj" value="53564561000180" type="nome" placeholder="Insira o CNPJ:" required>
 
                     <div class="line_campos">
                         <div class="container_inputs">
                             <label class="rotulo_login" for="input_cep">CEP</label>
-                            <input class="campo_login" id="input_cep" type="nome" placeholder="Insira o CEP:" required>
+                            <input class="campo_login" id="input_cep" type="nome" value="11070380" placeholder="Insira o CEP:" required>
                         </div>
                         <div class="container_inputs">
                             <label class="rotulo_login" for="input_numero">Número</label>
-                            <input class="campo_login" id="input_numero" type="text" placeholder="Insira o número:"
+                            <input class="campo_login" id="input_numero" type="text" value="1120" placeholder="Insira o número:"
                                 required>
                         </div>
                     </div>
 
                     <label class="rotulo_login" for="input_complemento">Complemento</label>
-                    <input class="campo_login" id="input_complemento" type="text" placeholder="Insira o complemento:"
+                    <input class="campo_login" id="input_complemento" value="xxxxxxxxxxxxx" type="text"  placeholder="Insira o complemento:"
                         required>
 
                     <label class="rotulo_login" for="input_email">Email Responsável</label>
-                    <input class="campo_login" id="input_email" type="text" placeholder="Insira o email do responsável:"
+                    <input class="campo_login" id="input_email" type="text" value="WayneBruce@gmail.com" placeholder="Insira o email do responsável:"
                         required>
 
                     <!-- <button type="submit" class="botao_formulario"  -->
@@ -115,21 +115,25 @@
         var email = input_email.value
 
         if (nome_fantasia == "" || razao_social == "" || cnpj == "" || cep == "" || numero == "" || email == "") {
+            cardErro.style.display = "flex"
             imagem_erro.src = "assets/icons/img_cancel.png"
             mensagem_erro.innerHTML = "Preencha todos os campos para cadastrar a empresa!"
-            card_erro.style.display = "flex"
+            console.log("preencha tudo");
         } else if (cnpj.length != 14) {
+            cardErro.style.display = "flex"
             imagem_erro.src = "assets/icons/img_cancel.png"
             mensagem_erro.innerHTML = "Insira um CNPJ com 14 caracteres!"
-            card_erro.style.display = "flex"
+            console.log("CNPJ com 14 caracteres");
         } else if (cep.length != 8) {
+            cardErro.style.display = "flex"
             imagem_erro.src = "assets/icons/img_cancel.png"
             mensagem_erro.innerHTML = "Insira um CEP com 8 caracteres!"
-            card_erro.style.display = "flex"
+            console.log("CEP com 8 caracteres");
         } else if (email.includes('@') == false && (email.endsWith('.com') || email.endsWith('.com.br')) == false) {
+            cardErro.style.display = "flex"
             imagem_erro.src = "assets/icons/img_cancel.png"
             mensagem_erro.innerHTML = "Insira um email que contenha @ e .com!"
-            card_erro.style.display = "flex"
+            console.log("Email que tenha @ e .com");
         } else {
 
             if (complemento == "") {
