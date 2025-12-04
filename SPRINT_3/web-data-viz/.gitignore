@@ -5,4 +5,4 @@ package-lock.json
 .github
 
 # Tem o token do google:
-.env.dev 
+# .env.dev 
