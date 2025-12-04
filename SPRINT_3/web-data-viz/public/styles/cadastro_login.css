@@ -188,22 +188,25 @@ body {
 
 
 .pop_up {
-    width: 100vw;
-    height: 130vh;
+    width: 1100px;
+    height: 700px;
     background-color: rgba(0, 0, 0, 0.336);
     z-index: 999;
     position: absolute;
     display: none;
     justify-content: center;
     align-items: center;
+    
 }
 
 .pop_up_conteudo {
     background-color: white;
+    padding: 20px;
     width: 50%;
     height: 60%;
     border-radius: 2rem;
     display: flex;
+    font-weight: bolder;
     flex-direction: column;
     justify-content: center;
     align-items: center;
