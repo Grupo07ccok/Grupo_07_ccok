@@ -195,11 +195,14 @@ html {
     align-items: center;
     text-align: center;
     /* vertical-align: center; */
-    background-color: #f4e8d4;
+    background-color: #FAF9F0;
+    border: 5px solid #f77449;
+    color: white;
+    font-weight: bolder;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     color: black;
     width: 20vw;
-    height: 20vh;
+    height: 18vh;
     position: absolute;
     border-radius: 0.5rem;
     margin-left: 70%;
