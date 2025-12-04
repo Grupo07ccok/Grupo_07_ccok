@@ -31,26 +31,29 @@
                 <h3>Olá, <span id="nome_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav">
-                <h3>Atendente Virtual</h3>
-            </div>
-
+            
             <div class="btn-nav-white">
                 <a href="https://sptech-team-termotech.atlassian.net/servicedesk/customer/portals">
                     <h3>Ferramenta de Suporte</h3>
                 </a>
             </div>
-
+            
             <div class="btn-nav-white">
-
+                
                 <a
-                    href="https://bandteccom-my.sharepoint.com/:w:/g/personal/nathan_asilva_sptech_school/IQCwgm8bzspfTJ5SKmsjMmZ1AXXqFx1nGUOaTSPmPAsi1AI?e=T4JgnG">
-                    <h3>Documento do Projeto</h3>
-                </a>
-            </div>
+                href="https://bandteccom-my.sharepoint.com/:w:/g/personal/nathan_asilva_sptech_school/IQCwgm8bzspfTJ5SKmsjMmZ1AXXqFx1nGUOaTSPmPAsi1AI?e=T4JgnG">
+                <h3>Documento do Projeto</h3>
+            </a>
+        </div>
+
+        <div class="btn-nav">
+            <a href="#" onclick="mostrar_fluxograma()">
+                <h3>Fluxograma de Atendimento</h3>
+            </a>
+        </div>
 
             <div class="btn-nav-white">
-                <a href="./mural.html">
+                <a href="#" onclick="mostrar_diagrama()">
                     <h3>Diagrama de Solução</h3>
                 </a>
             </div>
@@ -63,8 +66,8 @@
 
     </div>
 
-    <div class="fluxograma" id="fluxograma">
-        <img src="./assets/Fluxograma de Requisição-TermoTech.drawio.png" alt="">
+    <div class="fluxograma" id="div_imagem">
+        <img id="img_principal" src="./assets/Fluxograma de Requisição-TermoTech.drawio.png" alt="">
     </div>
 
     </div>
@@ -95,7 +98,6 @@
 
     <div id="bobIA" class="button_bobIA">
         <button class="botao_bob" onclick="chamar_bob()"><img src="./assets/img/help_desk.png" alt=""></button>
-
 
     </div>
     <!-- ----------------------- FIM BobIA ----------------------- -->
@@ -146,6 +148,14 @@
     }
 
     // ----------------------- FIM BobIA -----------------------
+
+    function mostrar_diagrama() {
+        img_principal.src="./assets/Diagrama_solucao_tecnica.png"
+    }
+
+    function mostrar_fluxograma() {
+        img_principal.src="./assets/Fluxograma de Requisição-TermoTech.drawio.png"
+    }
 
 </script>
 
