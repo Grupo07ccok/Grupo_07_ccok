@@ -16,8 +16,8 @@ async function simulador(
 
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool({
-        host: 'localhost',
-        user: 'aluno',
+        host: '10.18.32.49',
+        user: 'termotech',
         password: 'Sptech#2024',
         database: 'termotech',
         port: 3307
